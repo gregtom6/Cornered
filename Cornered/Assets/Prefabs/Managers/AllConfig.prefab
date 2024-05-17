@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CharacterConfig: {fileID: 11400000, guid: ef71ade59b783074f8b53159b8eee740, type: 2}
+  m_BeltConfig: {fileID: 11400000, guid: f1eddd1cbb9824042b853f29cd2fdd3e, type: 2}

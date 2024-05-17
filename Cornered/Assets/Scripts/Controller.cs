@@ -22,7 +22,6 @@ public class Controller : MonoBehaviour
 
     private Vector3 m_Movement;
     private Vector2 m_Rot;
-    private Vector2 m_PrevMousePos = Vector2.zero;
 
     protected MovementState _movementState = MovementState.Standing;
 
@@ -53,12 +52,8 @@ public class Controller : MonoBehaviour
 
     private void OnPointerPosition(Vector2 obj)
     {
-        //Vector2 delta = m_PrevMousePos - obj;
-
         m_Rot.x += obj.x * AllConfig.Instance.CharacterConfig.headRotSpeed;
         m_Rot.y += -obj.y * AllConfig.Instance.CharacterConfig.headRotSpeed;
-
-        m_PrevMousePos = obj;
 
         m_Rot.y = m_Rot.y > AllConfig.Instance.CharacterConfig.headMaxRotX ? AllConfig.Instance.CharacterConfig.headMaxRotX : m_Rot.y;
         m_Rot.y = m_Rot.y < AllConfig.Instance.CharacterConfig.headMinRotX ? AllConfig.Instance.CharacterConfig.headMinRotX : m_Rot.y;
@@ -87,17 +82,17 @@ public class Controller : MonoBehaviour
         }
     }
 
-    protected virtual void Update()
+    private void Update()
     {
         ManageLooking();
     }
 
-    protected virtual void FixedUpdate()
+    private void FixedUpdate()
     {
         ActualPositionChange();
     }
 
-    protected void ActualPositionChange()
+    private void ActualPositionChange()
     {
         if (headParent != null && rigidbody != null)
         {
@@ -108,7 +103,7 @@ public class Controller : MonoBehaviour
         }
     }
 
-    protected void ManageLooking()
+    private void ManageLooking()
     {
         if (headParent != null && legParent != null && armParent != null && bodyParent != null)
         {
