@@ -1168,6 +1168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f042cb1aa7ad1448dbfa471fcce839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_GameInput: {fileID: 11400000, guid: a40925a3114a1c641b1de7c1e02c3ad6, type: 2}
   rigidbody: {fileID: 6170694111097863786}
   headParent: {fileID: 6170694112272487523}
   bodyParent: {fileID: 6170694111168635354}
