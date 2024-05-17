@@ -1181,7 +1181,6 @@ MonoBehaviour:
   isStrafingAnimKey: strafe
   standingAnimKey: standing
   rotateAnimKey: rotate
-  walkingSpeed: 15
   runSpeed: 15
   headMaxRotX: 40
   headMinRotX: -40

@@ -19,12 +19,10 @@ public class Controller : MonoBehaviour
     [SerializeField] string isStrafingAnimKey;
     [SerializeField] string standingAnimKey;
     [SerializeField] string rotateAnimKey;
-    [SerializeField] float runSpeed;
-    [SerializeField] float headMaxRotX;
-    [SerializeField] float headMinRotX;
 
     private Vector3 m_Movement;
     private Vector2 m_Rot;
+    private Vector2 m_PrevMousePos = Vector2.zero;
 
     protected MovementState _movementState = MovementState.Standing;
 
@@ -55,25 +53,27 @@ public class Controller : MonoBehaviour
 
     private void OnPointerPosition(Vector2 obj)
     {
-        m_Rot.x += obj.x;
-        m_Rot.y += -obj.y;
+        Vector2 delta = m_PrevMousePos - obj;
 
-        if (m_Rot.y > headMaxRotX)
-            m_Rot.y = headMaxRotX;
-        if (m_Rot.y < headMinRotX)
-            m_Rot.y = headMinRotX;
+        m_Rot.x += -delta.x * AllConfig.Instance.CharacterConfig.headRotSpeed;
+        m_Rot.y += delta.y * AllConfig.Instance.CharacterConfig.headRotSpeed;
+
+        m_PrevMousePos = obj;
+
+        m_Rot.y = m_Rot.y > AllConfig.Instance.CharacterConfig.headMaxRotX ? AllConfig.Instance.CharacterConfig.headMaxRotX : m_Rot.y;
+        m_Rot.y = m_Rot.y < AllConfig.Instance.CharacterConfig.headMinRotX ? AllConfig.Instance.CharacterConfig.headMinRotX : m_Rot.y;
     }
 
     private void OnLeftRightMovement(float obj)
     {
-        m_Movement.x = obj * (runSpeed / 100f);
+        m_Movement.x = obj * (AllConfig.Instance.CharacterConfig.runSpeed / 100f);
 
         movementState = MovementState.Strafing;
     }
 
     private void OnForwardBackwardMovement(float obj)
     {
-        m_Movement.z = obj * (runSpeed / 100f);
+        m_Movement.z = obj * (AllConfig.Instance.CharacterConfig.runSpeed / 100f);
 
         movementState = MovementState.Moving;
     }
