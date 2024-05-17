@@ -53,6 +53,15 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PointerDelta"",
+                    ""type"": ""Value"",
+                    ""id"": ""d45278e7-50aa-4e7c-b259-77bad527cbca"",
+                    ""expectedControlType"": ""Delta"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -132,6 +141,17 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""PointerPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ad50c87-519a-4272-aa7c-d1fea78228fb"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PointerDelta"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +163,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         m_Gameplay_ForwardBackwardMovement = m_Gameplay.FindAction("ForwardBackwardMovement", throwIfNotFound: true);
         m_Gameplay_LeftRightMovement = m_Gameplay.FindAction("LeftRightMovement", throwIfNotFound: true);
         m_Gameplay_PointerPosition = m_Gameplay.FindAction("PointerPosition", throwIfNotFound: true);
+        m_Gameplay_PointerDelta = m_Gameplay.FindAction("PointerDelta", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -207,6 +228,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_ForwardBackwardMovement;
     private readonly InputAction m_Gameplay_LeftRightMovement;
     private readonly InputAction m_Gameplay_PointerPosition;
+    private readonly InputAction m_Gameplay_PointerDelta;
     public struct GameplayActions
     {
         private @GameInputActions m_Wrapper;
@@ -214,6 +236,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         public InputAction @ForwardBackwardMovement => m_Wrapper.m_Gameplay_ForwardBackwardMovement;
         public InputAction @LeftRightMovement => m_Wrapper.m_Gameplay_LeftRightMovement;
         public InputAction @PointerPosition => m_Wrapper.m_Gameplay_PointerPosition;
+        public InputAction @PointerDelta => m_Wrapper.m_Gameplay_PointerDelta;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -232,6 +255,9 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
             @PointerPosition.started += instance.OnPointerPosition;
             @PointerPosition.performed += instance.OnPointerPosition;
             @PointerPosition.canceled += instance.OnPointerPosition;
+            @PointerDelta.started += instance.OnPointerDelta;
+            @PointerDelta.performed += instance.OnPointerDelta;
+            @PointerDelta.canceled += instance.OnPointerDelta;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -245,6 +271,9 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
             @PointerPosition.started -= instance.OnPointerPosition;
             @PointerPosition.performed -= instance.OnPointerPosition;
             @PointerPosition.canceled -= instance.OnPointerPosition;
+            @PointerDelta.started -= instance.OnPointerDelta;
+            @PointerDelta.performed -= instance.OnPointerDelta;
+            @PointerDelta.canceled -= instance.OnPointerDelta;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -267,5 +296,6 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         void OnForwardBackwardMovement(InputAction.CallbackContext context);
         void OnLeftRightMovement(InputAction.CallbackContext context);
         void OnPointerPosition(InputAction.CallbackContext context);
+        void OnPointerDelta(InputAction.CallbackContext context);
     }
 }

@@ -10,6 +10,7 @@ public class GameInput : ScriptableObject, GameInputActions.IGameplayActions
     public Vector2 mousePosScreen => m_MousePosScreen;
 
     public event Action<Vector2> PointerPosition = delegate { };
+    public event Action<Vector2> PointerDelta = delegate { };
     public event Action<float> ForwardBackwardMovement = delegate { };
     public event Action<float> LeftRightMovement = delegate { };
 
@@ -73,6 +74,16 @@ public class GameInput : ScriptableObject, GameInputActions.IGameplayActions
             m_MousePosScreen = context.ReadValue<Vector2>();
 
             PointerPosition?.Invoke(m_MousePosScreen);
+        }
+    }
+
+    public void OnPointerDelta(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Vector2 delta = context.ReadValue<Vector2>();
+
+            PointerDelta?.Invoke(delta);
         }
     }
 }

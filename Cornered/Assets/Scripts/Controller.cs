@@ -47,16 +47,16 @@ public class Controller : MonoBehaviour
         {
             m_GameInput.ForwardBackwardMovement += OnForwardBackwardMovement;
             m_GameInput.LeftRightMovement += OnLeftRightMovement;
-            m_GameInput.PointerPosition += OnPointerPosition;
+            m_GameInput.PointerDelta += OnPointerPosition;
         }
     }
 
     private void OnPointerPosition(Vector2 obj)
     {
-        Vector2 delta = m_PrevMousePos - obj;
+        //Vector2 delta = m_PrevMousePos - obj;
 
-        m_Rot.x += -delta.x * AllConfig.Instance.CharacterConfig.headRotSpeed;
-        m_Rot.y += delta.y * AllConfig.Instance.CharacterConfig.headRotSpeed;
+        m_Rot.x += obj.x * AllConfig.Instance.CharacterConfig.headRotSpeed;
+        m_Rot.y += -obj.y * AllConfig.Instance.CharacterConfig.headRotSpeed;
 
         m_PrevMousePos = obj;
 
@@ -99,14 +99,12 @@ public class Controller : MonoBehaviour
 
     protected void ActualPositionChange()
     {
-        m_Movement.y = 0;
-
         if (headParent != null && rigidbody != null)
         {
             Vector3 direction = headParent.TransformDirection(m_Movement);
-            Vector3 newPosition = rigidbody.position + direction * Time.deltaTime * 100;
+            direction.y = 0f;
+            Vector3 newPosition = rigidbody.position + direction * Time.deltaTime * 100f;
             rigidbody.MovePosition(newPosition);
-
         }
     }
 

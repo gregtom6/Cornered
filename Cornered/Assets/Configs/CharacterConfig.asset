@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95217675dbba8a4892a7e87b8e8d4c6, type: 3}
   m_Name: CharacterConfig
   m_EditorClassIdentifier: 
-  m_RunSpeed: 15
+  m_RunSpeed: 10
   m_HeadMaxRotX: 40
   m_HeadMinRotX: -40
   m_HeadRotSpeed: 0.2
