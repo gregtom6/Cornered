@@ -22,12 +22,14 @@ public class CBeltElement : MonoBehaviour
         transform.Translate(-transform.right * Time.deltaTime * currentBeltSpeed);
     }
 
-    void Start()
+    void OnEnable()
     {
-        if(m_CreatedItem == null)
-        {
-            GameObject prefab = AllConfig.Instance.IngredientGenerationConfig.GetWeightedRandomItemPrefab();
-            m_CreatedItem = Instantiate(prefab, m_SpawnTransform.position, Quaternion.identity, m_SpawnTransform);
-        }
+        GameObject prefab = AllConfig.Instance.IngredientGenerationConfig.GetWeightedRandomItemPrefab();
+        m_CreatedItem = Instantiate(prefab, m_SpawnTransform.position, Quaternion.identity, m_SpawnTransform);
+    }
+
+    private void OnDisable()
+    {
+        Destroy(m_CreatedItem);
     }
 }
