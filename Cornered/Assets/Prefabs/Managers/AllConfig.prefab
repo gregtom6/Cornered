@@ -46,3 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CharacterConfig: {fileID: 11400000, guid: ef71ade59b783074f8b53159b8eee740, type: 2}
   m_BeltConfig: {fileID: 11400000, guid: f1eddd1cbb9824042b853f29cd2fdd3e, type: 2}
+  m_IngredientGenerationConfig: {fileID: 11400000, guid: e8fb5bed5cf2ac74c9d4fe6914b06c07, type: 2}
+  m_RecipeConfig: {fileID: 11400000, guid: 7204f73bba356384e8507e13ddf293a2, type: 2}
