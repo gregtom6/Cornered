@@ -5,21 +5,26 @@ using UnityEngine;
 
 public class CTriggerContainer : MonoBehaviour
 {
+    private HashSet<Collider> m_Colliders = new();
+
     public Action<Transform> objectEntered;
 
-    public bool isInside => m_IsInside;
-
-    private bool m_IsInside = false;
+    public Action allObjectLeft;
 
     private void OnTriggerEnter(Collider other)
     {
-        m_IsInside = true;
+        m_Colliders.Add(other);
 
         objectEntered?.Invoke(other.transform);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        m_IsInside = false;
+        m_Colliders.Remove(other);
+
+        if (m_Colliders.Count == 0)
+        {
+            allObjectLeft?.Invoke();
+        }
     }
 }

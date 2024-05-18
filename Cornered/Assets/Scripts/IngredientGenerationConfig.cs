@@ -10,32 +10,29 @@ public class IngredientGenerationConfig : ScriptableObject
 {
     [SerializeField] private IngredientGenerationDict m_IngredientGenerationDict;
 
-    private int m_SumOfWeights;
-
     public GameObject GetWeightedRandomItemPrefab()
     {
-        int random = UnityEngine.Random.Range(0, m_SumOfWeights);
-
-        int sum = 0;
+        int m_SumOfWeights = 0;
 
         foreach (KeyValuePair<EItemType, ItemGenerationDatas> item in m_IngredientGenerationDict)
         {
-            sum += item.Value.weightForAppear;
-            if (sum >= random)
+            m_SumOfWeights += item.Value.weightForAppear;
+        }
+
+        int random = UnityEngine.Random.Range(0, m_SumOfWeights);
+
+        m_SumOfWeights = 0;
+
+        foreach (KeyValuePair<EItemType, ItemGenerationDatas> item in m_IngredientGenerationDict)
+        {
+            m_SumOfWeights += item.Value.weightForAppear;
+            if (m_SumOfWeights >= random)
             {
                 return item.Value.itemPrefab;
             }
         }
 
         return null;
-    }
-
-    private void Awake()
-    {
-        foreach (KeyValuePair<EItemType, ItemGenerationDatas> item in m_IngredientGenerationDict)
-        {
-            m_SumOfWeights += item.Value.weightForAppear;
-        }
     }
 }
 

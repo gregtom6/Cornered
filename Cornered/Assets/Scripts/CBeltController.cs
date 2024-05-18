@@ -16,12 +16,19 @@ public class CBeltController : MonoBehaviour
 
     private void OnEnable()
     {
+        m_Spawner.allObjectLeft += OnAllObjectLeftFromSpawner;
         m_Despawner.objectEntered += OnDespawnerObjectEntered;
     }
 
     private void OnDisable()
     {
+        m_Spawner.allObjectLeft -= OnAllObjectLeftFromSpawner;
         m_Despawner.objectEntered -= OnDespawnerObjectEntered;
+    }
+
+    void OnAllObjectLeftFromSpawner()
+    {
+        m_BeltElementPool.Get();
     }
 
     void OnDespawnerObjectEntered(Transform transform)
@@ -40,14 +47,7 @@ public class CBeltController : MonoBehaviour
         m_BeltElementPool = new ObjectPool<CBeltElement>(CreateBeltElement, OnGetFromPool, OnReleaseToPool, OnDestroyPooledObject,
             AllConfig.Instance.beltConfig.collectionCheck, AllConfig.Instance.beltConfig.defaultCapacity, AllConfig.Instance.beltConfig.maxSize);
 
-    }
-
-    private void Update()
-    {
-        if (!m_Spawner.isInside)
-        {
-            m_BeltElementPool.Get();
-        }
+        m_BeltElementPool.Get();
     }
 
     private CBeltElement CreateBeltElement()
