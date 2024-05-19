@@ -79,6 +79,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Colliders:
   - {fileID: 8134325262955132159}
+  m_Rigidbodies:
+  - {fileID: 8110694764408441316}
 --- !u!1 &8763604481510528101
 GameObject:
   m_ObjectHideFlags: 0

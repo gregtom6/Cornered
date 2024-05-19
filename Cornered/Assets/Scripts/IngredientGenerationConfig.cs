@@ -10,7 +10,7 @@ public class IngredientGenerationConfig : ScriptableObject
 {
     [SerializeField] private IngredientGenerationDict m_IngredientGenerationDict;
 
-    public GameObject GetWeightedRandomItemPrefab()
+    public CIngredient GetWeightedRandomItemPrefab()
     {
         int m_SumOfWeights = 0;
 
@@ -40,7 +40,7 @@ public class IngredientGenerationConfig : ScriptableObject
 public struct ItemGenerationDatas
 {
     public int weightForAppear;
-    public GameObject itemPrefab;
+    public CIngredient itemPrefab;
 }
 
 [System.Serializable]

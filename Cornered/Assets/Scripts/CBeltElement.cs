@@ -9,7 +9,7 @@ public class CBeltElement : MonoBehaviour
     [SerializeField] private Transform m_SpawnTransform;
     private ObjectPool<CBeltElement> m_Pool;
 
-    private GameObject m_CreatedItem;
+    private CIngredient m_CreatedItem;
 
     public void SetObjectPool(ObjectPool<CBeltElement> pool)
     {
@@ -24,12 +24,15 @@ public class CBeltElement : MonoBehaviour
 
     void OnEnable()
     {
-        GameObject prefab = AllConfig.Instance.IngredientGenerationConfig.GetWeightedRandomItemPrefab();
-        m_CreatedItem = Instantiate(prefab, m_SpawnTransform.position, Quaternion.identity, m_SpawnTransform);
+        CIngredient prefab = AllConfig.Instance.IngredientGenerationConfig.GetWeightedRandomItemPrefab();
+        m_CreatedItem = Instantiate<CIngredient>(prefab, m_SpawnTransform.position, Quaternion.identity, m_SpawnTransform);
     }
 
     private void OnDisable()
     {
-        Destroy(m_CreatedItem);
+        if (!m_CreatedItem.WasPickedAnytime())
+        {
+            Destroy(m_CreatedItem);
+        }
     }
 }

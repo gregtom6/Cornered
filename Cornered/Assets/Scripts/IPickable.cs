@@ -4,9 +4,11 @@ using UnityEngine;
 
 public interface IPickable
 {
-    void Pickup();
+    void Pickup(Transform transform);
 
     void Drop();
 
     bool IsPicked();
+
+    bool WasPickedAnytime();
 }

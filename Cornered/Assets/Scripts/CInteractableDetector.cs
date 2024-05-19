@@ -19,7 +19,7 @@ public class CInteractableDetector : MonoBehaviour
 
         Vector3 worldDirection = transform.TransformDirection(localDirection);
 
-        float rayLength = 5f;
+        float rayLength = 9f;
 
         m_IsValidHit = Physics.Raycast(origin, worldDirection, out m_RaycastHit, rayLength);
 

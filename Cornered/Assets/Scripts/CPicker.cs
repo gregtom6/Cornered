@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CPicker : MonoBehaviour
 {
     [SerializeField] private GameInput m_GameInput;
 
     private CInteractableDetector m_InteractableDetector;
+
+    private IPickable m_PickedPickable;
 
     private void Start()
     {
@@ -31,22 +34,27 @@ public class CPicker : MonoBehaviour
     }
     private void OnRightPointerDown(Vector2 obj)
     {
-        if (m_InteractableDetector != null && m_InteractableDetector.isValidHit)
+        if (m_PickedPickable == null)
         {
-            RaycastHit raycastHit = m_InteractableDetector.raycastHit;
-
-            IPickable pickable = raycastHit.collider.GetComponentInParent<IPickable>();
-
-            if (pickable != null)
+            if (m_InteractableDetector != null && m_InteractableDetector.isValidHit)
             {
-                if (pickable.IsPicked())
+                RaycastHit raycastHit = m_InteractableDetector.raycastHit;
+
+                IPickable pickable = raycastHit.collider.GetComponentInParent<IPickable>();
+
+                if (pickable != null)
                 {
-                    pickable.Drop();
+                    pickable.Pickup(transform);
+                    m_PickedPickable = pickable;
                 }
-                else
-                {
-                    pickable.Pickup();
-                }
+            }
+        }
+        else
+        {
+            if (m_PickedPickable.IsPicked())
+            {
+                m_PickedPickable.Drop();
+                m_PickedPickable = null;
             }
         }
     }
