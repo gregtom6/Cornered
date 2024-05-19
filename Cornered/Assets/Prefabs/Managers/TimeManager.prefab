@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4476179626030753620
+--- !u!1 &5795707093312472071
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,44 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4766646246679037661}
-  - component: {fileID: 6095230257812330048}
+  - component: {fileID: 3419134328604634041}
+  - component: {fileID: 5457682401886942036}
   m_Layer: 0
-  m_Name: AllConfig
+  m_Name: TimeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4766646246679037661
+--- !u!4 &3419134328604634041
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4476179626030753620}
+  m_GameObject: {fileID: 5795707093312472071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6095230257812330048
+--- !u!114 &5457682401886942036
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4476179626030753620}
+  m_GameObject: {fileID: 5795707093312472071}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8baf244870720ae458f296de94b2e121, type: 3}
+  m_Script: {fileID: 11500000, guid: f3dadc664c4044844a9a99d94517d739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CharacterConfig: {fileID: 11400000, guid: ef71ade59b783074f8b53159b8eee740, type: 2}
-  m_BeltConfig: {fileID: 11400000, guid: f1eddd1cbb9824042b853f29cd2fdd3e, type: 2}
-  m_IngredientGenerationConfig: {fileID: 11400000, guid: e8fb5bed5cf2ac74c9d4fe6914b06c07, type: 2}
-  m_RecipeConfig: {fileID: 11400000, guid: 7204f73bba356384e8507e13ddf293a2, type: 2}
-  m_TimeConfig: {fileID: 11400000, guid: 2031bcbadd963524482bc973f51fad3f, type: 2}

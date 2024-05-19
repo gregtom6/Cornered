@@ -67,8 +67,16 @@ public class EventManager : MonoBehaviour
         listener.Raise(ev);
     }
 
-    private void Start()
+    private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

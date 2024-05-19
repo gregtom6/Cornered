@@ -8,6 +8,7 @@ public class AllConfig : MonoBehaviour
     [SerializeField] private BeltConfig m_BeltConfig;
     [SerializeField] private IngredientGenerationConfig m_IngredientGenerationConfig;
     [SerializeField] private RecipeConfig m_RecipeConfig;
+    [SerializeField] private TimeConfig m_TimeConfig;
 
     public CharacterConfig CharacterConfig => m_CharacterConfig;
 
@@ -16,6 +17,8 @@ public class AllConfig : MonoBehaviour
     public IngredientGenerationConfig IngredientGenerationConfig => m_IngredientGenerationConfig;
 
     public RecipeConfig RecipeConfig => m_RecipeConfig;
+
+    public TimeConfig TimeConfig => m_TimeConfig;
 
     public static AllConfig Instance;
 
