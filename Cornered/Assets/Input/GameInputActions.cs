@@ -62,6 +62,24 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""3c57086a-b78c-485e-ac6c-ab2fdc044be7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PickupDrop"",
+                    ""type"": ""Button"",
+                    ""id"": ""f4962851-9cbc-4cac-9bf1-207c4bcd8e4a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +170,28 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""PointerDelta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8fe9c3d2-e6c5-44a3-af08-d09860d5a167"",
+                    ""path"": ""<Pointer>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""50e3360b-2dce-42bd-8e67-4b82ea58ec7b"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PickupDrop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +204,8 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         m_Gameplay_LeftRightMovement = m_Gameplay.FindAction("LeftRightMovement", throwIfNotFound: true);
         m_Gameplay_PointerPosition = m_Gameplay.FindAction("PointerPosition", throwIfNotFound: true);
         m_Gameplay_PointerDelta = m_Gameplay.FindAction("PointerDelta", throwIfNotFound: true);
+        m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
+        m_Gameplay_PickupDrop = m_Gameplay.FindAction("PickupDrop", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +271,8 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_LeftRightMovement;
     private readonly InputAction m_Gameplay_PointerPosition;
     private readonly InputAction m_Gameplay_PointerDelta;
+    private readonly InputAction m_Gameplay_Interact;
+    private readonly InputAction m_Gameplay_PickupDrop;
     public struct GameplayActions
     {
         private @GameInputActions m_Wrapper;
@@ -237,6 +281,8 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         public InputAction @LeftRightMovement => m_Wrapper.m_Gameplay_LeftRightMovement;
         public InputAction @PointerPosition => m_Wrapper.m_Gameplay_PointerPosition;
         public InputAction @PointerDelta => m_Wrapper.m_Gameplay_PointerDelta;
+        public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
+        public InputAction @PickupDrop => m_Wrapper.m_Gameplay_PickupDrop;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +304,12 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
             @PointerDelta.started += instance.OnPointerDelta;
             @PointerDelta.performed += instance.OnPointerDelta;
             @PointerDelta.canceled += instance.OnPointerDelta;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+            @PickupDrop.started += instance.OnPickupDrop;
+            @PickupDrop.performed += instance.OnPickupDrop;
+            @PickupDrop.canceled += instance.OnPickupDrop;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -274,6 +326,12 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
             @PointerDelta.started -= instance.OnPointerDelta;
             @PointerDelta.performed -= instance.OnPointerDelta;
             @PointerDelta.canceled -= instance.OnPointerDelta;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+            @PickupDrop.started -= instance.OnPickupDrop;
+            @PickupDrop.performed -= instance.OnPickupDrop;
+            @PickupDrop.canceled -= instance.OnPickupDrop;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -297,5 +355,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         void OnLeftRightMovement(InputAction.CallbackContext context);
         void OnPointerPosition(InputAction.CallbackContext context);
         void OnPointerDelta(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnPickupDrop(InputAction.CallbackContext context);
     }
 }

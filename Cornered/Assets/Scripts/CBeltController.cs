@@ -8,11 +8,31 @@ public class CBeltController : MonoBehaviour
     [SerializeField] private Transform m_SpawnPoint;
     [SerializeField] private CTriggerContainer m_Spawner;
     [SerializeField] private CTriggerContainer m_Despawner;
+    [SerializeField] private CConveyorBeltSpeederButton m_SpeederButton;
     [SerializeField] private Transform m_Parent;
+
+    public EBeltSpeed currentBeltSpeed => m_CurrentBeltSpeed;
 
     private IObjectPool<CBeltElement> m_BeltElementPool;
 
+    private EBeltSpeed m_CurrentBeltSpeed = EBeltSpeed.Normal;
+
     public static CBeltController instance;
+
+    public float GetCurrentMultiplier()
+    {
+        return AllConfig.Instance.beltConfig.GetCurrentMultiplier(m_CurrentBeltSpeed);
+    }
+
+    public void ButtonPress()
+    {
+        SwitchBeltSpeed();
+    }
+
+    private void SwitchBeltSpeed()
+    {
+        m_CurrentBeltSpeed = m_CurrentBeltSpeed == EBeltSpeed.Normal ? EBeltSpeed.Fastened : EBeltSpeed.Normal;
+    }
 
     private void OnEnable()
     {
@@ -73,14 +93,7 @@ public class CBeltController : MonoBehaviour
         Destroy(beltElement.gameObject);
     }
 
-    public EBeltSpeed beltSpeed => m_BeltSpeed;
 
-    private EBeltSpeed m_BeltSpeed = EBeltSpeed.Normal;
-
-    public float GetCurrentMultiplier()
-    {
-        return AllConfig.Instance.beltConfig.GetCurrentMultiplier(m_BeltSpeed);
-    }
 }
 
 public enum EBeltSpeed

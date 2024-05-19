@@ -1,3 +1,4 @@
+using RotaryHeart.Lib.SerializableDictionary;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class BeltConfig : ScriptableObject
     [SerializeField] private int m_DefaultCapacity;
     [SerializeField] private int m_MaxSize;
     [SerializeField] private bool m_CollectionCheck;
+    [SerializeField] private SpeedAndIconDict m_SpeedAndIconDict;
 
     public float normalMultiplier => m_NormalMultiplier;
     public float speedMultiplier => m_SpeedMultiplier;
@@ -24,4 +26,12 @@ public class BeltConfig : ScriptableObject
     {
         return beltSpeed == EBeltSpeed.Normal ? m_NormalMultiplier : m_SpeedMultiplier;
     }
+
+    public Material GetMaterialBasedOnSpeed(EBeltSpeed beltSpeed)
+    {
+        return m_SpeedAndIconDict[beltSpeed];
+    }
 }
+
+[System.Serializable]
+public class SpeedAndIconDict : SerializableDictionaryBase<EBeltSpeed, Material> { }

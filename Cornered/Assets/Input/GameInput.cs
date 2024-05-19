@@ -13,6 +13,10 @@ public class GameInput : ScriptableObject, GameInputActions.IGameplayActions
     public event Action<Vector2> PointerDelta = delegate { };
     public event Action<float> ForwardBackwardMovement = delegate { };
     public event Action<float> LeftRightMovement = delegate { };
+    public event Action<Vector2> LeftPointerDown = delegate { };
+    public event Action<Vector2> LeftPointerUp = delegate { };
+    public event Action<Vector2> RightPointerDown = delegate { };
+    public event Action<Vector2> RightPointerUp = delegate { };
 
     private GameInputActions m_InputActions = null;
     private Vector2 m_MousePosScreen;
@@ -84,6 +88,38 @@ public class GameInput : ScriptableObject, GameInputActions.IGameplayActions
             Vector2 delta = context.ReadValue<Vector2>();
 
             PointerDelta?.Invoke(delta);
+        }
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        switch (context.phase)
+        {
+            case InputActionPhase.Started:
+                LeftPointerDown?.Invoke(Mouse.current.position.ReadValue());
+                break;
+
+            case InputActionPhase.Canceled:
+                LeftPointerUp?.Invoke(Mouse.current.position.ReadValue());
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void OnPickupDrop(InputAction.CallbackContext context)
+    {
+        switch (context.phase)
+        {
+            case InputActionPhase.Started:
+                RightPointerDown?.Invoke(Mouse.current.position.ReadValue());
+                break;
+
+            case InputActionPhase.Canceled:
+                RightPointerUp?.Invoke(Mouse.current.position.ReadValue());
+                break;
+            default:
+                break;
         }
     }
 }

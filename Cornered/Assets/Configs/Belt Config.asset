@@ -18,4 +18,31 @@ MonoBehaviour:
   m_DefaultCapacity: 11
   m_MaxSize: 20
   m_CollectionCheck: 1
-  m_TimeWhenCreatingNewBeltElement: 3.87
+  m_SpeedAndIconDict:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues: 0000000001000000
+    _keys: 0000000001000000
+    _values:
+    - {fileID: 2100000, guid: 7d1cc5217683b7446807aac810f8c327, type: 2}
+    - {fileID: 2100000, guid: c479e38c9842c314db731c49032945c6, type: 2}
