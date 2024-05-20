@@ -72,6 +72,12 @@ public class ItemTypes
 {
     public EItemType item = EItemType.Count;
     public EItemState state = EItemState.Count;
+
+    public ItemTypes(EItemType itemType, EItemState itemState)
+    {
+        item = itemType;
+        state = itemState;
+    }
 }
 
 [System.Serializable]

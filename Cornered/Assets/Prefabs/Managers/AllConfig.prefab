@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6095230257812330048
 MonoBehaviour:
@@ -49,3 +49,5 @@ MonoBehaviour:
   m_IngredientGenerationConfig: {fileID: 11400000, guid: e8fb5bed5cf2ac74c9d4fe6914b06c07, type: 2}
   m_RecipeConfig: {fileID: 11400000, guid: 7204f73bba356384e8507e13ddf293a2, type: 2}
   m_TimeConfig: {fileID: 11400000, guid: 2031bcbadd963524482bc973f51fad3f, type: 2}
+  m_HintConfig: {fileID: 11400000, guid: 562dddebb3d8dca4c9f94cfd837a29de, type: 2}
+  m_WeaponConfig: {fileID: 11400000, guid: 68383db4573f4534d81bd323523fe83c, type: 2}

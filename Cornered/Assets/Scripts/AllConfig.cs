@@ -9,6 +9,8 @@ public class AllConfig : MonoBehaviour
     [SerializeField] private IngredientGenerationConfig m_IngredientGenerationConfig;
     [SerializeField] private RecipeConfig m_RecipeConfig;
     [SerializeField] private TimeConfig m_TimeConfig;
+    [SerializeField] private HintConfig m_HintConfig;
+    [SerializeField] private WeaponConfig m_WeaponConfig;
 
     public CharacterConfig CharacterConfig => m_CharacterConfig;
 
@@ -19,6 +21,10 @@ public class AllConfig : MonoBehaviour
     public RecipeConfig RecipeConfig => m_RecipeConfig;
 
     public TimeConfig TimeConfig => m_TimeConfig;
+
+    public HintConfig HintConfig => m_HintConfig;
+
+    public WeaponConfig WeaponConfig => m_WeaponConfig;
 
     public static AllConfig Instance;
 

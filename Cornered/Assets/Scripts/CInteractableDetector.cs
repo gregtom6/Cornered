@@ -23,6 +23,6 @@ public class CInteractableDetector : MonoBehaviour
 
         m_IsValidHit = Physics.Raycast(origin, worldDirection, out m_RaycastHit, rayLength);
 
-        Debug.DrawRay(origin, worldDirection * rayLength, Color.red);
+        //Debug.DrawRay(origin, worldDirection * rayLength, Color.green);
     }
 }

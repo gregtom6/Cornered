@@ -24,6 +24,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tube
       objectReference: {fileID: 0}
+    - target: {fileID: 3797625828113751030, guid: 3d431d9f4cb7aeb45905bb753afd3631, type: 3}
+      propertyPath: m_ItemType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3797625828113751030, guid: 3d431d9f4cb7aeb45905bb753afd3631, type: 3}
+      propertyPath: m_ItemState
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4310391360559761607, guid: 3d431d9f4cb7aeb45905bb753afd3631, type: 3}
       propertyPath: m_RootOrder
       value: 0

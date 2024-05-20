@@ -11,4 +11,6 @@ public interface IPickable
     bool IsPicked();
 
     bool WasPickedAnytime();
+
+    IEquippable GetEquippable();
 }

@@ -32,7 +32,7 @@ public class CBeltElement : MonoBehaviour
     {
         if (!m_CreatedItem.WasPickedAnytime())
         {
-            Destroy(m_CreatedItem);
+            Destroy(m_CreatedItem.gameObject);
         }
     }
 }

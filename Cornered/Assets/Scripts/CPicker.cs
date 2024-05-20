@@ -7,9 +7,16 @@ public class CPicker : MonoBehaviour
 {
     [SerializeField] private GameInput m_GameInput;
 
+    public IPickable pickedPickable => m_PickedPickable;
+
     private CInteractableDetector m_InteractableDetector;
 
     private IPickable m_PickedPickable;
+
+    public void RemovePickable()
+    {
+        m_PickedPickable = null;
+    }
 
     private void Start()
     {

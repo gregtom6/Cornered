@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CIngredient : MonoBehaviour, IPickable
 {
-    [SerializeField] private List<Collider> m_Colliders = new();
-    [SerializeField] private List<Rigidbody> m_Rigidbodies= new();
+    [SerializeField] protected EItemType m_ItemType = EItemType.Count;
+    [SerializeField] protected EItemState m_ItemState = EItemState.Count;
+    [SerializeField] protected List<Collider> m_Colliders = new();
+    [SerializeField] protected List<Rigidbody> m_Rigidbodies= new();
 
     //todo: ezeket ososztalyba
 
@@ -55,5 +57,10 @@ public class CIngredient : MonoBehaviour, IPickable
             x.useGravity = true;
             x.isKinematic = false;
         });
+    }
+
+    public virtual IEquippable GetEquippable()
+    {
+        return null;
     }
 }

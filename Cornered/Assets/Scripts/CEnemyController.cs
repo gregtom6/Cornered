@@ -23,6 +23,7 @@ public class CEnemyController : MonoBehaviour
     private void Start()
     {
         m_NavMeshAgent = GetComponent<NavMeshAgent>();
+        m_NavMeshAgent.speed = AllConfig.Instance.CharacterConfig.enemyRunSpeed;
     }
 
     private void OnTimeOverHappened(TimeOverHappenedEvent ev)
