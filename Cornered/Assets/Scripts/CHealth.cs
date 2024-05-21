@@ -16,6 +16,11 @@ public class CHealth : MonoBehaviour
     {
         m_CurrentHealth = Mathf.Clamp(m_CurrentHealth += damage, AllConfig.Instance.CharacterConfig.minHealth, AllConfig.Instance.CharacterConfig.maxHealth);
         m_HealingMeasurementTimeStart = Time.time;
+
+        if (m_CurrentHealth <= AllConfig.Instance.CharacterConfig.minHealth)
+        {
+            EventManager.Raise(new CharacterDefeatedEvent { characterType = characterType });
+        }
     }
     private void Start()
     {

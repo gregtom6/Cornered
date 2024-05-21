@@ -14,11 +14,25 @@ public class TimeManager : MonoBehaviour
         return Mathf.Max(AllConfig.Instance.TimeConfig.prepareTimeEndInSec - GetCurrentTime(), 0f);
     }
 
+    private void OnEnable()
+    {
+        EventManager.AddListener<NewMatchStartedEvent>(OnNewMatchStartedEvent);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.RemoveListener<NewMatchStartedEvent>(OnNewMatchStartedEvent);
+    }
+
     private void Start()
+    {
+        instance = this;
+    }
+
+    private void OnNewMatchStartedEvent(NewMatchStartedEvent ev)
     {
         m_StartTime = Time.time;
         m_IsPreparingTime = true;
-        instance = this;
     }
 
     private void Update()

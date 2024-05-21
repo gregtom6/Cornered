@@ -11,6 +11,7 @@ public class AllConfig : MonoBehaviour
     [SerializeField] private TimeConfig m_TimeConfig;
     [SerializeField] private HintConfig m_HintConfig;
     [SerializeField] private WeaponConfig m_WeaponConfig;
+    [SerializeField] private AIConfig m_AIConfig;
 
     public CharacterConfig CharacterConfig => m_CharacterConfig;
 
@@ -25,6 +26,8 @@ public class AllConfig : MonoBehaviour
     public HintConfig HintConfig => m_HintConfig;
 
     public WeaponConfig WeaponConfig => m_WeaponConfig;
+
+    public AIConfig AIConfig => m_AIConfig;
 
     public static AllConfig Instance;
 

@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class CEquipmentGenerator : MonoBehaviour
 {
-    private void Start()
+    private void OnEnable()
+    {
+        EventManager.AddListener<NewMatchStartedEvent>(OnNewMatchStartedEvent);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.RemoveListener<NewMatchStartedEvent>(OnNewMatchStartedEvent);
+    }
+
+    private void OnNewMatchStartedEvent(NewMatchStartedEvent ev)
     {
         GenerateEquipment(ECharacterType.Enemy);
     }

@@ -14,6 +14,7 @@ public class CharacterConfig : ScriptableObject
     [SerializeField] float m_MaxHealth;
     [SerializeField] float m_WaitUntilHealthReloadStarts;
     [SerializeField] float m_HealHealthDelta;
+    [SerializeField] private GameObject m_EnemyPrefab;
 
     public float enemyRunSpeed => m_EnemyRunSpeed;
     public float runSpeed => m_RunSpeed;
@@ -24,4 +25,6 @@ public class CharacterConfig : ScriptableObject
     public float minHealth => m_MinHealth;
     public float maxHealth => m_MaxHealth;
     public float waitUntilHealthReloadStarts => m_WaitUntilHealthReloadStarts;
+
+    public GameObject enemyPrefab => m_EnemyPrefab;
 }

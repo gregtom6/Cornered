@@ -6,7 +6,7 @@ public class CProjectilePresenter : ProjectileVisualizer
 {
     private static readonly int ANIM_PARAM_SHOW = Animator.StringToHash("shot");
 
-    private Camera m_Camera;
+    [SerializeField] private Transform m_HeadTransform;
     private LineRenderer m_LineRenderer;
     private Animator m_Animator;
 
@@ -17,7 +17,6 @@ public class CProjectilePresenter : ProjectileVisualizer
 
     private void Start()
     {
-        m_Camera = Camera.main;
         m_LineRenderer = GetComponent<LineRenderer>();
         m_Animator = GetComponent<Animator>();
         m_LineRenderer.enabled = false;
@@ -25,7 +24,7 @@ public class CProjectilePresenter : ProjectileVisualizer
 
     private void Update()
     {
-        m_LineRenderer.SetPosition(0, m_Camera.transform.parent.localPosition);
-        m_LineRenderer.SetPosition(1, m_Camera.transform.parent.forward * 50f);
+        m_LineRenderer.SetPosition(0, m_HeadTransform.localPosition);
+        m_LineRenderer.SetPosition(1, m_HeadTransform.forward * 50f);
     }
 }

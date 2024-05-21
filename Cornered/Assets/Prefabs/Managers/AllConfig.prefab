@@ -51,3 +51,4 @@ MonoBehaviour:
   m_TimeConfig: {fileID: 11400000, guid: 2031bcbadd963524482bc973f51fad3f, type: 2}
   m_HintConfig: {fileID: 11400000, guid: 562dddebb3d8dca4c9f94cfd837a29de, type: 2}
   m_WeaponConfig: {fileID: 11400000, guid: 68383db4573f4534d81bd323523fe83c, type: 2}
+  m_AIConfig: {fileID: 11400000, guid: ae0cbff236312274d8fb908bc4c25f35, type: 2}

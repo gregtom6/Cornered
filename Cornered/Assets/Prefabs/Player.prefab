@@ -2420,6 +2420,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProjectileRepresenter
       objectReference: {fileID: 0}
+    - target: {fileID: 3556026144738789941, guid: a1a656383d1d08a4c8ebb79f7bd67130, type: 3}
+      propertyPath: m_HeadTransform
+      value: 
+      objectReference: {fileID: 6170694112272487523}
     - target: {fileID: 5549423232942879488, guid: a1a656383d1d08a4c8ebb79f7bd67130, type: 3}
       propertyPath: m_RootOrder
       value: -1
