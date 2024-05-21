@@ -4,13 +4,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting.FullSerializer.Internal.Converters;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Recipe Config")]
 public class RecipeConfig : ScriptableObject
 {
+    [SerializeField] private Material m_RecipeShowPlusMaterial;
+    [SerializeField] private Material m_RecipeShowEqualMaterial;
+    [SerializeField] private GameObject m_RecipeShowElementPrefab;
     [SerializeField] private RecipeDict m_RecipeDict;
     [SerializeField] private ProductPrefabDict m_ProductPrefabDict;
+    [SerializeField] private IngredientRadiatingMaterialDict m_IngredientRadiatingMaterialDict;
+
+    public Material plusSignMaterial => m_RecipeShowPlusMaterial;
+    public Material equalSignMaterial => m_RecipeShowEqualMaterial;
+
+    public GameObject recipeShowElementPrefab => m_RecipeShowElementPrefab;
 
     public GameObject GetResultItem(IReadOnlyList<ItemTypes> itemTypes)
     {
@@ -19,12 +29,31 @@ public class RecipeConfig : ScriptableObject
         return m_ProductPrefabDict[resultItemType];
     }
 
-    public bool AreAnyRecipesContainThese(List<ItemTypes> items)
+    public IReadOnlyList<IReadOnlyList<Material>> GetRadiatingMaterialsOfAllRecipes()
     {
-        return m_RecipeDict.Any(x =>
+        List<List<Material>> materials = new();
+
+        int i = 0;
+
+        foreach (KeyValuePair<EItemType, ItemTypeDetails> recipe in m_RecipeDict)
         {
-            return items.TrueForAll(y => x.Value.items.Contains(y));
-        });
+            materials.Add(new());
+
+            foreach (ItemTypes itemTypes in recipe.Value.items)
+            {
+                Material mat = m_IngredientRadiatingMaterialDict[itemTypes.item];
+
+                materials[i].Add(mat);
+            }
+
+            Material endMat = m_IngredientRadiatingMaterialDict[recipe.Key];
+
+            materials[i].Add(endMat);
+
+            i++;
+        }
+
+        return materials;
     }
 
     public static bool AreListsEqual(IReadOnlyList<ItemTypes> list1, IReadOnlyList<ItemTypes> list2)
@@ -42,21 +71,6 @@ public class RecipeConfig : ScriptableObject
         }
 
         return true;
-    }
-
-    private Dictionary<ItemTypes, int> GetElementCounts(IReadOnlyList<ItemTypes> list)
-    {
-        var dict = new Dictionary<ItemTypes, int>();
-
-        foreach (var element in list)
-        {
-            if (dict.ContainsKey(element))
-                dict[element]++;
-            else
-                dict[element] = 1;
-        }
-
-        return dict;
     }
 }
 
@@ -100,6 +114,9 @@ public class RecipeDict : SerializableDictionaryBase<EItemType, ItemTypeDetails>
 
 [System.Serializable]
 public class ProductPrefabDict : SerializableDictionaryBase<EItemType, GameObject> { }
+
+[System.Serializable]
+public class IngredientRadiatingMaterialDict : SerializableDictionaryBase<EItemType, Material> { }
 
 public enum EItemState
 {
