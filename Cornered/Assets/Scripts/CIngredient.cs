@@ -7,11 +7,20 @@ public class CIngredient : MonoBehaviour, IPickable
     [SerializeField] protected EItemType m_ItemType = EItemType.Count;
     [SerializeField] protected EItemState m_ItemState = EItemState.Count;
     [SerializeField] protected List<Collider> m_Colliders = new();
-    [SerializeField] protected List<Rigidbody> m_Rigidbodies= new();
+    [SerializeField] protected List<Rigidbody> m_Rigidbodies = new();
 
     //todo: ezeket ososztalyba
 
+    public EItemType itemType => m_ItemType;
+
+    public EItemState itemState => m_ItemState;
+
     private bool m_WasPickedAnyTime;
+
+    public void SetState(EItemState state)
+    {
+        m_ItemState = state;
+    }
 
     public void Drop()
     {

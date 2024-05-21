@@ -19,7 +19,7 @@ MonoBehaviour:
       draggable: 1
       expandable: 1
       multipleSelection: 1
-      isExpanded: 1
+      isExpanded: 0
       label:
         m_Text: Keys
         m_Image: {fileID: 0}
@@ -34,7 +34,7 @@ MonoBehaviour:
       elementNameOverride: 
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
-    isExpanded: 1
+    isExpanded: 0
     _keyValues: 0700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
     _keys: 0700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
     _values:
@@ -97,3 +97,38 @@ MonoBehaviour:
         state: 2
       - item: 16
         state: 2
+  m_ProductPrefabDict:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues: 0700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
+    _keys: 0700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
+    _values:
+    - {fileID: 2234510257570796805, guid: 1306cdef44f5ea34abd05b6429ac0ad8, type: 3}
+    - {fileID: 2234510257570796805, guid: 33157320914e4294b95d9acf7b6e9192, type: 3}
+    - {fileID: 2234510257570796805, guid: ccf787c7d224b1c4c82472df30a24830, type: 3}
+    - {fileID: 2234510257570796805, guid: 825eee7dc3ff53f49afc1acc87f66fe2, type: 3}
+    - {fileID: 2234510257570796805, guid: 2dd899962c8d0834db0d311c9c1cf55c, type: 3}
+    - {fileID: 2687255016740261199, guid: 11d6aec27e31ba8419ebc252f5012cbc, type: 3}
+    - {fileID: 2687255016740261199, guid: 6650f9cf78eac894bbbbb0ab65ff3a40, type: 3}
+    - {fileID: 2687255016740261199, guid: 31a375559e53e9a4e82427295d39c292, type: 3}
+    - {fileID: 2687255016740261199, guid: 8c7cb46206cc134458be07ce238d4ff0, type: 3}

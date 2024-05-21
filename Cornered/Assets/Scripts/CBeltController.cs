@@ -10,6 +10,7 @@ public class CBeltController : MonoBehaviour
     [SerializeField] private CTriggerContainer m_Despawner;
     [SerializeField] private CConveyorBeltSpeederButton m_SpeederButton;
     [SerializeField] private Transform m_Parent;
+    [SerializeField] private CButton m_Button;
 
     public EBeltSpeed currentBeltSpeed => m_CurrentBeltSpeed;
 
@@ -24,7 +25,7 @@ public class CBeltController : MonoBehaviour
         return AllConfig.Instance.beltConfig.GetCurrentMultiplier(m_CurrentBeltSpeed);
     }
 
-    public void ButtonPress()
+    private void OnPressHappened()
     {
         SwitchBeltSpeed();
     }
@@ -38,12 +39,16 @@ public class CBeltController : MonoBehaviour
     {
         m_Spawner.allObjectLeft += OnAllObjectLeftFromSpawner;
         m_Despawner.objectEntered += OnDespawnerObjectEntered;
+
+        m_Button.pressHappened += OnPressHappened;
     }
 
     private void OnDisable()
     {
         m_Spawner.allObjectLeft -= OnAllObjectLeftFromSpawner;
         m_Despawner.objectEntered -= OnDespawnerObjectEntered;
+
+        m_Button.pressHappened -= OnPressHappened;
     }
 
     void OnAllObjectLeftFromSpawner()

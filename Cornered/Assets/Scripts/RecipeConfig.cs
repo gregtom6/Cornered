@@ -10,11 +10,13 @@ using UnityEngine;
 public class RecipeConfig : ScriptableObject
 {
     [SerializeField] private RecipeDict m_RecipeDict;
+    [SerializeField] private ProductPrefabDict m_ProductPrefabDict;
 
-    public EItemType GetResultItem(List<ItemTypes> itemTypes)
+    public GameObject GetResultItem(IReadOnlyList<ItemTypes> itemTypes)
     {
         KeyValuePair<EItemType, ItemTypeDetails> item = m_RecipeDict.Where(x => AreListsEqual(itemTypes, x.Value.items)).FirstOrDefault();
-        return item.Key;
+        EItemType resultItemType = item.Key;
+        return m_ProductPrefabDict[resultItemType];
     }
 
     public bool AreAnyRecipesContainThese(List<ItemTypes> items)
@@ -25,20 +27,17 @@ public class RecipeConfig : ScriptableObject
         });
     }
 
-    private bool AreListsEqual(IReadOnlyList<ItemTypes> first, IReadOnlyList<ItemTypes> second)
+    public static bool AreListsEqual(IReadOnlyList<ItemTypes> list1, IReadOnlyList<ItemTypes> list2)
     {
-        if (first == null || second == null)
+        if (list1 == null || list2 == null)
+            return list1 == list2;
+
+        if (list1.Count != list2.Count)
             return false;
 
-        if (first.Count != second.Count)
-            return false;
-
-        var dict1 = GetElementCounts(first);
-        var dict2 = GetElementCounts(second);
-
-        foreach (var kvp in dict1)
+        for (int i = 0; i < list1.Count; i++)
         {
-            if (!dict2.ContainsKey(kvp.Key) || dict2[kvp.Key] != kvp.Value)
+            if (!list1[i].Equals(list2[i]))
                 return false;
         }
 
@@ -68,20 +67,39 @@ public class ItemTypeDetails
 }
 
 [Serializable]
-public class ItemTypes
+public struct ItemTypes
 {
-    public EItemType item = EItemType.Count;
-    public EItemState state = EItemState.Count;
+    public EItemType item;
+    public EItemState state;
 
     public ItemTypes(EItemType itemType, EItemState itemState)
     {
         item = itemType;
         state = itemState;
     }
+
+    public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+            return false;
+
+        ItemTypes other = (ItemTypes)obj;
+        return item == other.item && state == other.state;
+    }
+
+    public override int GetHashCode()
+    {
+        int hashItem = item.GetHashCode();
+        int hashState = state.GetHashCode();
+        return hashItem ^ hashState;
+    }
 }
 
 [System.Serializable]
 public class RecipeDict : SerializableDictionaryBase<EItemType, ItemTypeDetails> { }
+
+[System.Serializable]
+public class ProductPrefabDict : SerializableDictionaryBase<EItemType, GameObject> { }
 
 public enum EItemState
 {

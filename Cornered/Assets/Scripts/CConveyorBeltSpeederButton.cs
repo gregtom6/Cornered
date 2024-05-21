@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CConveyorBeltSpeederButton : MonoBehaviour, IInteractable
+public class CConveyorBeltSpeederButton : CButton
 {
     [SerializeField] private CBeltController m_BeltController;
     [SerializeField] private MeshRenderer m_MeshRenderer;
@@ -12,9 +12,9 @@ public class CConveyorBeltSpeederButton : MonoBehaviour, IInteractable
         m_MeshRenderer.material = AllConfig.Instance.beltConfig.GetMaterialBasedOnSpeed(m_BeltController.currentBeltSpeed);
     }
 
-    public void Interact()
+    public override void Interact()
     {
-        m_BeltController.ButtonPress();
+        base.Interact();
 
         m_MeshRenderer.material = AllConfig.Instance.beltConfig.GetMaterialBasedOnSpeed(m_BeltController.currentBeltSpeed);
     }
