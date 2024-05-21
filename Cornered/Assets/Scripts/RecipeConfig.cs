@@ -12,15 +12,25 @@ public class RecipeConfig : ScriptableObject
 {
     [SerializeField] private Material m_RecipeShowPlusMaterial;
     [SerializeField] private Material m_RecipeShowEqualMaterial;
+    [SerializeField] private Material m_BurnMaterial;
+    [SerializeField] private Material m_FreezeMaterial;
     [SerializeField] private GameObject m_RecipeShowElementPrefab;
+    [SerializeField] private GameObject m_RecipeShowOperatorPrefab;
     [SerializeField] private RecipeDict m_RecipeDict;
     [SerializeField] private ProductPrefabDict m_ProductPrefabDict;
     [SerializeField] private IngredientRadiatingMaterialDict m_IngredientRadiatingMaterialDict;
+    [SerializeField] private EffectRadiatingMaterialDict m_EffectRadiatingMaterialDict;
 
     public Material plusSignMaterial => m_RecipeShowPlusMaterial;
     public Material equalSignMaterial => m_RecipeShowEqualMaterial;
 
+    public Material burnMaterial => m_BurnMaterial;
+
+    public Material freezeMaterial => m_FreezeMaterial;
+
     public GameObject recipeShowElementPrefab => m_RecipeShowElementPrefab;
+
+    public GameObject recipeShowOperatorPrefab => m_RecipeShowOperatorPrefab;
 
     public GameObject GetResultItem(IReadOnlyList<ItemTypes> itemTypes)
     {
@@ -29,30 +39,41 @@ public class RecipeConfig : ScriptableObject
         return m_ProductPrefabDict[resultItemType];
     }
 
-    public IReadOnlyList<IReadOnlyList<Material>> GetRadiatingMaterialsOfAllRecipes()
+    public IReadOnlyList<IReadOnlyList<Material>> GetRadiatingMaterialsOfAllRecipes(out IReadOnlyList<IReadOnlyList<Material>> effectMaterials)
     {
         List<List<Material>> materials = new();
+        List<List<Material>> itemStateMaterials = new();
 
         int i = 0;
 
         foreach (KeyValuePair<EItemType, ItemTypeDetails> recipe in m_RecipeDict)
         {
             materials.Add(new());
+            itemStateMaterials.Add(new());
 
             foreach (ItemTypes itemTypes in recipe.Value.items)
             {
                 Material mat = m_IngredientRadiatingMaterialDict[itemTypes.item];
 
                 materials[i].Add(mat);
+
+                Material stateMat = m_EffectRadiatingMaterialDict[itemTypes.state];
+
+                itemStateMaterials[i].Add(stateMat);
             }
 
             Material endMat = m_IngredientRadiatingMaterialDict[recipe.Key];
 
             materials[i].Add(endMat);
 
+            Material stateEndMat = m_EffectRadiatingMaterialDict[EItemState.Normal];
+
+            itemStateMaterials[i].Add(stateEndMat);
+
             i++;
         }
 
+        effectMaterials = itemStateMaterials;
         return materials;
     }
 
@@ -117,6 +138,9 @@ public class ProductPrefabDict : SerializableDictionaryBase<EItemType, GameObjec
 
 [System.Serializable]
 public class IngredientRadiatingMaterialDict : SerializableDictionaryBase<EItemType, Material> { }
+
+[System.Serializable]
+public class EffectRadiatingMaterialDict : SerializableDictionaryBase<EItemState, Material> { }
 
 public enum EItemState
 {

@@ -17,7 +17,7 @@ public class CRecipeShower : MonoBehaviour
     {
         Vector3 positionForGeneration = m_StartingTransform.position;
 
-        IReadOnlyList<IReadOnlyList<Material>> materials = AllConfig.Instance.RecipeConfig.GetRadiatingMaterialsOfAllRecipes();
+        IReadOnlyList<IReadOnlyList<Material>> materials = AllConfig.Instance.RecipeConfig.GetRadiatingMaterialsOfAllRecipes(out IReadOnlyList<IReadOnlyList<Material>> stateMaterials);
 
         for (int i = 0; i < materials.Count; i++)
         {
@@ -25,29 +25,29 @@ public class CRecipeShower : MonoBehaviour
             {
                 GameObject recipeElement = Instantiate(AllConfig.Instance.RecipeConfig.recipeShowElementPrefab, positionForGeneration, Quaternion.Euler(90, 0, 0), transform);
 
-                MeshRenderer meshRenderer = recipeElement.GetComponentInParent<MeshRenderer>();
+                CRecipeElementVisual meshRenderer = recipeElement.GetComponentInParent<CRecipeElementVisual>();
 
-                meshRenderer.material = materials[i][j];
+                meshRenderer.SetElement(materials[i][j],stateMaterials[i][j]);
 
                 positionForGeneration = new Vector3(positionForGeneration.x + m_HorizontalGapSize, positionForGeneration.y, positionForGeneration.z);
 
                 if (j + 2 < materials[i].Count)
                 {
-                    recipeElement = Instantiate(AllConfig.Instance.RecipeConfig.recipeShowElementPrefab, positionForGeneration, Quaternion.Euler(90, 0, 0), transform);
+                    recipeElement = Instantiate(AllConfig.Instance.RecipeConfig.recipeShowOperatorPrefab, positionForGeneration, Quaternion.Euler(90, 0, 0), transform);
 
-                    meshRenderer = recipeElement.GetComponentInParent<MeshRenderer>();
+                    meshRenderer = recipeElement.GetComponentInParent<CRecipeElementVisual>();
 
-                    meshRenderer.material = AllConfig.Instance.RecipeConfig.plusSignMaterial;
+                    meshRenderer.SetElement(AllConfig.Instance.RecipeConfig.plusSignMaterial,null);
 
                     positionForGeneration = new Vector3(positionForGeneration.x + m_HorizontalGapSize, positionForGeneration.y, positionForGeneration.z);
                 }
                 else if (j + 2 == materials[i].Count)
                 {
-                    recipeElement = Instantiate(AllConfig.Instance.RecipeConfig.recipeShowElementPrefab, positionForGeneration, Quaternion.Euler(90, 0, 0), transform);
+                    recipeElement = Instantiate(AllConfig.Instance.RecipeConfig.recipeShowOperatorPrefab, positionForGeneration, Quaternion.Euler(90, 0, 0), transform);
 
-                    meshRenderer = recipeElement.GetComponentInParent<MeshRenderer>();
+                    meshRenderer = recipeElement.GetComponentInParent<CRecipeElementVisual>();
 
-                    meshRenderer.material = AllConfig.Instance.RecipeConfig.equalSignMaterial;
+                    meshRenderer.SetElement(AllConfig.Instance.RecipeConfig.equalSignMaterial,null);
 
                     positionForGeneration = new Vector3(positionForGeneration.x + m_HorizontalGapSize, positionForGeneration.y, positionForGeneration.z);
                 }

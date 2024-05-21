@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RecipeShowPlusMaterial: {fileID: 2100000, guid: 62cc7a4d242185e499d91b2030366e5e, type: 2}
   m_RecipeShowEqualMaterial: {fileID: 2100000, guid: 2dc16ff12c10c2d4ba4c0bab24d4fa00, type: 2}
+  m_BurnMaterial: {fileID: 0}
+  m_FreezeMaterial: {fileID: 0}
   m_RecipeShowElementPrefab: {fileID: 506017202582363131, guid: 3495f257d4e1d474c8a3b7749f629c86, type: 3}
+  m_RecipeShowOperatorPrefab: {fileID: 6313852697088902061, guid: 5dae3812ddca1ed40aa4ce52e71f928c, type: 3}
   m_RecipeDict:
     reorderableList:
       canAdd: 1
@@ -177,3 +180,32 @@ MonoBehaviour:
     - {fileID: 2100000, guid: 56965f3d483e36941adb88058217dce6, type: 2}
     - {fileID: 2100000, guid: ad21ff6e3c93fd7479ca745121eed6f4, type: 2}
     - {fileID: 2100000, guid: 9bd03bb0ecb583c45a9f2b039698d11c, type: 2}
+  m_EffectRadiatingMaterialDict:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues: 010000000000000002000000
+    _keys: 010000000000000002000000
+    _values:
+    - {fileID: 2100000, guid: be8c9da60df827d4ea6cab451f8577d2, type: 2}
+    - {fileID: 0}
+    - {fileID: 2100000, guid: d36106672cff5ce40832b0f8556889c7, type: 2}
