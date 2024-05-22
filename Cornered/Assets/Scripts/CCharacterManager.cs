@@ -43,4 +43,5 @@ public class CCharacterManager : MonoBehaviour
     }
 
     public static Vector3 playerPosition => instance.m_Player.position;
+    public static Vector3 enemyPosition => instance.m_EnemyInstanceGameObject.transform.position;
 }

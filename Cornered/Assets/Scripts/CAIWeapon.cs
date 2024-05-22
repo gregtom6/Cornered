@@ -21,7 +21,7 @@ public class CAIWeapon : MonoBehaviour
             {
                 RaycastHit raycastHit = m_ShotDetector.raycastHit;
 
-                CHealth health = raycastHit.collider.GetComponentInParent<CHealth>();
+                CHealth health = raycastHit.collider.GetComponentInChildren<CHealth>();
 
                 if (health != null)
                 {

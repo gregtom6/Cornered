@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class CEnemyController : MonoBehaviour
 {
     [SerializeField] private CHealth m_EnemyHealth;
+    [SerializeField] private Transform m_HeadTransform;
 
     private CAIWeapon m_AIWeapon;
 
@@ -42,6 +43,8 @@ public class CEnemyController : MonoBehaviour
         {
             return;
         }
+
+        m_HeadTransform.LookAt(CCharacterManager.playerPosition);
 
         if (state == EEnemyState.DefendPosition)
         {

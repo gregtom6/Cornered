@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7564547496685296158}
   - component: {fileID: 3556026144738789941}
   m_Layer: 6
-  m_Name: ProjectileRepresenter
+  m_Name: PlayerProjectileRepresenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &7543582064045549476
 LineRenderer:
@@ -135,7 +135,7 @@ LineRenderer:
     shadowBias: 0.5
     generateLightingData: 0
   m_MaskInteraction: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 0
 --- !u!95 &7564547496685296158
@@ -171,3 +171,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb726ccf0ad074e4e99c8e35ad46a469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Animator: {fileID: 7564547496685296158}
+  m_HeadTransform: {fileID: 0}

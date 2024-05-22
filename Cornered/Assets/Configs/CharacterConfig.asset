@@ -20,5 +20,5 @@ MonoBehaviour:
   m_MinHealth: 0
   m_MaxHealth: 100
   m_WaitUntilHealthReloadStarts: 2
-  m_HealHealthDelta: 1
+  m_HealHealthDelta: 5
   m_EnemyPrefab: {fileID: 2535627791207296582, guid: dd3237f0ab67ba44589cf4f20f9626ab, type: 3}

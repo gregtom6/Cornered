@@ -599,8 +599,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e2b72c5aba9334bb9d00c20a2d8021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Light: {fileID: 8586029766388311355}
   m_Animator: {fileID: 5753422054732504807}
+  m_Light: {fileID: 8586029766388311355}
 --- !u!1 &5505696190732988150
 GameObject:
   m_ObjectHideFlags: 0
@@ -1535,7 +1535,6 @@ GameObject:
   - component: {fileID: 6170694111168635354}
   - component: {fileID: 6170694111168635353}
   - component: {fileID: 6170694111168635352}
-  - component: {fileID: 6170694111168635355}
   m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
@@ -1608,27 +1607,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6170694111168635355
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6170694111168635365}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6170694111352708201
 GameObject:
   m_ObjectHideFlags: 0
@@ -2182,7 +2160,6 @@ GameObject:
   - component: {fileID: 6170694112272487523}
   - component: {fileID: 6170694112272487526}
   - component: {fileID: 6170694112272487521}
-  - component: {fileID: 6170694112272487520}
   m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
@@ -2256,27 +2233,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6170694112272487520
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6170694112272487522}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6846338293504670033
 GameObject:
   m_ObjectHideFlags: 0
@@ -2418,12 +2374,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2592020544912705697, guid: a1a656383d1d08a4c8ebb79f7bd67130, type: 3}
       propertyPath: m_Name
-      value: ProjectileRepresenter
+      value: PlayerProjectileRepresenter
       objectReference: {fileID: 0}
     - target: {fileID: 3556026144738789941, guid: a1a656383d1d08a4c8ebb79f7bd67130, type: 3}
       propertyPath: m_HeadTransform
       value: 
       objectReference: {fileID: 6170694112272487523}
+    - target: {fileID: 3556026144738789941, guid: a1a656383d1d08a4c8ebb79f7bd67130, type: 3}
+      propertyPath: m_CameraTransform
+      value: 
+      objectReference: {fileID: 6170694110623655004}
     - target: {fileID: 5549423232942879488, guid: a1a656383d1d08a4c8ebb79f7bd67130, type: 3}
       propertyPath: m_RootOrder
       value: -1
