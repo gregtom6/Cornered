@@ -1,13 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class CEnemyController : MonoBehaviour
+public partial class CEnemyController : MonoBehaviour
 {
     [SerializeField] private CHealth m_EnemyHealth;
     [SerializeField] private Transform m_HeadTransform;
+    [SerializeField] private Transform m_MovementTargetPoint;
+    [SerializeField] private LayerMask m_PlayerPillarLayerMask;
+    [SerializeField] private LayerMask m_PillarLayerMask;
 
     private CAIWeapon m_AIWeapon;
 
@@ -48,11 +54,13 @@ public class CEnemyController : MonoBehaviour
 
         if (state == EEnemyState.DefendPosition)
         {
-            m_NavMeshAgent.destination = GetClosestHidingSpot();
+            HideSpotFinder hideSpotFinder = new HideSpotFinder(m_MovementTargetPoint, transform, m_PlayerPillarLayerMask, m_PillarLayerMask);
+            Vector3? position = hideSpotFinder.GetClosestHidingSpot();
+            m_NavMeshAgent.destination = position.HasValue ? position.Value : transform.position;
         }
         else if (state == EEnemyState.ShootPosition)
         {
-            m_NavMeshAgent.destination = GetShootPosition();
+            m_NavMeshAgent.destination = CCharacterManager.playerPosition;
         }
 
 
@@ -72,14 +80,9 @@ public class CEnemyController : MonoBehaviour
         }
     }
 
-    Vector3 GetShootPosition()
+    private void OnDrawGizmos()
     {
-        return CCharacterManager.playerPosition;
-    }
-
-    Vector3 GetClosestHidingSpot()
-    {
-        return Vector3.zero;
+        Gizmos.DrawCube(m_MovementTargetPoint.position, Vector3.one * 1f);
     }
 }
 

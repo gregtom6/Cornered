@@ -15,3 +15,5 @@ MonoBehaviour:
   m_HideWhenLifeLessThanPercentage: 70
   m_AttackWhenLifeMoreThanPercentage: 100
   m_PreservedDistanceBetweenPlayerAndMe: 20
+  m_NavmeshSamplePositionDistance: 20
+  m_RayTraverseStepSizeToDiscoverHidingPlace: 4
