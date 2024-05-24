@@ -84,6 +84,12 @@ public partial class CEnemyController : MonoBehaviour
     {
         Gizmos.DrawCube(m_MovementTargetPoint.position, Vector3.one * 1f);
     }
+
+    [ContextMenu("Kill Enemy")]
+    private void DebugKillEnemy()
+    {
+        m_EnemyHealth.DamageHealth(float.MinValue);
+    }
 }
 
 public struct TimeOverHappenedEvent

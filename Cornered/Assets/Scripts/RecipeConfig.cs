@@ -85,13 +85,10 @@ public class RecipeConfig : ScriptableObject
         if (list1.Count != list2.Count)
             return false;
 
-        for (int i = 0; i < list1.Count; i++)
-        {
-            if (!list1[i].Equals(list2[i]))
-                return false;
-        }
+        var dict1 = list1.GroupBy(item => item).ToDictionary(g => g.Key, g => g.Count());
+        var dict2 = list2.GroupBy(item => item).ToDictionary(g => g.Key, g => g.Count());
 
-        return true;
+        return dict1.Count == dict2.Count && dict1.All(kv => dict2.TryGetValue(kv.Key, out int count) && count == kv.Value);
     }
 }
 

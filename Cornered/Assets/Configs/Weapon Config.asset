@@ -62,11 +62,11 @@ MonoBehaviour:
     - cooldownTimeInSec: 1
       damage: -10
     - cooldownTimeInSec: 4
-      damage: -40
-    - cooldownTimeInSec: 4
-      damage: -70
-    - cooldownTimeInSec: 4
       damage: -20
+    - cooldownTimeInSec: 4
+      damage: -30
+    - cooldownTimeInSec: 4
+      damage: -30
   m_ShieldSettingsDict:
     reorderableList:
       canAdd: 1

@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a50a1e152a0a6e4c90e35103eaa35a9, type: 3}
   m_Name: Progress Config
   m_EditorClassIdentifier: 
+  m_AbilitiesToUnlockPerLevel:
+  - abilities: 00000000
+  - abilities: 01000000
+  - abilities: 02000000

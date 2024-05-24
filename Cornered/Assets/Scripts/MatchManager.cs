@@ -9,6 +9,10 @@ public class MatchManager : MonoBehaviour
 
     private int m_MatchIndex;
 
+    private float m_MatchEndedStartTime;
+
+    private bool m_ShouldWaitUntilNewMatch;
+
     private void OnEnable()
     {
         EventManager.AddListener<CharacterDefeatedEvent>(OnCharacterDefeated);
@@ -33,6 +37,22 @@ public class MatchManager : MonoBehaviour
         else if (e.characterType == ECharacterType.Enemy)
         {
             m_MatchIndex += 1;
+            m_MatchEndedStartTime = Time.time;
+            m_ShouldWaitUntilNewMatch = true;
+        }
+    }
+
+    private void Update()
+    {
+        if (!m_ShouldWaitUntilNewMatch)
+        {
+            return;
+        }
+
+        float currentTime = Time.time - m_MatchEndedStartTime;
+        if (currentTime >= AllConfig.Instance.TimeConfig.waitBetweenPreviousAndNewMatchInSec)
+        {
+            m_ShouldWaitUntilNewMatch = false;
             InitiateNewMatch();
         }
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CMixingMachine : MonoBehaviour
@@ -23,6 +24,8 @@ public class CMixingMachine : MonoBehaviour
         m_FreezeButton.pressHappened += FreezeButtonPressed;
         m_BurnButton.pressHappened += BurnButtonPressed;
         m_ConvertButton.pressHappened += ConvertButtonPressed;
+
+        EventManager.AddListener<NewMatchStartedEvent>(OnNewMatchStarted);
     }
 
     private void OnDisable()
@@ -30,6 +33,19 @@ public class CMixingMachine : MonoBehaviour
         m_FreezeButton.pressHappened -= FreezeButtonPressed;
         m_BurnButton.pressHappened -= BurnButtonPressed;
         m_ConvertButton.pressHappened -= ConvertButtonPressed;
+
+        EventManager.RemoveListener<NewMatchStartedEvent>(OnNewMatchStarted);
+    }
+
+    private void OnNewMatchStarted(NewMatchStartedEvent ev)
+    {
+        ActivateUnlockedButtons();
+    }
+
+    private void ActivateUnlockedButtons()
+    {
+        m_FreezeButton.gameObject.SetActive(AllConfig.Instance.ProgressConfig.IsAbilityAlreadyUnlocked(EAbility.Freeze));
+        m_BurnButton.gameObject.SetActive(AllConfig.Instance.ProgressConfig.IsAbilityAlreadyUnlocked(EAbility.Burn));
     }
 
     private void FreezeButtonPressed()
@@ -59,7 +75,7 @@ public class CMixingMachine : MonoBehaviour
     {
         IReadOnlyList<ItemTypes> detectedItems = m_MixingItemDetector.GetDetectedItems();
 
-        if (detectedItems.Count == 0)
+        if (detectedItems.Count == 0 || detectedItems.Any(x => x.item == EItemType.EmptyItem))
         {
             return;
         }

@@ -35,8 +35,8 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 01000000000000000200000003000000040000000500000006000000
-    _keys: 01000000000000000200000003000000040000000500000006000000
+    _keyValues: 0100000000000000020000000300000004000000050000000600000010000000
+    _keys: 0100000000000000020000000300000004000000050000000600000010000000
     _values:
     - weightForAppear: 5
       itemPrefab: {fileID: 4577439159198717919, guid: 1ed918e11dfe9094cb0effe42440fcf3, type: 3}
@@ -46,9 +46,11 @@ MonoBehaviour:
       itemPrefab: {fileID: 4577439159198717919, guid: c3b13fe5633bfee49a59b4f83bbb668f, type: 3}
     - weightForAppear: 3
       itemPrefab: {fileID: 4577439159198717919, guid: cdf03f98bf8a8544da297c5aa4f02110, type: 3}
-    - weightForAppear: 2
+    - weightForAppear: 1
       itemPrefab: {fileID: 4577439159198717919, guid: 5a4fa674c35b2e84c9f0df7fec277fad, type: 3}
-    - weightForAppear: 2
+    - weightForAppear: 1
       itemPrefab: {fileID: 4577439159198717919, guid: 9a50905f10d09304dbc6b92df22dc78c, type: 3}
     - weightForAppear: 2
       itemPrefab: {fileID: 4577439159198717919, guid: b77596e13723c2e4db25b336b2537683, type: 3}
+    - weightForAppear: 2
+      itemPrefab: {fileID: 4577439159198717919, guid: 4e4209ed83e7d1e4aa3935ff97e78695, type: 3}
