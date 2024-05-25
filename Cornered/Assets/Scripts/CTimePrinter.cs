@@ -9,6 +9,6 @@ public class CTimePrinter : MonoBehaviour
 
     private void Update()
     {
-        m_TimeText.text = TimeManager.instance.GetTimeLeft().ToString("F0");
+        m_TimeText.text = TimeManager.instance.preparingTimeLeft.ToString("F0");
     }
 }

@@ -5,11 +5,19 @@ using UnityEngine;
 public class TimeManager : MonoBehaviour
 {
     private float m_StartTime;
+    private float m_PreparingTimeLeft;
     private bool m_IsPreparingTime;
 
     public static TimeManager instance;
 
-    public float GetTimeLeft()
+    public float preparingTimeLeft => m_PreparingTimeLeft;
+
+    public void ZeroingTimer()
+    {
+        PreparingTimeEnded();
+    }
+
+    private float GetTimeLeft()
     {
         return Mathf.Max(AllConfig.Instance.TimeConfig.prepareTimeEndInSec - GetCurrentTime(), 0f);
     }
@@ -42,11 +50,19 @@ public class TimeManager : MonoBehaviour
             return;
         }
 
+        m_PreparingTimeLeft = GetTimeLeft();
+
         if (GetCurrentTime() >= AllConfig.Instance.TimeConfig.prepareTimeEndInSec)
         {
-            EventManager.Raise(new TimeOverHappenedEvent() { });
-            m_IsPreparingTime = false;
+            PreparingTimeEnded();
         }
+    }
+
+    private void PreparingTimeEnded()
+    {
+        m_IsPreparingTime = false;
+        m_PreparingTimeLeft = 0;
+        EventManager.Raise(new TimeOverHappenedEvent() { });
     }
 
     private float GetCurrentTime()
