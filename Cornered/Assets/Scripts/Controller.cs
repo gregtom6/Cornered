@@ -23,6 +23,8 @@ public class Controller : MonoBehaviour
     private Vector3 m_Movement;
     private Vector2 m_Rot;
 
+    private float m_AdditionalMultiplier;
+
     protected MovementState _movementState = MovementState.Standing;
 
     protected MovementState movementState
@@ -61,16 +63,21 @@ public class Controller : MonoBehaviour
 
     private void OnLeftRightMovement(float obj)
     {
-        m_Movement.x = obj * (AllConfig.Instance.CharacterConfig.runSpeed / 100f);
+        m_Movement.x = obj * (AllConfig.Instance.CharacterConfig.runSpeed / 100f) * GetAdditionalMultiplier();
 
         movementState = MovementState.Strafing;
     }
 
     private void OnForwardBackwardMovement(float obj)
     {
-        m_Movement.z = obj * (AllConfig.Instance.CharacterConfig.runSpeed / 100f);
+        m_Movement.z = obj * (AllConfig.Instance.CharacterConfig.runSpeed / 100f) * GetAdditionalMultiplier();
 
         movementState = MovementState.Moving;
+    }
+
+    private float GetAdditionalMultiplier()
+    {
+        return InventoryManager.instance.currentPlayerAdditional.item == EItemType.FastBoots ? AllConfig.Instance.CharacterConfig.fastBootsSpeedMultiplier : 1f;
     }
 
     private void OnDisable()

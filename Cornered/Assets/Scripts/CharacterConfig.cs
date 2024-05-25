@@ -5,15 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CharacterConfig")]
 public class CharacterConfig : ScriptableObject
 {
-    [SerializeField] float m_RunSpeed;
-    [SerializeField] float m_EnemyRunSpeed;
-    [SerializeField] float m_HeadMaxRotX;
-    [SerializeField] float m_HeadMinRotX;
-    [SerializeField] float m_HeadRotSpeed;
-    [SerializeField] float m_MinHealth;
-    [SerializeField] float m_MaxHealth;
-    [SerializeField] float m_WaitUntilHealthReloadStarts;
-    [SerializeField] float m_HealHealthDelta;
+    [SerializeField] private float m_RunSpeed;
+    [SerializeField] private float m_EnemyRunSpeed;
+    [SerializeField] private float m_HeadMaxRotX;
+    [SerializeField] private float m_HeadMinRotX;
+    [SerializeField] private float m_HeadRotSpeed;
+    [SerializeField] private float m_MinHealth;
+    [SerializeField] private float m_MaxHealth;
+    [SerializeField] private float m_WaitUntilHealthReloadStarts;
+    [SerializeField] private float m_HealHealthDelta;
+    [SerializeField] private float m_FastBootsSpeedMultiplier;
     [SerializeField] private GameObject m_EnemyPrefab;
 
     public float enemyRunSpeed => m_EnemyRunSpeed;
@@ -26,5 +27,6 @@ public class CharacterConfig : ScriptableObject
     public float maxHealth => m_MaxHealth;
     public float waitUntilHealthReloadStarts => m_WaitUntilHealthReloadStarts;
 
+    public float fastBootsSpeedMultiplier => m_FastBootsSpeedMultiplier;
     public GameObject enemyPrefab => m_EnemyPrefab;
 }

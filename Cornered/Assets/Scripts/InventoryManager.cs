@@ -6,6 +6,8 @@ public class InventoryManager : MonoBehaviour
 {
     public ItemTypes currentPlayerWeapon => m_CharacterInventories[ECharacterType.Player].weapon;
 
+    public ItemTypes currentPlayerAdditional => m_CharacterInventories[ECharacterType.Player].additional;
+
     public ItemTypes currentEnemyWeapon => m_CharacterInventories[ECharacterType.Enemy].weapon;
 
     private Dictionary<ECharacterType, CurrentInventory> m_CharacterInventories = new();
