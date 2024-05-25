@@ -54,3 +54,4 @@ MonoBehaviour:
   m_AIConfig: {fileID: 11400000, guid: ae0cbff236312274d8fb908bc4c25f35, type: 2}
   m_MixingMachineConfig: {fileID: 11400000, guid: e6f315d2bd03a7944b99a962930c715a, type: 2}
   m_ProgressConfig: {fileID: 11400000, guid: 7efe7f8b6a387914abaeb773dece73cb, type: 2}
+  m_ExitDoorConfig: {fileID: 11400000, guid: c49b36f4eccd20f479a97f8c3635f92b, type: 2}

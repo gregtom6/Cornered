@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CInteractableDetector : MonoBehaviour
 {
+    [SerializeField] private LayerMask m_InteractableLayerMask;
+
     public RaycastHit raycastHit => m_RaycastHit;
 
     public bool isValidHit => m_IsValidHit;
@@ -21,8 +23,6 @@ public class CInteractableDetector : MonoBehaviour
 
         float rayLength = 9f;
 
-        m_IsValidHit = Physics.Raycast(origin, worldDirection, out m_RaycastHit, rayLength);
-
-        //Debug.DrawRay(origin, worldDirection * rayLength, Color.green);
+        m_IsValidHit = Physics.Raycast(origin, worldDirection, out m_RaycastHit, rayLength, m_InteractableLayerMask);
     }
 }

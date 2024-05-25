@@ -14,6 +14,7 @@ public class AllConfig : MonoBehaviour
     [SerializeField] private AIConfig m_AIConfig;
     [SerializeField] private MixingMachineConfig m_MixingMachineConfig;
     [SerializeField] private ProgressConfig m_ProgressConfig;
+    [SerializeField] private ExitDoorConfig m_ExitDoorConfig;
 
     public CharacterConfig CharacterConfig => m_CharacterConfig;
 
@@ -34,6 +35,8 @@ public class AllConfig : MonoBehaviour
     public ProgressConfig ProgressConfig => m_ProgressConfig;
 
     public MixingMachineConfig MixingMachineConfig => m_MixingMachineConfig;
+
+    public ExitDoorConfig ExitDoorConfig => m_ExitDoorConfig;
 
     public static AllConfig Instance;
 
