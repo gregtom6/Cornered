@@ -47,6 +47,11 @@ public class RecipeConfig : ScriptableObject
 
         foreach (KeyValuePair<EItemType, ItemTypeDetails> recipe in m_RecipeDict)
         {
+            if (!AllConfig.Instance.ProgressConfig.IsAbilityAlreadyUnlocked(recipe.Value.necessaryAbilityToUse))
+            {
+                continue;
+            }
+
             materials.Add(new());
             itemStateMaterials.Add(new());
 
@@ -94,6 +99,7 @@ public class RecipeConfig : ScriptableObject
 [Serializable]
 public class ItemTypeDetails
 {
+    public EAbility necessaryAbilityToUse;
     public List<ItemTypes> items = new();
 }
 

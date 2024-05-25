@@ -8,9 +8,28 @@ public class CRecipeShower : MonoBehaviour
     [SerializeField] private float m_HorizontalGapSize;
     [SerializeField] private float m_VerticalGapSize;
 
-    private void Start()
+    private List<GameObject> m_RecipeVisualElements = new();
+
+    private void OnEnable()
     {
+        EventManager.AddListener<NewMatchStartedEvent>(OnNewMatchStartedEvent);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.RemoveListener<NewMatchStartedEvent>(OnNewMatchStartedEvent);
+    }
+
+    private void OnNewMatchStartedEvent(NewMatchStartedEvent ev)
+    {
+        DestroyElements();
         GenerateRecipeVisuals();
+    }
+
+    private void DestroyElements()
+    {
+        m_RecipeVisualElements.ForEach(x => Destroy(x));
+        m_RecipeVisualElements.Clear();
     }
 
     private void GenerateRecipeVisuals()
@@ -25,6 +44,8 @@ public class CRecipeShower : MonoBehaviour
             {
                 GameObject recipeElement = Instantiate(AllConfig.Instance.RecipeConfig.recipeShowElementPrefab, positionForGeneration, Quaternion.Euler(90, 0, 0), transform);
 
+                m_RecipeVisualElements.Add(recipeElement);
+
                 CRecipeElementVisual meshRenderer = recipeElement.GetComponentInParent<CRecipeElementVisual>();
 
                 meshRenderer.SetElement(materials[i][j],stateMaterials[i][j]);
@@ -35,6 +56,8 @@ public class CRecipeShower : MonoBehaviour
                 {
                     recipeElement = Instantiate(AllConfig.Instance.RecipeConfig.recipeShowOperatorPrefab, positionForGeneration, Quaternion.Euler(90, 0, 0), transform);
 
+                    m_RecipeVisualElements.Add(recipeElement);
+
                     meshRenderer = recipeElement.GetComponentInParent<CRecipeElementVisual>();
 
                     meshRenderer.SetElement(AllConfig.Instance.RecipeConfig.plusSignMaterial,null);
@@ -44,6 +67,8 @@ public class CRecipeShower : MonoBehaviour
                 else if (j + 2 == materials[i].Count)
                 {
                     recipeElement = Instantiate(AllConfig.Instance.RecipeConfig.recipeShowOperatorPrefab, positionForGeneration, Quaternion.Euler(90, 0, 0), transform);
+
+                    m_RecipeVisualElements.Add(recipeElement);
 
                     meshRenderer = recipeElement.GetComponentInParent<CRecipeElementVisual>();
 

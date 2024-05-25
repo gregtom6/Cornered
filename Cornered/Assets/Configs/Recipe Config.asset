@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RecipeShowPlusMaterial: {fileID: 2100000, guid: 62cc7a4d242185e499d91b2030366e5e, type: 2}
   m_RecipeShowEqualMaterial: {fileID: 2100000, guid: 2dc16ff12c10c2d4ba4c0bab24d4fa00, type: 2}
-  m_BurnMaterial: {fileID: 0}
-  m_FreezeMaterial: {fileID: 0}
   m_RecipeShowElementPrefab: {fileID: 506017202582363131, guid: 3495f257d4e1d474c8a3b7749f629c86, type: 3}
   m_RecipeShowOperatorPrefab: {fileID: 6313852697088902061, guid: 5dae3812ddca1ed40aa4ce52e71f928c, type: 3}
   m_RecipeDict:
@@ -44,24 +42,28 @@ MonoBehaviour:
     _keyValues: 0700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
     _keys: 0700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
     _values:
-    - items:
+    - necessaryAbilityToUse: 0
+      items:
       - item: 1
         state: 0
       - item: 2
         state: 0
-    - items:
+    - necessaryAbilityToUse: 0
+      items:
       - item: 1
         state: 0
       - item: 1
         state: 0
       - item: 2
         state: 0
-    - items:
+    - necessaryAbilityToUse: 0
+      items:
       - item: 4
         state: 0
       - item: 5
         state: 0
-    - items:
+    - necessaryAbilityToUse: 1
+      items:
       - item: 1
         state: 2
       - item: 1
@@ -70,33 +72,38 @@ MonoBehaviour:
         state: 2
       - item: 6
         state: 2
-    - items:
+    - necessaryAbilityToUse: 2
+      items:
       - item: 1
         state: 1
       - item: 1
         state: 1
       - item: 2
         state: 1
-    - items:
+    - necessaryAbilityToUse: 0
+      items:
       - item: 3
         state: 0
       - item: 16
         state: 0
-    - items:
+    - necessaryAbilityToUse: 0
+      items:
       - item: 3
         state: 0
       - item: 3
         state: 0
       - item: 16
         state: 0
-    - items:
+    - necessaryAbilityToUse: 2
+      items:
       - item: 3
         state: 1
       - item: 3
         state: 1
       - item: 16
         state: 1
-    - items:
+    - necessaryAbilityToUse: 1
+      items:
       - item: 3
         state: 2
       - item: 3
