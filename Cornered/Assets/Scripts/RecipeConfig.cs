@@ -12,8 +12,6 @@ public class RecipeConfig : ScriptableObject
 {
     [SerializeField] private Material m_RecipeShowPlusMaterial;
     [SerializeField] private Material m_RecipeShowEqualMaterial;
-    [SerializeField] private Material m_BurnMaterial;
-    [SerializeField] private Material m_FreezeMaterial;
     [SerializeField] private GameObject m_RecipeShowElementPrefab;
     [SerializeField] private GameObject m_RecipeShowOperatorPrefab;
     [SerializeField] private RecipeDict m_RecipeDict;
@@ -24,10 +22,6 @@ public class RecipeConfig : ScriptableObject
     public Material plusSignMaterial => m_RecipeShowPlusMaterial;
     public Material equalSignMaterial => m_RecipeShowEqualMaterial;
 
-    public Material burnMaterial => m_BurnMaterial;
-
-    public Material freezeMaterial => m_FreezeMaterial;
-
     public GameObject recipeShowElementPrefab => m_RecipeShowElementPrefab;
 
     public GameObject recipeShowOperatorPrefab => m_RecipeShowOperatorPrefab;
@@ -36,7 +30,12 @@ public class RecipeConfig : ScriptableObject
     {
         KeyValuePair<EItemType, ItemTypeDetails> item = m_RecipeDict.Where(x => AreListsEqual(itemTypes, x.Value.items)).FirstOrDefault();
         EItemType resultItemType = item.Key;
-        return m_ProductPrefabDict[resultItemType];
+        if (m_ProductPrefabDict.ContainsKey(resultItemType))
+        {
+            return m_ProductPrefabDict[resultItemType];
+        }
+
+        return null;
     }
 
     public IReadOnlyList<IReadOnlyList<Material>> GetRadiatingMaterialsOfAllRecipes(out IReadOnlyList<IReadOnlyList<Material>> effectMaterials)

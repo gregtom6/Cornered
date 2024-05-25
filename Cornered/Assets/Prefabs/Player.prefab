@@ -1408,6 +1408,7 @@ GameObject:
   - component: {fileID: 468350171}
   - component: {fileID: 4898167865936725133}
   - component: {fileID: 3053658404462509198}
+  - component: {fileID: 8744795810692557121}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1524,6 +1525,25 @@ MonoBehaviour:
   m_ProjectileVisualizers:
   - {fileID: 324531080590195692}
   - {fileID: 7650483262289167305}
+--- !u!114 &8744795810692557121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6170694111097863793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &6170694111168635365
 GameObject:
   m_ObjectHideFlags: 0

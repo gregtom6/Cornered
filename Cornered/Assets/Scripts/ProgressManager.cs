@@ -10,6 +10,11 @@ public class ProgressManager : MonoBehaviour
 
     public int currentUnlockLevel => m_UnlockLevel;
 
+    public void ResetProgress()
+    {
+        m_UnlockLevel = 0;
+    }
+
     private void Start()
     {
         EventManager.AddListener<CharacterDefeatedEvent>(OnCharacterDefeated);

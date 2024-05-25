@@ -82,9 +82,11 @@ public class CMixingMachine : MonoBehaviour
 
         GameObject resultPrefab = AllConfig.Instance.RecipeConfig.GetResultItem(detectedItems);
 
-        Instantiate(resultPrefab, m_ResultTargetTransform.position, Quaternion.identity, null);
-
-        m_MixingItemDetector.DestroyAllItems();
+        if (resultPrefab != null)
+        {
+            Instantiate(resultPrefab, m_ResultTargetTransform.position, Quaternion.identity, null);
+            m_MixingItemDetector.DestroyAllItems();
+        }
     }
 
     private void Update()
