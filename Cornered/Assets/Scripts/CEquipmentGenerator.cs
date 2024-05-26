@@ -6,17 +6,18 @@ public class CEquipmentGenerator : MonoBehaviour
 {
     private void OnEnable()
     {
-        EventManager.AddListener<NewMatchStartedEvent>(OnNewMatchStartedEvent);
+        EventManager.AddListener<EnemyGeneratedEvent>(OnEnemyGeneratedEvent);
     }
 
     private void OnDisable()
     {
-        EventManager.RemoveListener<NewMatchStartedEvent>(OnNewMatchStartedEvent);
+        EventManager.RemoveListener<EnemyGeneratedEvent>(OnEnemyGeneratedEvent);
     }
 
-    private void OnNewMatchStartedEvent(NewMatchStartedEvent ev)
+    private void OnEnemyGeneratedEvent(EnemyGeneratedEvent ev)
     {
         GenerateEquipment(ECharacterType.Enemy);
+        EquipGeneratedInventory(ev.enemy);
     }
 
     private void GenerateEquipment(ECharacterType characterType)
@@ -26,6 +27,13 @@ public class CEquipmentGenerator : MonoBehaviour
         ItemTypes additional = AllConfig.Instance.WeaponConfig.GetRandomAdditional();
 
         EventManager.Raise(new EquipmentDecidedEvent { characterType = characterType, weaponItem = weapon, shieldItem = shield, additionalItem = additional });
+    }
+
+    private void EquipGeneratedInventory(GameObject enemyInstance)
+    {
+        CEquipmentVisualizer equipmentVisualizer = enemyInstance.GetComponentInParent<CEquipmentVisualizer>();
+
+        equipmentVisualizer.EquipFromInventory();
     }
 }
 

@@ -16,6 +16,7 @@ public class WeaponConfig : ScriptableObject
     [SerializeField] private WeaponSettingsDict m_WeaponSettingsDict;
     [SerializeField] private ShieldSettingsDict m_ShieldSettingsDict;
     [SerializeField] private AdditionalSettingsDict m_AdditionalSettingsDict;
+    [SerializeField] private EquippedPrefabDict m_EquippedPrefabDict;
 
     public ItemTypes GetRandomWeapon()
     {
@@ -61,6 +62,11 @@ public class WeaponConfig : ScriptableObject
     {
         return m_AdditionalSettingsDict[itemType];
     }
+
+    public GameObject GetEquippedPrefab(EItemType itemType)
+    {
+        return m_EquippedPrefabDict[itemType];
+    }
 }
 
 [Serializable]
@@ -90,3 +96,6 @@ public class ShieldSettingsDict : SerializableDictionaryBase<EItemType, ShieldSe
 
 [Serializable]
 public class AdditionalSettingsDict : SerializableDictionaryBase<EItemType, AdditionalSettings> { }
+
+[Serializable]
+public class EquippedPrefabDict : SerializableDictionaryBase<EItemType, GameObject> { }

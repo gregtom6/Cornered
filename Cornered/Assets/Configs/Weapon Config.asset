@@ -124,3 +124,33 @@ MonoBehaviour:
     _keys: 09000000
     _values:
     - multiplier: 3
+  m_EquippedPrefabDict:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues: 0c0000000d0000000e0000000f000000
+    _keys: 0c0000000d0000000e0000000f000000
+    _values:
+    - {fileID: 1136359371308399813, guid: cbe0bf94f52648b44831c39f40fa6177, type: 3}
+    - {fileID: 9135905597736867926, guid: 27fa25b63dbfa734586ccee573bf2c47, type: 3}
+    - {fileID: 9135905597736867926, guid: 551b9a98b1bc33f4f9c3d08a0f3cb026, type: 3}
+    - {fileID: 9135905597736867926, guid: d0ed1b52e862d424b88c62844f33c29a, type: 3}

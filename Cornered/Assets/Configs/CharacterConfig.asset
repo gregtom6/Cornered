@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CharacterConfig
   m_EditorClassIdentifier: 
   m_RunSpeed: 3.5
-  m_EnemyRunSpeed: 5
+  m_EnemyRunSpeed: 7
   m_HeadMaxRotX: 40
   m_HeadMinRotX: -40
   m_HeadRotSpeed: 0.2

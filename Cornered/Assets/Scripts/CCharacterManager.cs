@@ -32,6 +32,7 @@ public class CCharacterManager : MonoBehaviour
     {
         Transform selectedTransform = m_EnemyPossibleStartingTransforms.GetRandom();
         m_EnemyInstanceGameObject = Instantiate(AllConfig.Instance.CharacterConfig.enemyPrefab, selectedTransform.position, Quaternion.identity, null);
+        EventManager.Raise(new EnemyGeneratedEvent { enemy = m_EnemyInstanceGameObject });
     }
 
     private void OnCharacterDefeatedEvent(CharacterDefeatedEvent ev)
@@ -46,4 +47,9 @@ public class CCharacterManager : MonoBehaviour
     public static Vector3 enemyPosition => instance.m_EnemyInstanceGameObject.transform.position;
 
     public static Transform playerTransform => instance.m_Player;
+}
+
+public struct EnemyGeneratedEvent
+{
+    public GameObject enemy;
 }
