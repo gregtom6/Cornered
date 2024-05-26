@@ -80,12 +80,3 @@ public class CEquipmentVisualizer : MonoBehaviour
         return transforms;
     }
 }
-
-public enum EEquipment
-{
-    Weapon,
-    Shield,
-    Additional,
-
-    Count,
-}

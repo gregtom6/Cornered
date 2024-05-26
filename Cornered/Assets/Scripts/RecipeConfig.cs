@@ -144,11 +144,3 @@ public class IngredientRadiatingMaterialDict : SerializableDictionaryBase<EItemT
 [System.Serializable]
 public class EffectRadiatingMaterialDict : SerializableDictionaryBase<EItemState, Material> { }
 
-public enum EItemState
-{
-    Normal,
-    Freezed,
-    Burned,
-
-    Count,
-}

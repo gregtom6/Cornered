@@ -61,8 +61,3 @@ public class CCharacterManager : MonoBehaviour
         return null;
     }
 }
-
-public struct EnemyGeneratedEvent
-{
-    public GameObject enemy;
-}

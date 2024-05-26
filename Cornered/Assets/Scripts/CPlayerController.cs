@@ -102,13 +102,4 @@ public class CPlayerController : CCharacterController
             bodyParent.localRotation = Quaternion.Euler(0f, m_Rot.x, 0f);
         }
     }
-
-    public enum EMovementState
-    {
-        Standing,
-        Walking,
-        Strafing,
-
-        Count,
-    }
 }

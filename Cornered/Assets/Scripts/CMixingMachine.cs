@@ -144,14 +144,3 @@ public class CMixingMachine : MonoBehaviour
         }
     }
 }
-
-
-public enum EMixingMachineState
-{
-    Heating,
-    Freezing,
-    Mixing,
-    Waiting,
-
-    Count,
-}

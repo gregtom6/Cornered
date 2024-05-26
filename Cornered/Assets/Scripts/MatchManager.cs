@@ -70,13 +70,3 @@ public class MatchManager : MonoBehaviour
         EventManager.Raise(new NewMatchStartedEvent { matchIndex = m_MatchIndex });
     }
 }
-
-public struct CharacterDefeatedEvent
-{
-    public ECharacterType characterType;
-}
-
-public struct NewMatchStartedEvent
-{
-    public int matchIndex;
-}

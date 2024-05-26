@@ -34,9 +34,3 @@ public class UIHealthBar : MonoBehaviour
         m_CurrentHealthImage.fillAmount = m_HealthComponent.currentHealth / AllConfig.Instance.CharacterConfig.maxHealth;
     }
 }
-
-public struct CharacterInitializedEvent
-{
-    public ECharacterType characterType;
-    public CHealth healthComponent;
-}

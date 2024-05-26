@@ -46,25 +46,3 @@ public struct ItemGenerationDatas
 [System.Serializable]
 public class IngredientGenerationDict : SerializableDictionaryBase<EItemType, ItemGenerationDatas> { }
 
-public enum EItemType
-{
-    EmptyItem,
-    Tube,
-    Marbles,
-    Board,
-    Coffee,
-    Boots,
-    Petrol,
-    Pistol,
-    Shotgun,
-    FastBoots,
-    FlamingShotgun,
-    Freezer,
-    DefenderPhysical,
-    DefenderPhysicalExtra,
-    DefenderHeat,
-    DefenderCold,
-    Rope,
-
-    Count,
-}

@@ -40,12 +40,3 @@ public struct UnlockableAbilities
     public List<EAbility> abilities;
 }
 
-[Serializable]
-public enum EAbility
-{
-    Default,
-    Burn,
-    Freeze,
-
-    Count,
-}

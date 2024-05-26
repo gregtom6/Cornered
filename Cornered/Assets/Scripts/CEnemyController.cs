@@ -79,7 +79,7 @@ public partial class CEnemyController : CCharacterController
             }
         }
 
-        movementState = m_NavMeshAgent.velocity.magnitude <= 1f ? CPlayerController.EMovementState.Standing : CPlayerController.EMovementState.Walking;
+        movementState = m_NavMeshAgent.velocity.magnitude <= 1f ? EMovementState.Standing : EMovementState.Walking;
     }
 
     private void OnDrawGizmos()
@@ -92,18 +92,4 @@ public partial class CEnemyController : CCharacterController
     {
         m_EnemyHealth.DamageHealth(float.MinValue);
     }
-}
-
-public struct TimeOverHappenedEvent
-{
-
-}
-
-public enum EEnemyState
-{
-    Waiting,
-    ShootPosition,
-    DefendPosition,
-
-    Count,
 }

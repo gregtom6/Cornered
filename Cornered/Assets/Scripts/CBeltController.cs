@@ -100,11 +100,3 @@ public class CBeltController : MonoBehaviour
 
 
 }
-
-public enum EBeltSpeed
-{
-    Normal,
-    Fastened,
-
-    Count,
-}

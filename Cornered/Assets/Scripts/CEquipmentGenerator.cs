@@ -28,11 +28,3 @@ public class CEquipmentGenerator : MonoBehaviour
         EventManager.Raise(new EquipmentDecidedEvent { characterType = characterType, weaponItem = weapon, shieldItem = shield, additionalItem = additional });
     }
 }
-
-public enum ECharacterType
-{
-    Player,
-    Enemy,
-
-    Count,
-}
