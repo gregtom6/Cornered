@@ -62,23 +62,6 @@ public class InventoryManager : MonoBehaviour
         m_CharacterInventories.Add(ECharacterType.Player, new CurrentInventory(emptyItemTypes, emptyItemTypes, emptyItemTypes));
         m_CharacterInventories.Add(ECharacterType.Enemy, new CurrentInventory(emptyItemTypes, emptyItemTypes, emptyItemTypes));
     }
-
-    private void OnEnable()
-    {
-        EventManager.AddListener<EquipmentDecidedEvent>(OnEquipmentDecided);
-    }
-
-    private void OnDisable()
-    {
-        EventManager.RemoveListener<EquipmentDecidedEvent>(OnEquipmentDecided);
-    }
-
-    private void OnEquipmentDecided(EquipmentDecidedEvent e)
-    {
-        EquipItem(ECharacterType.Enemy, e.weaponItem);
-        EquipItem(ECharacterType.Enemy, e.shieldItem);
-        EquipItem(ECharacterType.Enemy, e.additionalItem);
-    }
 }
 
 public struct CurrentInventory

@@ -11,7 +11,7 @@ public class CCharacterManager : MonoBehaviour
 
     private GameObject m_EnemyInstanceGameObject;
 
-    private void Start()
+    private void Awake()
     {
         instance = this;
     }
@@ -44,9 +44,22 @@ public class CCharacterManager : MonoBehaviour
     }
 
     public static Vector3 playerPosition => instance.m_Player.position;
-    public static Vector3 enemyPosition => instance.m_EnemyInstanceGameObject.transform.position;
 
     public static Transform playerTransform => instance.m_Player;
+
+    public CEquipmentVisualizer GetEquipmentVisualizer(ECharacterType characterType)
+    {
+        if (characterType == ECharacterType.Player && m_Player != null)
+        {
+            return m_Player.GetComponentInParent<CEquipmentVisualizer>();
+        }
+        else if (characterType == ECharacterType.Enemy && m_EnemyInstanceGameObject != null)
+        {
+            return m_EnemyInstanceGameObject.GetComponentInParent<CEquipmentVisualizer>();
+        }
+
+        return null;
+    }
 }
 
 public struct EnemyGeneratedEvent

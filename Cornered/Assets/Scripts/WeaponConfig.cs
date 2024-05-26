@@ -65,7 +65,12 @@ public class WeaponConfig : ScriptableObject
 
     public GameObject GetEquippedPrefab(EItemType itemType)
     {
-        return m_EquippedPrefabDict[itemType];
+        if (m_EquippedPrefabDict.ContainsKey(itemType))
+        {
+            return m_EquippedPrefabDict[itemType];
+        }
+
+        return null;
     }
 }
 

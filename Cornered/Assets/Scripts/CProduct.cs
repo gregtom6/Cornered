@@ -11,7 +11,7 @@ public class CProduct : CIngredient, IEquippable
 
     public void Equip()
     {
-        InventoryManager.instance.EquipItem(ECharacterType.Player, new ItemTypes(m_ItemType, m_ItemState));
+        EquipManager.instance.Equip(ECharacterType.Player, new ItemTypes(m_ItemType, m_ItemState));
 
         Destroy(gameObject);
     }
