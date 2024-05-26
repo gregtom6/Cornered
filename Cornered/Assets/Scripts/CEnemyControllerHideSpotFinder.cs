@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public partial class CEnemyController : MonoBehaviour
+public partial class CEnemyController : CCharacterController
 {
     private class HideSpotFinder
     {

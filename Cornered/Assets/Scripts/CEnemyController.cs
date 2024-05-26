@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public partial class CEnemyController : MonoBehaviour
+public partial class CEnemyController : CCharacterController
 {
     [SerializeField] private CHealth m_EnemyHealth;
     [SerializeField] private Transform m_HeadTransform;
@@ -78,6 +78,8 @@ public partial class CEnemyController : MonoBehaviour
                 state = EEnemyState.DefendPosition;
             }
         }
+
+        movementState = m_NavMeshAgent.velocity.magnitude <= 1f ? CPlayerController.EMovementState.Standing : CPlayerController.EMovementState.Walking;
     }
 
     private void OnDrawGizmos()

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Controller : MonoBehaviour
+public class CPlayerController : CCharacterController
 {
     [SerializeField] private GameInput m_GameInput;
     [SerializeField] new Rigidbody rigidbody;
@@ -12,45 +12,9 @@ public class Controller : MonoBehaviour
     [SerializeField] Transform bodyParent;
     [SerializeField] Transform armParent;
     [SerializeField] Transform legParent;
-    [SerializeField] Animator bodyAnimator;
-    [SerializeField] Animator armAnimator;
-    [SerializeField] Animator legAnimator;
-    [SerializeField] string isMovingAnimKey;
-    [SerializeField] string isStrafingAnimKey;
-    [SerializeField] string standingAnimKey;
-    [SerializeField] string rotateAnimKey;
 
     private Vector3 m_Movement;
     private Vector2 m_Rot;
-
-    private float m_AdditionalMultiplier;
-
-    protected MovementState _movementState = MovementState.Standing;
-
-    protected MovementState movementState
-    {
-        get
-        {
-            return _movementState;
-        }
-        set
-        {
-            if (_movementState == value)
-                return;
-
-            _movementState = value;
-        }
-    }
-
-    private void OnEnable()
-    {
-        if (m_GameInput != null)
-        {
-            m_GameInput.ForwardBackwardMovement += OnForwardBackwardMovement;
-            m_GameInput.LeftRightMovement += OnLeftRightMovement;
-            m_GameInput.PointerDelta += OnPointerPosition;
-        }
-    }
 
     private void OnPointerPosition(Vector2 obj)
     {
@@ -65,19 +29,28 @@ public class Controller : MonoBehaviour
     {
         m_Movement.x = obj * (AllConfig.Instance.CharacterConfig.runSpeed / 100f) * GetAdditionalMultiplier();
 
-        movementState = MovementState.Strafing;
+        movementState = EMovementState.Strafing;
     }
 
     private void OnForwardBackwardMovement(float obj)
     {
         m_Movement.z = obj * (AllConfig.Instance.CharacterConfig.runSpeed / 100f) * GetAdditionalMultiplier();
 
-        movementState = MovementState.Moving;
+        movementState = EMovementState.Walking;
     }
 
     private float GetAdditionalMultiplier()
     {
         return InventoryManager.instance.currentPlayerAdditional.item == EItemType.FastBoots ? AllConfig.Instance.CharacterConfig.fastBootsSpeedMultiplier : 1f;
+    }
+    private void OnEnable()
+    {
+        if (m_GameInput != null)
+        {
+            m_GameInput.ForwardBackwardMovement += OnForwardBackwardMovement;
+            m_GameInput.LeftRightMovement += OnLeftRightMovement;
+            m_GameInput.PointerDelta += OnPointerPosition;
+        }
     }
 
     private void OnDisable()
@@ -86,6 +59,7 @@ public class Controller : MonoBehaviour
         {
             m_GameInput.ForwardBackwardMovement -= OnForwardBackwardMovement;
             m_GameInput.LeftRightMovement -= OnLeftRightMovement;
+            m_GameInput.PointerDelta -= OnPointerPosition;
         }
     }
 
@@ -97,6 +71,14 @@ public class Controller : MonoBehaviour
     private void FixedUpdate()
     {
         ActualPositionChange();
+    }
+
+    private void LateUpdate()
+    {
+        if (movementState != EMovementState.Standing && Mathf.Approximately(m_Movement.x, 0f) && Mathf.Approximately(m_Movement.z, 0f))
+        {
+            movementState = EMovementState.Standing;
+        }
     }
 
     private void ActualPositionChange()
@@ -121,10 +103,12 @@ public class Controller : MonoBehaviour
         }
     }
 
-    public enum MovementState
+    public enum EMovementState
     {
         Standing,
-        Moving,
+        Walking,
         Strafing,
+
+        Count,
     }
 }

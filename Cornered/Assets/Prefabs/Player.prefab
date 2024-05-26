@@ -419,7 +419,7 @@ Animator:
   m_GameObject: {fileID: 3898623607627438358}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 91407beb1e3959f46bb0afc9af13d0bf, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0de0ec5b1250298499bee7b736a64e62, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1477,6 +1477,7 @@ GameObject:
   - component: {fileID: 4898167865936725133}
   - component: {fileID: 3053658404462509198}
   - component: {fileID: 8744795810692557121}
+  - component: {fileID: 1042078820049195529}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1569,13 +1570,6 @@ MonoBehaviour:
   bodyParent: {fileID: 6170694111168635354}
   armParent: {fileID: 6170694110734212654}
   legParent: {fileID: 6170694111757118998}
-  bodyAnimator: {fileID: 8078359445537564418}
-  armAnimator: {fileID: 6170694110734212655}
-  legAnimator: {fileID: 6170694111757118999}
-  isMovingAnimKey: move
-  isStrafingAnimKey: strafe
-  standingAnimKey: standing
-  rotateAnimKey: rotate
 --- !u!114 &3053658404462509198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1612,6 +1606,19 @@ MonoBehaviour:
   m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!114 &1042078820049195529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6170694111097863793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e6de0879b483604286d31f563f58829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 8078359445537564418}
 --- !u!1 &6170694111168635365
 GameObject:
   m_ObjectHideFlags: 0
