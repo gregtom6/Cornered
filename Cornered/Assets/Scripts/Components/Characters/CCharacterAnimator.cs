@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class CCharacterAnimator : MonoBehaviour
 {
-    private static readonly int ANIM_PARAM_LEGSTATE = Animator.StringToHash("legState");
+    protected readonly int ANIM_PARAM_LEGSTATE = Animator.StringToHash("legState");
+    protected readonly int ANIM_PARAM_ARMWEAPON = Animator.StringToHash("useWeapon");
 
-    [SerializeField] private Animator m_Animator;
-    private CCharacterController m_CharacterController;
+    [SerializeField] protected Animator m_Animator;
+    protected CCharacterController m_CharacterController;
 
-    private void Start()
+    protected void Start()
     {
         m_CharacterController = GetComponent<CCharacterController>();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         m_Animator.SetInteger(ANIM_PARAM_LEGSTATE, (int)m_CharacterController.characterMovementState);
     }
