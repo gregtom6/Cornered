@@ -7,11 +7,11 @@ using UnityEngine;
 public class CPlayerController : CCharacterController
 {
     [SerializeField] private GameInput m_GameInput;
-    [SerializeField] new Rigidbody rigidbody;
-    [SerializeField] Transform headParent;
-    [SerializeField] Transform bodyParent;
-    [SerializeField] Transform armParent;
-    [SerializeField] Transform legParent;
+    [SerializeField] private new Rigidbody rigidbody;
+    [SerializeField] private Transform headParent;
+    [SerializeField] private Transform bodyParent;
+    [SerializeField] private Transform armParent;
+    [SerializeField] private Transform legParent;
 
     private Vector3 m_Movement;
     private Vector2 m_Rot;

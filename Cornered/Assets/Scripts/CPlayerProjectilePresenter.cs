@@ -9,6 +9,6 @@ public class CPlayerProjectilePresenter : ProjectileVisualizer
     {
         m_LineRenderer.SetPosition(0, m_HeadTransform.position);
 
-        m_LineRenderer.SetPosition(1, m_HeadTransform.position+m_HeadTransform.forward*100f);
+        m_LineRenderer.SetPosition(1, m_HeadTransform.position + m_HeadTransform.forward * 100f);
     }
 }

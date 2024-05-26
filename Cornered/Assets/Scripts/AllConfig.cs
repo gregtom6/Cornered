@@ -42,6 +42,6 @@ public class AllConfig : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this; 
+        Instance = this;
     }
 }

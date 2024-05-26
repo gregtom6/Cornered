@@ -50,7 +50,7 @@ public partial class CEnemyController : CCharacterController
             return;
         }
 
-        m_HeadTransform.LookAt(CCharacterManager.playerPosition);
+        m_HeadTransform.LookAt(CCharacterManager.instance.playerPosition);
 
         if (state == EEnemyState.DefendPosition)
         {
@@ -60,7 +60,7 @@ public partial class CEnemyController : CCharacterController
         }
         else if (state == EEnemyState.ShootPosition)
         {
-            m_NavMeshAgent.destination = CCharacterManager.playerPosition;
+            m_NavMeshAgent.destination = CCharacterManager.instance.playerPosition;
         }
 
 

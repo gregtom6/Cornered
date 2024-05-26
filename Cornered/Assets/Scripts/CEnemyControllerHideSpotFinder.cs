@@ -22,14 +22,14 @@ public partial class CEnemyController : CCharacterController
             m_PillarPlayerLayerMask = pillarLayerMask;
         }
 
-        bool IsThisPointOutsideColliders(Vector3 currentPoint)
+        private bool IsThisPointOutsideColliders(Vector3 currentPoint)
         {
             return !HidingRoomElementsCollector.Instance.IsAnyColliderContainsPosition(currentPoint);
         }
 
-        bool IsThisPointNotVisibleByPlayer(Vector3 currentPoint)
+        private bool IsThisPointNotVisibleByPlayer(Vector3 currentPoint)
         {
-            Vector3 direction = CCharacterManager.playerTransform.position - currentPoint;
+            Vector3 direction = CCharacterManager.instance.playerTransform.position - currentPoint;
 
             float distance = direction.magnitude;
             direction.Normalize();
@@ -49,9 +49,9 @@ public partial class CEnemyController : CCharacterController
             return false;
         }
 
-        bool ThisRayIsNotHittingPlayer(RaycastHit[] raycastHits)
+        private bool ThisRayIsNotHittingPlayer(RaycastHit[] raycastHits)
         {
-            return !raycastHits.Any(x => x.transform == CCharacterManager.playerTransform);
+            return !raycastHits.Any(x => x.transform == CCharacterManager.instance.playerTransform);
         }
 
         public Vector3? GetClosestHidingSpot()
@@ -88,7 +88,7 @@ public partial class CEnemyController : CCharacterController
             return null;
         }
 
-        RaycastHit[] MakeRaycastInSelectedAngle(float currentAngle, float rayLength, out Ray rayToUse)
+        private RaycastHit[] MakeRaycastInSelectedAngle(float currentAngle, float rayLength, out Ray rayToUse)
         {
             Vector3 newForward = Quaternion.Euler(0, currentAngle, 0) * m_EnemyTransform.forward * rayLength;
 
@@ -103,7 +103,7 @@ public partial class CEnemyController : CCharacterController
             return raycastHits;
         }
 
-        void FindingPossiblePositionsAlongCurrentRay(Ray ray, List<Vector3> possibleHideSpots, RaycastHit[] raycastHits, float rayLength)
+        private void FindingPossiblePositionsAlongCurrentRay(Ray ray, List<Vector3> possibleHideSpots, RaycastHit[] raycastHits, float rayLength)
         {
             float currentDistanceToCheckOnRay = 0f;
             float stepCount = 1f;
@@ -132,7 +132,7 @@ public partial class CEnemyController : CCharacterController
             while (currentDistanceToCheckOnRay < rayLength);
         }
 
-        void SortHitsBasedOnDistance(ref RaycastHit[] raycastHits)
+        private void SortHitsBasedOnDistance(ref RaycastHit[] raycastHits)
         {
             Array.Sort(raycastHits, (x, y) => x.distance.CompareTo(y.distance));
         }

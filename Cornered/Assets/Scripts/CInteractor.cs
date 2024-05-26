@@ -37,7 +37,7 @@ public class CInteractor : MonoBehaviour
     {
         if (m_Holdable == null)
         {
-            return; 
+            return;
         }
 
         if (m_InteractableDetector != null && !m_InteractableDetector.isValidHit)

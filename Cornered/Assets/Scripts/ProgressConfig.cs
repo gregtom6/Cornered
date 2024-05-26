@@ -9,6 +9,15 @@ using UnityEngine;
 public class ProgressConfig : ScriptableObject
 {
     [SerializeField] private List<UnlockableAbilities> m_AbilitiesToUnlockPerLevel = new();
+    public int maxUnlockLevel => m_AbilitiesToUnlockPerLevel.Count;
+    public bool IsAbilityAlreadyUnlocked(EAbility ability)
+    {
+        int currentUnlockLevel = ProgressManager.Instance.currentUnlockLevel;
+
+        IReadOnlyList<EAbility> unlockedAbilities = GetAlreadyUnlockedAbilities(currentUnlockLevel);
+
+        return unlockedAbilities.Contains(ability);
+    }
 
     private IReadOnlyList<EAbility> GetAlreadyUnlockedAbilities(int currentUnlockLevel)
     {
@@ -21,17 +30,6 @@ public class ProgressConfig : ScriptableObject
 
         return abilities;
     }
-
-    public bool IsAbilityAlreadyUnlocked(EAbility ability)
-    {
-        int currentUnlockLevel = ProgressManager.Instance.currentUnlockLevel;
-
-        IReadOnlyList<EAbility> unlockedAbilities = GetAlreadyUnlockedAbilities(currentUnlockLevel);
-
-        return unlockedAbilities.Contains(ability);
-    }
-
-    public int maxUnlockLevel => m_AbilitiesToUnlockPerLevel.Count;
 }
 
 [Serializable]

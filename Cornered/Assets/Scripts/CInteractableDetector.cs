@@ -14,7 +14,7 @@ public class CInteractableDetector : MonoBehaviour
 
     private bool m_IsValidHit;
 
-    void Update()
+    private void Update()
     {
         Vector3 origin = transform.position;
         Vector3 localDirection = Vector3.forward;

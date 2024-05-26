@@ -18,7 +18,7 @@ public class CShieldHint : MonoBehaviour
         EventManager.RemoveListener<EquipmentDecidedEvent>(OnEnemyEquipmentDecidedEvent);
     }
 
-    void OnEnemyEquipmentDecidedEvent(EquipmentDecidedEvent e)
+    private void OnEnemyEquipmentDecidedEvent(EquipmentDecidedEvent e)
     {
         m_HintMeshRenderer.material = AllConfig.Instance.HintConfig.GetMaterialBasedOnItemType(e.shieldItem.item);
     }

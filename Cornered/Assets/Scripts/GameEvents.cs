@@ -24,3 +24,11 @@ public struct CharacterInitializedEvent
     public ECharacterType characterType;
     public CHealth healthComponent;
 }
+
+public struct EquipmentDecidedEvent
+{
+    public ECharacterType characterType;
+    public ItemTypes weaponItem;
+    public ItemTypes shieldItem;
+    public ItemTypes additionalItem;
+}

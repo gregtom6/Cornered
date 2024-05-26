@@ -6,16 +6,16 @@ public class CConveyorBeltSpeederButton : CButton
 {
     [SerializeField] private CBeltController m_BeltController;
     [SerializeField] private MeshRenderer m_MeshRenderer;
-
-    private void Start()
-    {
-        m_MeshRenderer.material = AllConfig.Instance.beltConfig.GetMaterialBasedOnSpeed(m_BeltController.currentBeltSpeed);
-    }
-
     public override void Interact()
     {
         base.Interact();
 
         m_MeshRenderer.material = AllConfig.Instance.beltConfig.GetMaterialBasedOnSpeed(m_BeltController.currentBeltSpeed);
     }
+
+    private void Start()
+    {
+        m_MeshRenderer.material = AllConfig.Instance.beltConfig.GetMaterialBasedOnSpeed(m_BeltController.currentBeltSpeed);
+    }
+
 }

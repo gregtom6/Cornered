@@ -57,8 +57,12 @@ public class CIngredient : MonoBehaviour, IPickable
 
         m_WasPickedAnyTime = true;
     }
+    public virtual IEquippable GetEquippable()
+    {
+        return null;
+    }
 
-    void Start()
+    private void Start()
     {
         m_Colliders.ForEach(x => x.enabled = true);
         m_Rigidbodies.ForEach(x =>
@@ -68,8 +72,4 @@ public class CIngredient : MonoBehaviour, IPickable
         });
     }
 
-    public virtual IEquippable GetEquippable()
-    {
-        return null;
-    }
 }

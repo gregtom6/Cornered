@@ -5,10 +5,9 @@ using UnityEngine;
 public class ProgressManager : MonoBehaviour
 {
     public static ProgressManager Instance;
+    public int currentUnlockLevel => m_UnlockLevel;
 
     private int m_UnlockLevel;
-
-    public int currentUnlockLevel => m_UnlockLevel;
 
     public void ResetProgress()
     {
@@ -47,7 +46,7 @@ public class ProgressManager : MonoBehaviour
         {
             m_UnlockLevel = Mathf.Clamp(m_UnlockLevel + 1, 0, AllConfig.Instance.ProgressConfig.maxUnlockLevel);
         }
-        else if(ev.characterType==ECharacterType.Player)
+        else if (ev.characterType == ECharacterType.Player)
         {
             m_UnlockLevel = 0;
         }

@@ -51,12 +51,12 @@ public class CBeltController : MonoBehaviour
         m_Button.pressHappened -= OnPressHappened;
     }
 
-    void OnAllObjectLeftFromSpawner()
+    private void OnAllObjectLeftFromSpawner()
     {
         m_BeltElementPool.Get();
     }
 
-    void OnDespawnerObjectEntered(Transform transform)
+    private void OnDespawnerObjectEntered(Transform transform)
     {
         CBeltElement beltElement = transform.GetComponentInParent<CBeltElement>();
         if (beltElement != null)

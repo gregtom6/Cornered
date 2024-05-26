@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SettingsManager : MonoBehaviour
 {
-    void Start()
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;

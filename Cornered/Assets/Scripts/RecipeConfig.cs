@@ -81,6 +81,8 @@ public class RecipeConfig : ScriptableObject
         return materials;
     }
 
+    //TODO: placing this into a utils class?
+
     public static bool AreListsEqual(IReadOnlyList<ItemTypes> list1, IReadOnlyList<ItemTypes> list2)
     {
         if (list1 == null || list2 == null)

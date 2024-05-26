@@ -22,7 +22,7 @@ public class CBeltElement : MonoBehaviour
         transform.Translate(-transform.right * Time.deltaTime * currentBeltSpeed);
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         CIngredient prefab = AllConfig.Instance.IngredientGenerationConfig.GetWeightedRandomItemPrefab();
         m_CreatedItem = Instantiate<CIngredient>(prefab, m_SpawnTransform.position, Quaternion.identity, m_SpawnTransform);

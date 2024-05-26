@@ -30,11 +30,11 @@ public class CEquipper : MonoBehaviour
     }
     private void OnLeftPointerDown(Vector2 obj)
     {
-        if(m_Picker != null)
+        if (m_Picker != null)
         {
             if (m_Picker.pickedPickable != null)
             {
-                IEquippable equippable= m_Picker.pickedPickable.GetEquippable();
+                IEquippable equippable = m_Picker.pickedPickable.GetEquippable();
 
                 if (equippable != null)
                 {

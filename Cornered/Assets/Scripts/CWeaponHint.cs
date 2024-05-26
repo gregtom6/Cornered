@@ -16,16 +16,8 @@ public class CWeaponHint : MonoBehaviour
         EventManager.RemoveListener<EquipmentDecidedEvent>(OnEnemyEquipmentDecidedEvent);
     }
 
-    void OnEnemyEquipmentDecidedEvent(EquipmentDecidedEvent e)
+    private void OnEnemyEquipmentDecidedEvent(EquipmentDecidedEvent e)
     {
         m_HintMeshRenderer.material = AllConfig.Instance.HintConfig.GetMaterialBasedOnItemType(e.weaponItem.item);
     }
-}
-
-public struct EquipmentDecidedEvent
-{
-    public ECharacterType characterType;
-    public ItemTypes weaponItem;
-    public ItemTypes shieldItem;
-    public ItemTypes additionalItem;
 }

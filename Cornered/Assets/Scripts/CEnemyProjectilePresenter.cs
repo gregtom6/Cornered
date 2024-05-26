@@ -9,6 +9,6 @@ public class CEnemyProjectilePresenter : ProjectileVisualizer
     {
         m_LineRenderer.SetPosition(0, m_HeadTransform.position);
 
-        m_LineRenderer.SetPosition(1, CCharacterManager.playerPosition);
+        m_LineRenderer.SetPosition(1, CCharacterManager.instance.playerPosition);
     }
 }

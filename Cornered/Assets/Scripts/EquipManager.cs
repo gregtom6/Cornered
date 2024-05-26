@@ -5,6 +5,10 @@ using UnityEngine;
 public class EquipManager : MonoBehaviour
 {
     public static EquipManager instance;
+    public void Equip(ECharacterType characterType, ItemTypes itemTypes)
+    {
+        ActualizeEquipment(characterType, itemTypes);
+    }
 
     private void Start()
     {
@@ -26,11 +30,6 @@ public class EquipManager : MonoBehaviour
         ActualizeEquipment(e.characterType, e.weaponItem);
         ActualizeEquipment(e.characterType, e.shieldItem);
         ActualizeEquipment(e.characterType, e.additionalItem);
-    }
-
-    public void Equip(ECharacterType characterType, ItemTypes itemTypes)
-    {
-        ActualizeEquipment(characterType, itemTypes);
     }
 
     private void ActualizeEquipment(ECharacterType characterType, ItemTypes itemTypes)

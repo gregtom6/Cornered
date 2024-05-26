@@ -28,7 +28,7 @@ public class MatchManager : MonoBehaviour
         InitiateNewMatch();
     }
 
-    void OnCharacterDefeated(CharacterDefeatedEvent e)
+    private void OnCharacterDefeated(CharacterDefeatedEvent e)
     {
         if (e.characterType == ECharacterType.Player)
         {
