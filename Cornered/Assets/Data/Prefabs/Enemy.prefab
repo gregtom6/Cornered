@@ -86,7 +86,11 @@ PrefabInstance:
     - target: {fileID: 5126484516331105809, guid: 8db1a4a2cefb0524b895c003350422f0, type: 3}
       propertyPath: m_HeadTransform
       value: 
-      objectReference: {fileID: 2535627792247768148}
+      objectReference: {fileID: 6531568857367491057}
+    - target: {fileID: 5126484516331105809, guid: 8db1a4a2cefb0524b895c003350422f0, type: 3}
+      propertyPath: m_OriginTransform
+      value: 
+      objectReference: {fileID: 6531568857367491057}
     - target: {fileID: 7604913298552565883, guid: 8db1a4a2cefb0524b895c003350422f0, type: 3}
       propertyPath: m_Name
       value: EnemyProjectileRepresenter
@@ -148,6 +152,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4094154704245678516, guid: 744d0dcb048ecf84a86c43c019c70267, type: 3}
+      propertyPath: m_ProjectileVisualizer
+      value: 
+      objectReference: {fileID: 7436243102482345963}
     - target: {fileID: 6170694110623654994, guid: 744d0dcb048ecf84a86c43c019c70267, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -466,6 +474,11 @@ MonoBehaviour:
 --- !u!4 &2535627792247768148 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6170694112272487523, guid: 744d0dcb048ecf84a86c43c019c70267, type: 3}
+  m_PrefabInstance: {fileID: 8544148261115646007}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6531568857367491057 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3185772089960653254, guid: 744d0dcb048ecf84a86c43c019c70267, type: 3}
   m_PrefabInstance: {fileID: 8544148261115646007}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &6959732505354941618 stripped

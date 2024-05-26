@@ -1643,6 +1643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2601f6a294624ff4dbd4a958618bf2d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ProjectileVisualizer: {fileID: 7650483262289167305}
   m_ShieldEquipmentParent: {fileID: 1814974696475830172}
   m_WeaponEquipmentParent: {fileID: 3185772089960653254}
   m_AdditionalLeftEquipmentParent: {fileID: 0}
@@ -2638,6 +2639,10 @@ PrefabInstance:
       propertyPath: m_CameraTransform
       value: 
       objectReference: {fileID: 6170694110623655004}
+    - target: {fileID: 3556026144738789941, guid: a1a656383d1d08a4c8ebb79f7bd67130, type: 3}
+      propertyPath: m_OriginTransform
+      value: 
+      objectReference: {fileID: 3185772089960653254}
     - target: {fileID: 5549423232942879488, guid: a1a656383d1d08a4c8ebb79f7bd67130, type: 3}
       propertyPath: m_RootOrder
       value: -1

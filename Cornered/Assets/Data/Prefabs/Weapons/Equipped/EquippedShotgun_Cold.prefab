@@ -198,6 +198,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: EquippedShotgun_Cold
       objectReference: {fileID: 0}
+    - target: {fileID: 4528127666089671836, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4528127666089671836, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4528127666089671836, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.78
+      objectReference: {fileID: 0}
     - target: {fileID: 5539046453295367973, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

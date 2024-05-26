@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class ProjectileVisualizer : MonoBehaviour
@@ -8,16 +9,25 @@ public class ProjectileVisualizer : MonoBehaviour
 
     [SerializeField] protected Animator m_Animator;
     protected LineRenderer m_LineRenderer;
+    protected Transform m_OriginTransform;
+
+    public void SetOriginTransform(Transform originTransform)
+    {
+        m_OriginTransform = originTransform;
+    }
 
     public void Show()
     {
         m_Animator.SetTrigger(ANIM_PARAM_SHOW);
     }
 
-    protected void Start()
+    protected virtual void Update()
     {
-        m_LineRenderer = GetComponent<LineRenderer>();
-        m_Animator = GetComponent<Animator>();
-        m_LineRenderer.enabled = false;
+        if (m_OriginTransform == null)
+        {
+            return;
+        }
+
+        m_LineRenderer.SetPosition(0, m_OriginTransform.position);
     }
 }

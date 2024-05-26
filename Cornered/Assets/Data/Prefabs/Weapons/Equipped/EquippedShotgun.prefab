@@ -80,6 +80,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: EquippedShotgun
       objectReference: {fileID: 0}
+    - target: {fileID: 4528127666089671836, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4528127666089671836, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4528127666089671836, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.78
+      objectReference: {fileID: 0}
     - target: {fileID: 9120058734530189158, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
       propertyPath: m_LocalScale.y
       value: 2.5136

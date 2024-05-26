@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class CEnemyProjectilePresenter : ProjectileVisualizer
 {
-    [SerializeField] protected Transform m_HeadTransform;
-    private void Update()
+    private void Awake()
     {
-        m_LineRenderer.SetPosition(0, m_HeadTransform.position);
+        m_LineRenderer = GetComponent<LineRenderer>();
+        m_Animator = GetComponent<Animator>();
+        m_LineRenderer.enabled = false;
+    }
 
+    protected override void Update()
+    {
+        base.Update();
         m_LineRenderer.SetPosition(1, CCharacterManager.instance.playerPosition);
     }
 }

@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Rendering.FilterWindow;
 
 public class CEquipmentVisualizer : MonoBehaviour
 {
+    [SerializeField] private ProjectileVisualizer m_ProjectileVisualizer;
     [SerializeField] private Transform m_ShieldEquipmentParent;
     [SerializeField] private Transform m_WeaponEquipmentParent;
     [SerializeField] private Transform m_AdditionalLeftEquipmentParent;
@@ -29,7 +31,18 @@ public class CEquipmentVisualizer : MonoBehaviour
             {
                 GameObject element = Instantiate(prefab, transform);
                 m_VisualizedEquipmentElements[equipmentToBeReplaced].Add(element);
+                SetupVisualizedEquipment(element);
             }
+        }
+    }
+
+    private void SetupVisualizedEquipment(GameObject element)
+    {
+        CEquippedWeapon equippedWeapon = element.GetComponent<CEquippedWeapon>();
+
+        if (equippedWeapon != null)
+        {
+            m_ProjectileVisualizer.SetOriginTransform(equippedWeapon.muzzleTransform);
         }
     }
 
