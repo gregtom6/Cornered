@@ -15,6 +15,8 @@ public class AllConfig : MonoBehaviour
     [SerializeField] private MixingMachineConfig m_MixingMachineConfig;
     [SerializeField] private ProgressConfig m_ProgressConfig;
     [SerializeField] private ExitDoorConfig m_ExitDoorConfig;
+    [SerializeField] private TutorialConfig m_TutorialConfig;
+    [SerializeField] private ControlsConfig m_ControlsConfig;
 
     public CharacterConfig CharacterConfig => m_CharacterConfig;
 
@@ -38,10 +40,22 @@ public class AllConfig : MonoBehaviour
 
     public ExitDoorConfig ExitDoorConfig => m_ExitDoorConfig;
 
+    public TutorialConfig TutorialConfig => m_TutorialConfig;
+
+    public ControlsConfig ControlsConfig => m_ControlsConfig;
+
     public static AllConfig Instance;
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

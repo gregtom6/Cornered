@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e318b0d40a03f174893bce3bd3f6f90f, type: 3}
   m_Name: Time Config
   m_EditorClassIdentifier: 
-  m_PrepareTimeEndInSec: 200
+  m_PrepareTimeEndInSec: 100
   m_WaitBetweenPreviousAndNewMatchInSec: 2

@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6095230257812330048
 MonoBehaviour:
@@ -55,3 +55,5 @@ MonoBehaviour:
   m_MixingMachineConfig: {fileID: 11400000, guid: e6f315d2bd03a7944b99a962930c715a, type: 2}
   m_ProgressConfig: {fileID: 11400000, guid: 7efe7f8b6a387914abaeb773dece73cb, type: 2}
   m_ExitDoorConfig: {fileID: 11400000, guid: c49b36f4eccd20f479a97f8c3635f92b, type: 2}
+  m_TutorialConfig: {fileID: 11400000, guid: efe577218a1a0234995769e1ecccb542, type: 2}
+  m_ControlsConfig: {fileID: 11400000, guid: 42a01f3791e8e1e4da3a2800e159e0ca, type: 2}
