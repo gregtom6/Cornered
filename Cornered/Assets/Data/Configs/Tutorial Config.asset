@@ -30,7 +30,7 @@ MonoBehaviour:
     text: Use enemy equipment hint to generate better equipment against him.
   - image: {fileID: 21300000, guid: 7b36fe6e33dc0c14e9f41677355ec806, type: 3}
     text: Life bar reloads after receiving a shot from the enemy.
-  - image: {fileID: 0}
+  - image: {fileID: 21300000, guid: 15d7ac23782585b45a5dd01033f45a01, type: 3}
     text: Indicator led shows, when am I ready to shoot again.
   - image: {fileID: 21300000, guid: bd9d7f96ea9cffe498c800c48cc39b80, type: 3}
     text: Use conveyor belt speed up button to see ingredients faster.
