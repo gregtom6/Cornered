@@ -22,7 +22,10 @@ public class SettingsManager : MonoBehaviour
 
     private void OnCharacterDefeatedEvent(CharacterDefeatedEvent ev)
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        if (ev.characterType == ECharacterType.Player)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }
