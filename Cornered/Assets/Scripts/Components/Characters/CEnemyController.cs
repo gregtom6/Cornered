@@ -15,7 +15,7 @@ public partial class CEnemyController : CCharacterController
     [SerializeField] private LayerMask m_PlayerPillarLayerMask;
     [SerializeField] private LayerMask m_PillarLayerMask;
 
-    private CAIWeapon m_AIWeapon;
+    private CEnemyWeapon m_AIWeapon;
 
     private NavMeshAgent m_NavMeshAgent;
 
@@ -34,7 +34,7 @@ public partial class CEnemyController : CCharacterController
     private void Start()
     {
         m_NavMeshAgent = GetComponent<NavMeshAgent>();
-        m_AIWeapon = GetComponent<CAIWeapon>();
+        m_AIWeapon = GetComponent<CEnemyWeapon>();
         m_NavMeshAgent.speed = AllConfig.Instance.CharacterConfig.enemyRunSpeed;
     }
 

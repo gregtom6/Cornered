@@ -140,6 +140,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3053658404462509198, guid: 744d0dcb048ecf84a86c43c019c70267, type: 3}
+      propertyPath: m_ProjectileVisualizers.Array.data[1]
+      value: 
+      objectReference: {fileID: 7436243102482345963}
     - target: {fileID: 3117604996146618251, guid: 744d0dcb048ecf84a86c43c019c70267, type: 3}
       propertyPath: m_Enabled
       value: 1
