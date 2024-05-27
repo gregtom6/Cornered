@@ -2,44 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CHealth : MonoBehaviour
+public abstract class CHealth : MonoBehaviour
 {
-    [SerializeField] private ECharacterType characterType = ECharacterType.Count;
-
     public float currentHealth => m_CurrentHealth;
 
-    private float m_CurrentHealth;
+    protected float m_CurrentHealth;
 
-    private float m_HealingMeasurementTimeStart;
+    protected float m_HealingMeasurementTimeStart;
 
     public void DamageHealth(float damage)
     {
-        m_CurrentHealth = Mathf.Clamp(m_CurrentHealth += damage, AllConfig.Instance.CharacterConfig.minHealth, AllConfig.Instance.CharacterConfig.maxHealth);
+        m_CurrentHealth = Mathf.Clamp(m_CurrentHealth += damage, AllConfig.Instance.CharacterConfig.minHealth, GetMaxHealth());
         m_HealingMeasurementTimeStart = Time.time;
 
         if (m_CurrentHealth <= AllConfig.Instance.CharacterConfig.minHealth)
         {
-            EventManager.Raise(new CharacterDefeatedEvent { characterType = characterType });
+            EventManager.Raise(new CharacterDefeatedEvent { characterType = GetCharacterType() });
         }
     }
-    private void Start()
+
+    protected abstract ECharacterType GetCharacterType();
+
+    public abstract float GetMaxHealth();
+
+    protected abstract float GetReloadWaitingMaxTime();
+
+    protected void Start()
     {
-        m_CurrentHealth = AllConfig.Instance.CharacterConfig.maxHealth;
-        EventManager.Raise(new CharacterInitializedEvent { characterType = characterType, healthComponent = this });
+        m_CurrentHealth = GetMaxHealth();
+        EventManager.Raise(new CharacterInitializedEvent { characterType = GetCharacterType(), healthComponent = this });
     }
 
-    private void Update()
+    protected void Update()
     {
-        if (m_CurrentHealth >= AllConfig.Instance.CharacterConfig.maxHealth ||
+        if (m_CurrentHealth >= GetMaxHealth() ||
             m_CurrentHealth <= AllConfig.Instance.CharacterConfig.minHealth)
         {
             return;
         }
 
         float currentTime = Time.time - m_HealingMeasurementTimeStart;
-        if (currentTime >= AllConfig.Instance.CharacterConfig.waitUntilHealthReloadStarts)
+        if (currentTime >= GetReloadWaitingMaxTime())
         {
-            m_CurrentHealth = Mathf.Clamp(m_CurrentHealth += AllConfig.Instance.CharacterConfig.healHealthDelta * Time.deltaTime, AllConfig.Instance.CharacterConfig.minHealth, AllConfig.Instance.CharacterConfig.maxHealth);
+            m_CurrentHealth = Mathf.Clamp(m_CurrentHealth += AllConfig.Instance.CharacterConfig.healHealthDelta * Time.deltaTime, AllConfig.Instance.CharacterConfig.minHealth, GetMaxHealth());
         }
     }
 }

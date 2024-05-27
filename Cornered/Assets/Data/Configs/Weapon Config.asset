@@ -60,13 +60,13 @@ MonoBehaviour:
     _keys: 07000000080000000a0000000b000000
     _values:
     - cooldownTimeInSec: 1
-      damage: -10
-    - cooldownTimeInSec: 4
       damage: -20
     - cooldownTimeInSec: 4
       damage: -30
     - cooldownTimeInSec: 4
-      damage: -30
+      damage: -40
+    - cooldownTimeInSec: 4
+      damage: -40
   m_ShieldSettingsDict:
     reorderableList:
       canAdd: 1
@@ -93,10 +93,10 @@ MonoBehaviour:
     _keyValues: 0c0000000d0000000e0000000f000000
     _keys: 0c0000000d0000000e0000000f000000
     _values:
-    - damageDivider: 7
-    - damageDivider: 30
+    - damageDivider: 20
+    - damageDivider: 40
     - damageDivider: 50
-    - damageDivider: 10
+    - damageDivider: 30
   m_AdditionalSettingsDict:
     reorderableList:
       canAdd: 1

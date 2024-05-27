@@ -31,6 +31,6 @@ public class UIHealthBar : MonoBehaviour
 
     private void Update()
     {
-        m_CurrentHealthImage.fillAmount = m_HealthComponent.currentHealth / AllConfig.Instance.CharacterConfig.maxHealth;
+        m_CurrentHealthImage.fillAmount = m_HealthComponent.currentHealth / m_HealthComponent.GetMaxHealth();
     }
 }

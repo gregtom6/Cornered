@@ -15,7 +15,7 @@ public partial class CEnemyController : CCharacterController
     [SerializeField] private LayerMask m_PlayerPillarLayerMask;
     [SerializeField] private LayerMask m_PillarLayerMask;
 
-    private CEnemyWeapon m_AIWeapon;
+    private CWeapon m_AIWeapon;
 
     private NavMeshAgent m_NavMeshAgent;
 
@@ -34,7 +34,7 @@ public partial class CEnemyController : CCharacterController
     private void Start()
     {
         m_NavMeshAgent = GetComponent<NavMeshAgent>();
-        m_AIWeapon = GetComponent<CEnemyWeapon>();
+        m_AIWeapon = GetComponent<CWeapon>();
         m_NavMeshAgent.speed = AllConfig.Instance.CharacterConfig.enemyRunSpeed;
     }
 
@@ -66,14 +66,14 @@ public partial class CEnemyController : CCharacterController
 
         if (state == EEnemyState.DefendPosition)
         {
-            if ((m_EnemyHealth.currentHealth / AllConfig.Instance.CharacterConfig.maxHealth) * 100f >= AllConfig.Instance.AIConfig.attackWhenLifeMoreThanPercentage && m_AIWeapon.isReadyToShoot)
+            if ((m_EnemyHealth.currentHealth / AllConfig.Instance.CharacterConfig.enemyMaxHealth) * 100f >= AllConfig.Instance.AIConfig.attackWhenLifeMoreThanPercentage && m_AIWeapon.isReadyToShoot)
             {
                 state = EEnemyState.ShootPosition;
             }
         }
         else if (state == EEnemyState.ShootPosition)
         {
-            if (!m_AIWeapon.isReadyToShoot || (m_EnemyHealth.currentHealth / AllConfig.Instance.CharacterConfig.maxHealth) * 100f <= AllConfig.Instance.AIConfig.hideWhenLifeLessThanPercentage)
+            if (!m_AIWeapon.isReadyToShoot || (m_EnemyHealth.currentHealth / AllConfig.Instance.CharacterConfig.enemyMaxHealth) * 100f <= AllConfig.Instance.AIConfig.hideWhenLifeLessThanPercentage)
             {
                 state = EEnemyState.DefendPosition;
             }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62461fd64fdd83947becb4816bfe250a, type: 3}
   m_Name: Exit Door Config
   m_EditorClassIdentifier: 
-  m_ButtonHoldingOpenMultiplier: 1
+  m_ButtonHoldingOpenMultiplier: 0.4
   m_MinPercentage: 0
   m_MaxPercentage: 100

@@ -23,6 +23,8 @@ public class ProgressConfig : ScriptableObject
     {
         List<EAbility> abilities = new();
 
+        currentUnlockLevel = Mathf.Min(m_AbilitiesToUnlockPerLevel.Count - 1, currentUnlockLevel);
+
         for (int i = currentUnlockLevel; i >= 0; i--)
         {
             abilities.AddRange(m_AbilitiesToUnlockPerLevel[i].abilities);
