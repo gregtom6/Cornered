@@ -11,8 +11,8 @@ public class GameInput : ScriptableObject, GameInputActions.IGameplayActions
 
     public event Action<Vector2> PointerPosition = delegate { };
     public event Action<Vector2> PointerDelta = delegate { };
-    public event Action<float> ForwardBackwardMovement = delegate { };
-    public event Action<float> LeftRightMovement = delegate { };
+    public event Action<float> ForwardBackward = delegate { };
+    public event Action<float> LeftRight = delegate { };
     public event Action<Vector2> LeftPointerDown = delegate { };
     public event Action<Vector2> LeftPointerUp = delegate { };
     public event Action<Vector2> RightPointerDown = delegate { };
@@ -25,11 +25,11 @@ public class GameInput : ScriptableObject, GameInputActions.IGameplayActions
     {
         if (context.performed)
         {
-            ForwardBackwardMovement?.Invoke(context.ReadValue<float>());
+            ForwardBackward?.Invoke(context.ReadValue<float>());
         }
         else if (context.canceled)
         {
-            ForwardBackwardMovement?.Invoke(0f);
+            ForwardBackward?.Invoke(0f);
         }
     }
 
@@ -37,11 +37,11 @@ public class GameInput : ScriptableObject, GameInputActions.IGameplayActions
     {
         if (context.performed)
         {
-            LeftRightMovement?.Invoke(context.ReadValue<float>());
+            LeftRight?.Invoke(context.ReadValue<float>());
         }
         else if (context.canceled)
         {
-            LeftRightMovement?.Invoke(0f);
+            LeftRight?.Invoke(0f);
         }
     }
 

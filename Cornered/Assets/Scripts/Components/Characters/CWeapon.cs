@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class CWeapon : MonoBehaviour
 {
     [SerializeField] protected CShotDetector m_ShotDetector;
-    [SerializeField] protected List<ProjectileVisualizer> m_ProjectileVisualizers = new();
+    [SerializeField] protected List<CProjectileVisualizer> m_ProjectileVisualizers = new();
     public bool isReadyToShoot => m_IsReadyToShoot;
 
     protected float m_CooldownStartTime;

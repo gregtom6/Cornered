@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CGateController : MonoBehaviour
 {
-    protected static readonly int ANIM_PARAM_OPEN = Animator.StringToHash("open");
+    private static readonly int ANIM_PARAM_OPEN = Animator.StringToHash("open");
 
     [SerializeField] private Animator m_GateAnimator;
     [SerializeField] private CGateEnterDetector m_GateEnterDetector;

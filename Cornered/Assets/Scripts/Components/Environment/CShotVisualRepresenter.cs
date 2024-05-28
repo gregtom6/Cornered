@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CShotVisualRepresenter : ProjectileVisualizer
+public class CShotVisualRepresenter : CProjectileVisualizer
 {
     [SerializeField] private Light m_Light;
 

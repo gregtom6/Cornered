@@ -47,8 +47,8 @@ public class CPlayerController : CCharacterController
     {
         if (m_GameInput != null)
         {
-            m_GameInput.ForwardBackwardMovement += OnForwardBackwardMovement;
-            m_GameInput.LeftRightMovement += OnLeftRightMovement;
+            m_GameInput.ForwardBackward += OnForwardBackwardMovement;
+            m_GameInput.LeftRight += OnLeftRightMovement;
             m_GameInput.PointerDelta += OnPointerPosition;
         }
     }
@@ -57,8 +57,8 @@ public class CPlayerController : CCharacterController
     {
         if (m_GameInput != null)
         {
-            m_GameInput.ForwardBackwardMovement -= OnForwardBackwardMovement;
-            m_GameInput.LeftRightMovement -= OnLeftRightMovement;
+            m_GameInput.ForwardBackward -= OnForwardBackwardMovement;
+            m_GameInput.LeftRight -= OnLeftRightMovement;
             m_GameInput.PointerDelta -= OnPointerPosition;
         }
     }

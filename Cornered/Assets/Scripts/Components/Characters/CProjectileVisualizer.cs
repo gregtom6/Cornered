@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class ProjectileVisualizer : MonoBehaviour
+public class CProjectileVisualizer : MonoBehaviour
 {
     protected static readonly int ANIM_PARAM_SHOW = Animator.StringToHash("shot");
 

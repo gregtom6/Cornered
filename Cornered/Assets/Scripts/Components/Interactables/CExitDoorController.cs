@@ -4,9 +4,9 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class CExitDoorController : HoldActivable
+public class CExitDoorController : CHoldActivable
 {
-    protected static readonly int ANIM_PARAM_ACTIVATE = Animator.StringToHash("activate");
+    private static readonly int ANIM_PARAM_ACTIVATE = Animator.StringToHash("activate");
 
     [SerializeField] private TextMeshPro m_PercentageText;
     private Animator m_OpenAnimator;

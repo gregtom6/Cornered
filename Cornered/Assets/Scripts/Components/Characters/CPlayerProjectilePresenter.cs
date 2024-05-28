@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CPlayerProjectilePresenter : ProjectileVisualizer
+public class CPlayerProjectilePresenter : CProjectileVisualizer
 {
     [SerializeField] protected Transform m_HeadTransform;
 

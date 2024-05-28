@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class CRedLightController : MonoBehaviour
 {
-    protected static readonly int ANIM_PARAM_ACTIVATE = Animator.StringToHash("activate");
+    private static readonly int ANIM_PARAM_ACTIVATE = Animator.StringToHash("activate");
 
     private Animator m_Animator;
 

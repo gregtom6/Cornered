@@ -11,7 +11,7 @@ public class SceneSetting
     public LoadSceneMode loadSceneMode;
     public bool shouldLoad = true;
 }
-public class CLoader : MonoBehaviour
+public class CGameStartLoader : MonoBehaviour
 {
     [SerializeField] private List<SceneSetting> m_ScenesToLoad = new List<SceneSetting>();
 

@@ -5,7 +5,7 @@ using static UnityEditor.Rendering.FilterWindow;
 
 public class CEquipmentVisualizer : MonoBehaviour
 {
-    [SerializeField] private ProjectileVisualizer m_ProjectileVisualizer;
+    [SerializeField] private CProjectileVisualizer m_ProjectileVisualizer;
     [SerializeField] private Transform m_ShieldEquipmentParent;
     [SerializeField] private Transform m_WeaponEquipmentParent;
     [SerializeField] private Transform m_AdditionalLeftEquipmentParent;

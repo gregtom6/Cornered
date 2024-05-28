@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CEnemyProjectilePresenter : ProjectileVisualizer
+public class CEnemyProjectilePresenter : CProjectileVisualizer
 {
     private void Awake()
     {

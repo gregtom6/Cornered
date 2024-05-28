@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CExitButton : MonoBehaviour, IHoldable
 {
-    [SerializeField] private HoldActivable m_HoldActivable;
+    [SerializeField] private CHoldActivable m_HoldActivable;
 
     public void HoldingFinished()
     {

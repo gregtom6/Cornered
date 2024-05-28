@@ -35,7 +35,7 @@ public partial class CEnemyController : CCharacterController
             direction.Normalize();
 
 #if UNITY_EDITOR
-            DrawArrow.ForDebug(currentPoint, direction * distance, Color.red);
+            DebugArrow.ForDebug(currentPoint, direction * distance, Color.red);
 #endif
 
             if (Physics.Raycast(currentPoint, direction, out RaycastHit hit, distance, m_PillarPlayerLayerMask))
@@ -97,7 +97,7 @@ public partial class CEnemyController : CCharacterController
             RaycastHit[] raycastHits = Physics.RaycastAll(rayToUse);
 
 #if UNITY_EDITOR
-            DrawArrow.ForDebug(m_EnemyTransform.position, newForward, Color.yellow);
+            DebugArrow.ForDebug(m_EnemyTransform.position, newForward, Color.yellow);
 #endif
 
             return raycastHits;

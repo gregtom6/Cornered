@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CMixingMachine : MonoBehaviour
 {
-    protected static readonly int ANIM_PARAM_CLOSE = Animator.StringToHash("close");
+    private static readonly int ANIM_PARAM_CLOSE = Animator.StringToHash("close");
 
     [SerializeField] private Transform m_ResultTargetTransform;
     [SerializeField] private CMixingItemDetector m_MixingItemDetector;
