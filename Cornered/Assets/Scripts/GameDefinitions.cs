@@ -95,3 +95,12 @@ public enum EMixingMachineState
 
     Count,
 }
+
+public enum EMainMenuState
+{
+    Main,
+    Hint,
+    Controls,
+
+    Count,
+}

@@ -10,6 +10,8 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private GameObject m_ControlsPanel;
     [SerializeField] private List<SceneSetting> m_NewGameScenesToLoad = new List<SceneSetting>();
 
+    private EMainMenuState m_State = EMainMenuState.Main;
+
     public void OnNewGameButton()
     {
         m_NewGameScenesToLoad.ForEach(x =>
@@ -20,32 +22,39 @@ public class UIMainMenu : MonoBehaviour
 
     public void OnHintButton()
     {
-        m_MainPanel.SetActive(false);
-        m_HintPanel.SetActive(true);
+        SetState(EMainMenuState.Hint);
     }
 
     public void OnHintBackButton()
     {
-        m_MainPanel.SetActive(true);
-        m_HintPanel.SetActive(false);
+        SetState(EMainMenuState.Main);
     }
 
     public void OnControlsButton()
     {
-        m_MainPanel.SetActive(false);
-        m_ControlsPanel.SetActive(true);
+        SetState(EMainMenuState.Controls);
     }
 
     public void OnControlsBackButton()
     {
-        m_MainPanel.SetActive(true);
-        m_ControlsPanel.SetActive(false);
+        SetState(EMainMenuState.Main);
     }
 
     private void Start()
     {
-        m_MainPanel.SetActive(true);
-        m_HintPanel.SetActive(false);
-        m_ControlsPanel.SetActive(false);
+        ShowState();
+    }
+
+    private void SetState(EMainMenuState state)
+    {
+        m_State = state;
+        ShowState();
+    }
+
+    private void ShowState()
+    {
+        m_MainPanel.SetActive(m_State == EMainMenuState.Main);
+        m_HintPanel.SetActive(m_State == EMainMenuState.Hint);
+        m_ControlsPanel.SetActive(m_State == EMainMenuState.Controls);
     }
 }
