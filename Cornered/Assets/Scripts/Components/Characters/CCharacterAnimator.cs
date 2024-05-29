@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CCharacterAnimator : MonoBehaviour
+public abstract class CCharacterAnimator : MonoBehaviour
 {
     protected readonly int ANIM_PARAM_LEGSTATE = Animator.StringToHash("legState");
     protected readonly int ANIM_PARAM_ARMWEAPON = Animator.StringToHash("useWeapon");

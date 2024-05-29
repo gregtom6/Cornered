@@ -5,7 +5,7 @@ using UnityEngine;
 public class EquipManager : MonoBehaviour
 {
     public static EquipManager instance;
-    public void Equip(ECharacterType characterType, ItemTypes itemTypes)
+    public void Equip(ECharacterType characterType, ItemDatas itemTypes)
     {
         ActualizeEquipment(characterType, itemTypes);
     }
@@ -32,7 +32,7 @@ public class EquipManager : MonoBehaviour
         ActualizeEquipment(e.characterType, e.additionalItem);
     }
 
-    private void ActualizeEquipment(ECharacterType characterType, ItemTypes itemTypes)
+    private void ActualizeEquipment(ECharacterType characterType, ItemDatas itemTypes)
     {
         InventoryManager.instance.EquipItem(characterType, itemTypes);
 

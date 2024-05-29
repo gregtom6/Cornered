@@ -9,10 +9,8 @@ public class CProduct : CIngredient, IEquippable
         return this;
     }
 
-    public void Equip()
+    public virtual void Equip()
     {
-        EquipManager.instance.Equip(ECharacterType.Player, new ItemTypes(m_ItemType, m_ItemState));
-
         Destroy(gameObject);
     }
 }

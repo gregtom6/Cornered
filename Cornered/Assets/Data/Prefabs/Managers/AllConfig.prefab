@@ -50,7 +50,7 @@ MonoBehaviour:
   m_RecipeConfig: {fileID: 11400000, guid: 7204f73bba356384e8507e13ddf293a2, type: 2}
   m_TimeConfig: {fileID: 11400000, guid: 2031bcbadd963524482bc973f51fad3f, type: 2}
   m_HintConfig: {fileID: 11400000, guid: 562dddebb3d8dca4c9f94cfd837a29de, type: 2}
-  m_WeaponConfig: {fileID: 11400000, guid: 68383db4573f4534d81bd323523fe83c, type: 2}
+  m_EquipmentConfig: {fileID: 11400000, guid: 68383db4573f4534d81bd323523fe83c, type: 2}
   m_AIConfig: {fileID: 11400000, guid: ae0cbff236312274d8fb908bc4c25f35, type: 2}
   m_MixingMachineConfig: {fileID: 11400000, guid: e6f315d2bd03a7944b99a962930c715a, type: 2}
   m_ProgressConfig: {fileID: 11400000, guid: 7efe7f8b6a387914abaeb773dece73cb, type: 2}

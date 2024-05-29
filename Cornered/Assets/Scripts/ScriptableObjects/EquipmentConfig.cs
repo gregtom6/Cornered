@@ -6,29 +6,29 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Weapon Config")]
-public class WeaponConfig : ScriptableObject
+[CreateAssetMenu(fileName = "Equipment Config")]
+public class EquipmentConfig : ScriptableObject
 {
-    [SerializeField] private List<ItemTypes> m_Weapons = new();
-    [SerializeField] private List<ItemTypes> m_Shields = new();
-    [SerializeField] private List<ItemTypes> m_Additionals = new();
+    [SerializeField] private List<WeaponItemDatas> m_Weapons = new();
+    [SerializeField] private List<ShieldItemDatas> m_Shields = new();
+    [SerializeField] private List<AdditionalItemDatas> m_Additionals = new();
 
     [SerializeField] private WeaponSettingsDict m_WeaponSettingsDict;
     [SerializeField] private ShieldSettingsDict m_ShieldSettingsDict;
     [SerializeField] private AdditionalSettingsDict m_AdditionalSettingsDict;
     [SerializeField] private EquippedPrefabDict m_EquippedPrefabDict;
 
-    public ItemTypes GetRandomWeapon()
+    public ItemDatas GetRandomWeapon()
     {
         return m_Weapons.GetRandom();
     }
 
-    public ItemTypes GetRandomShield()
+    public ItemDatas GetRandomShield()
     {
         return m_Shields.GetRandom();
     }
 
-    public ItemTypes GetRandomAdditional()
+    public ItemDatas GetRandomAdditional()
     {
         return m_Additionals.GetRandom();
     }

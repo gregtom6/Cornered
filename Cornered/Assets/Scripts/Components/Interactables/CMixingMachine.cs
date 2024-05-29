@@ -73,7 +73,7 @@ public class CMixingMachine : MonoBehaviour
 
     private void Mixing()
     {
-        IReadOnlyList<ItemTypes> detectedItems = m_MixingItemDetector.GetDetectedItems();
+        IReadOnlyList<ItemDatas> detectedItems = m_MixingItemDetector.GetDetectedItems();
 
         if (detectedItems.Count == 0 || detectedItems.Any(x => x.item == EItemType.EmptyItem))
         {

@@ -10,7 +10,7 @@ public class AllConfig : MonoBehaviour
     [SerializeField] private RecipeConfig m_RecipeConfig;
     [SerializeField] private TimeConfig m_TimeConfig;
     [SerializeField] private HintConfig m_HintConfig;
-    [SerializeField] private WeaponConfig m_WeaponConfig;
+    [SerializeField] private EquipmentConfig m_EquipmentConfig;
     [SerializeField] private AIConfig m_AIConfig;
     [SerializeField] private MixingMachineConfig m_MixingMachineConfig;
     [SerializeField] private ProgressConfig m_ProgressConfig;
@@ -30,7 +30,7 @@ public class AllConfig : MonoBehaviour
 
     public HintConfig HintConfig => m_HintConfig;
 
-    public WeaponConfig WeaponConfig => m_WeaponConfig;
+    public EquipmentConfig EquipmentConfig => m_EquipmentConfig;
 
     public AIConfig AIConfig => m_AIConfig;
 

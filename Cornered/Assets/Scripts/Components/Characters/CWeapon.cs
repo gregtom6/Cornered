@@ -18,7 +18,7 @@ public abstract class CWeapon : MonoBehaviour
 
         EItemType usedWeapon = GetEquippedWeapon();
 
-        WeaponSettings weaponSettings = AllConfig.Instance.WeaponConfig.GetWeaponSettings(usedWeapon);
+        WeaponSettings weaponSettings = AllConfig.Instance.EquipmentConfig.GetWeaponSettings(usedWeapon);
 
         return Mathf.Clamp01(currentTime / weaponSettings.cooldownTimeInSec);
     }
@@ -29,7 +29,7 @@ public abstract class CWeapon : MonoBehaviour
     {
         float currentTime = Time.time - m_CooldownStartTime;
 
-        WeaponSettings weaponSettings = AllConfig.Instance.WeaponConfig.GetWeaponSettings(usedWeapon);
+        WeaponSettings weaponSettings = AllConfig.Instance.EquipmentConfig.GetWeaponSettings(usedWeapon);
 
         if (currentTime >= weaponSettings.cooldownTimeInSec)
         {
@@ -56,7 +56,7 @@ public abstract class CWeapon : MonoBehaviour
             {
                 EItemType playerWeapon = GetEquippedWeapon();
 
-                WeaponSettings weaponSettings = AllConfig.Instance.WeaponConfig.GetWeaponSettings(playerWeapon);
+                WeaponSettings weaponSettings = AllConfig.Instance.EquipmentConfig.GetWeaponSettings(playerWeapon);
 
                 health.DamageHealth(weaponSettings.damage);
             }

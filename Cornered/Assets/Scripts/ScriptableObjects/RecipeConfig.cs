@@ -26,7 +26,7 @@ public class RecipeConfig : ScriptableObject
 
     public GameObject recipeShowOperatorPrefab => m_RecipeShowOperatorPrefab;
 
-    public GameObject GetResultItem(IReadOnlyList<ItemTypes> itemTypes)
+    public GameObject GetResultItem(IReadOnlyList<ItemDatas> itemTypes)
     {
         KeyValuePair<EItemType, ItemTypeDetails> item = m_RecipeDict.Where(x => AreListsEqual(itemTypes, x.Value.items)).FirstOrDefault();
         EItemType resultItemType = item.Key;
@@ -55,7 +55,7 @@ public class RecipeConfig : ScriptableObject
             materials.Add(new());
             itemStateMaterials.Add(new());
 
-            foreach (ItemTypes itemTypes in recipe.Value.items)
+            foreach (ItemDatas itemTypes in recipe.Value.items)
             {
                 Material mat = m_IngredientRadiatingMaterialDict[itemTypes.item];
 
@@ -83,7 +83,7 @@ public class RecipeConfig : ScriptableObject
 
     //TODO: placing this into a utils class?
 
-    public static bool AreListsEqual(IReadOnlyList<ItemTypes> list1, IReadOnlyList<ItemTypes> list2)
+    public static bool AreListsEqual(IReadOnlyList<ItemDatas> list1, IReadOnlyList<ItemDatas> list2)
     {
         if (list1 == null || list2 == null)
             return list1 == list2;
@@ -102,16 +102,16 @@ public class RecipeConfig : ScriptableObject
 public class ItemTypeDetails
 {
     public EAbility necessaryAbilityToUse;
-    public List<ItemTypes> items = new();
+    public List<ItemDatas> items = new();
 }
 
 [Serializable]
-public struct ItemTypes
+public class ItemDatas
 {
     public EItemType item;
     public EItemState state;
 
-    public ItemTypes(EItemType itemType, EItemState itemState)
+    public ItemDatas(EItemType itemType, EItemState itemState)
     {
         item = itemType;
         state = itemState;
@@ -122,7 +122,7 @@ public struct ItemTypes
         if (obj == null || GetType() != obj.GetType())
             return false;
 
-        ItemTypes other = (ItemTypes)obj;
+        ItemDatas other = (ItemDatas)obj;
         return item == other.item && state == other.state;
     }
 
@@ -131,6 +131,41 @@ public struct ItemTypes
         int hashItem = item.GetHashCode();
         int hashState = state.GetHashCode();
         return hashItem ^ hashState;
+    }
+
+    public virtual void Equip(CurrentInventory inventory) { }
+}
+
+[Serializable]
+public class WeaponItemDatas: ItemDatas
+{
+    public WeaponItemDatas(EItemType itemType, EItemState itemState) : base(itemType, itemState) { }
+
+    public override void Equip(CurrentInventory inventory)
+    {
+        inventory.weapon = this;
+    }
+}
+
+[Serializable]
+public class ShieldItemDatas : ItemDatas
+{
+    public ShieldItemDatas(EItemType itemType, EItemState itemState) : base(itemType, itemState) { }
+
+    public override void Equip(CurrentInventory inventory)
+    {
+        inventory.shield = this;
+    }
+}
+
+[Serializable]
+public class AdditionalItemDatas : ItemDatas
+{
+    public AdditionalItemDatas(EItemType itemType, EItemState itemState) : base(itemType, itemState) { }
+
+    public override void Equip(CurrentInventory inventory)
+    {
+        inventory.additional = this;
     }
 }
 

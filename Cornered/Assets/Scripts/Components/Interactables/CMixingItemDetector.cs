@@ -6,16 +6,16 @@ public class CMixingItemDetector : MonoBehaviour
 {
     private HashSet<Collider> m_Colliders = new();
 
-    public IReadOnlyList<ItemTypes> GetDetectedItems()
+    public IReadOnlyList<ItemDatas> GetDetectedItems()
     {
-        List<ItemTypes> itemTypes = new();
+        List<ItemDatas> itemTypes = new();
 
         foreach (Collider collider in m_Colliders)
         {
             CIngredient ingredient = collider.GetComponentInParent<CIngredient>();
             if (ingredient != null)
             {
-                itemTypes.Add(new ItemTypes(ingredient.itemType, ingredient.itemState));
+                itemTypes.Add(new ItemDatas(ingredient.itemType, ingredient.itemState));
             }
         }
 

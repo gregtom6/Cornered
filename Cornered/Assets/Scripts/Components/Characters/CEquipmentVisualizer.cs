@@ -13,7 +13,7 @@ public class CEquipmentVisualizer : MonoBehaviour
 
     private Dictionary<EEquipment, List<GameObject>> m_VisualizedEquipmentElements = new();
 
-    public void VisualizeEquipment(ItemTypes itemTypes)
+    public void VisualizeEquipment(ItemDatas itemTypes)
     {
         if (m_VisualizedEquipmentElements.Count == 0)
         {
@@ -26,7 +26,7 @@ public class CEquipmentVisualizer : MonoBehaviour
 
         foreach (Transform transform in transforms)
         {
-            GameObject prefab = AllConfig.Instance.WeaponConfig.GetEquippedPrefab(itemTypes.item);
+            GameObject prefab = AllConfig.Instance.EquipmentConfig.GetEquippedPrefab(itemTypes.item);
             if (prefab != null)
             {
                 GameObject element = Instantiate(prefab, transform);
@@ -73,17 +73,17 @@ public class CEquipmentVisualizer : MonoBehaviour
         List<Transform> transforms = new();
         equipment = EEquipment.Count;
 
-        if (AllConfig.Instance.WeaponConfig.IsWeapon(itemType))
+        if (AllConfig.Instance.EquipmentConfig.IsWeapon(itemType))
         {
             equipment = EEquipment.Weapon;
             transforms.Add(m_WeaponEquipmentParent);
         }
-        else if (AllConfig.Instance.WeaponConfig.IsShield(itemType))
+        else if (AllConfig.Instance.EquipmentConfig.IsShield(itemType))
         {
             equipment = EEquipment.Shield;
             transforms.Add(m_ShieldEquipmentParent);
         }
-        else if (AllConfig.Instance.WeaponConfig.IsAdditional(itemType))
+        else if (AllConfig.Instance.EquipmentConfig.IsAdditional(itemType))
         {
             equipment = EEquipment.Additional;
             transforms.Add(m_AdditionalLeftEquipmentParent);

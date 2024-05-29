@@ -28,7 +28,7 @@ public struct CharacterInitializedEvent
 public struct EquipmentDecidedEvent
 {
     public ECharacterType characterType;
-    public ItemTypes weaponItem;
-    public ItemTypes shieldItem;
-    public ItemTypes additionalItem;
+    public ItemDatas weaponItem;
+    public ItemDatas shieldItem;
+    public ItemDatas additionalItem;
 }

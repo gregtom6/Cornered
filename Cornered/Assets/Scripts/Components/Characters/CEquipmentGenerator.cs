@@ -21,9 +21,9 @@ public class CEquipmentGenerator : MonoBehaviour
 
     private void GenerateEquipment(ECharacterType characterType)
     {
-        ItemTypes weapon = AllConfig.Instance.WeaponConfig.GetRandomWeapon();
-        ItemTypes shield = AllConfig.Instance.WeaponConfig.GetRandomShield();
-        ItemTypes additional = AllConfig.Instance.WeaponConfig.GetRandomAdditional();
+        ItemDatas weapon = AllConfig.Instance.EquipmentConfig.GetRandomWeapon();
+        ItemDatas shield = AllConfig.Instance.EquipmentConfig.GetRandomShield();
+        ItemDatas additional = AllConfig.Instance.EquipmentConfig.GetRandomAdditional();
 
         EventManager.Raise(new EquipmentDecidedEvent { characterType = characterType, weaponItem = weapon, shieldItem = shield, additionalItem = additional });
     }

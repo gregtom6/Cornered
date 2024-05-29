@@ -4,73 +4,45 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    public ItemTypes currentPlayerWeapon => m_CharacterInventories[ECharacterType.Player].weapon;
+    public ItemDatas currentPlayerWeapon => m_CharacterInventories[ECharacterType.Player].weapon;
 
-    public ItemTypes currentPlayerAdditional => m_CharacterInventories[ECharacterType.Player].additional;
+    public ItemDatas currentPlayerAdditional => m_CharacterInventories[ECharacterType.Player].additional;
 
-    public ItemTypes currentEnemyWeapon => m_CharacterInventories[ECharacterType.Enemy].weapon;
+    public ItemDatas currentEnemyWeapon => m_CharacterInventories[ECharacterType.Enemy].weapon;
 
-    public ItemTypes currentEnemyShield => m_CharacterInventories[ECharacterType.Enemy].shield;
+    public ItemDatas currentEnemyShield => m_CharacterInventories[ECharacterType.Enemy].shield;
 
     private Dictionary<ECharacterType, CurrentInventory> m_CharacterInventories = new();
 
     public static InventoryManager instance;
 
-    public void EquipItem(ECharacterType type, ItemTypes itemTypes)
+    public void EquipItem(ECharacterType type, ItemDatas itemTypes)
     {
-        if (AllConfig.Instance.WeaponConfig.IsWeapon(itemTypes.item))
-        {
-            EquipWeaponType(type, itemTypes);
-        }
-        else if (AllConfig.Instance.WeaponConfig.IsShield(itemTypes.item))
-        {
-            EquipShieldType(type, itemTypes);
-        }
-        else if (AllConfig.Instance.WeaponConfig.IsAdditional(itemTypes.item))
-        {
-            EquipAdditionalType(type, itemTypes);
-        }
-    }
+        CurrentInventory currentInventory = m_CharacterInventories[type];
 
-    private void EquipWeaponType(ECharacterType characterType, ItemTypes itemTypes)
-    {
-        CurrentInventory currentInventory = m_CharacterInventories[characterType];
-        currentInventory.weapon = itemTypes;
-        m_CharacterInventories[characterType] = currentInventory;
-    }
+        itemTypes.Equip(currentInventory);
 
-    private void EquipShieldType(ECharacterType characterType, ItemTypes itemTypes)
-    {
-        CurrentInventory currentInventory = m_CharacterInventories[characterType];
-        currentInventory.shield = itemTypes;
-        m_CharacterInventories[characterType] = currentInventory;
-    }
-
-    private void EquipAdditionalType(ECharacterType characterType, ItemTypes itemTypes)
-    {
-        CurrentInventory currentInventory = m_CharacterInventories[characterType];
-        currentInventory.additional = itemTypes;
-        m_CharacterInventories[characterType] = currentInventory;
+        m_CharacterInventories[type] = currentInventory;
     }
 
     private void Awake()
     {
         instance = this;
 
-        ItemTypes emptyItemTypes = new ItemTypes(EItemType.Count, EItemState.Count);
+        ItemDatas emptyItemTypes = new ItemDatas(EItemType.Count, EItemState.Count);
 
         m_CharacterInventories.Add(ECharacterType.Player, new CurrentInventory(emptyItemTypes, emptyItemTypes, emptyItemTypes));
         m_CharacterInventories.Add(ECharacterType.Enemy, new CurrentInventory(emptyItemTypes, emptyItemTypes, emptyItemTypes));
     }
 }
 
-public struct CurrentInventory
+public class CurrentInventory
 {
-    public ItemTypes weapon;
-    public ItemTypes shield;
-    public ItemTypes additional;
+    public ItemDatas weapon;
+    public ItemDatas shield;
+    public ItemDatas additional;
 
-    public CurrentInventory(ItemTypes weapon, ItemTypes shield, ItemTypes additional)
+    public CurrentInventory(ItemDatas weapon, ItemDatas shield, ItemDatas additional)
     {
         this.weapon = weapon;
         this.shield = shield;
