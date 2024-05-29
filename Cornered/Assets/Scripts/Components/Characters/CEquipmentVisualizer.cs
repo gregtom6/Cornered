@@ -4,18 +4,18 @@
 /// Creation Date: 18.05.2024.
 /// </summary>
 
+using RotaryHeart.Lib.SerializableDictionary;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using static UnityEditor.Rendering.FilterWindow;
 
 public class CEquipmentVisualizer : MonoBehaviour
 {
     [SerializeField] private CProjectileVisualizer m_ProjectileVisualizer;
-    [SerializeField] private Transform m_ShieldEquipmentParent;
-    [SerializeField] private Transform m_WeaponEquipmentParent;
-    [SerializeField] private Transform m_AdditionalLeftEquipmentParent;
-    [SerializeField] private Transform m_AdditionalRightEquipmentParent;
+    [SerializeField] private EquipmentAndItsTransformsDict m_EquipmentTransforms;
 
     private Dictionary<EEquipment, List<GameObject>> m_VisualizedEquipmentElements = new();
 
@@ -26,11 +26,11 @@ public class CEquipmentVisualizer : MonoBehaviour
             InitializeDictionary();
         }
 
-        List<Transform> transforms = GetUsedTransform(itemTypes.item, out EEquipment equipmentToBeReplaced);
+        TransformHolder transforms = GetUsedTransform(itemTypes.item, out EEquipment equipmentToBeReplaced);
 
         DestroyPreviouslyVisualizedElements(equipmentToBeReplaced);
 
-        foreach (Transform transform in transforms)
+        foreach (Transform transform in transforms.transforms)
         {
             GameObject prefab = AllConfig.Instance.EquipmentConfig.GetEquippedPrefab(itemTypes.item);
             if (prefab != null)
@@ -74,28 +74,19 @@ public class CEquipmentVisualizer : MonoBehaviour
         m_VisualizedEquipmentElements[equipment].Clear();
     }
 
-    private List<Transform> GetUsedTransform(EItemType itemType, out EEquipment equipment)
+    private TransformHolder GetUsedTransform(EItemType itemType, out EEquipment equipment)
     {
-        List<Transform> transforms = new();
-        equipment = EEquipment.Count;
+        equipment = AllConfig.Instance.EquipmentConfig.GetEquipmentTypeBasedOnItemType(itemType);
 
-        if (AllConfig.Instance.EquipmentConfig.IsWeapon(itemType))
-        {
-            equipment = EEquipment.Weapon;
-            transforms.Add(m_WeaponEquipmentParent);
-        }
-        else if (AllConfig.Instance.EquipmentConfig.IsShield(itemType))
-        {
-            equipment = EEquipment.Shield;
-            transforms.Add(m_ShieldEquipmentParent);
-        }
-        else if (AllConfig.Instance.EquipmentConfig.IsAdditional(itemType))
-        {
-            equipment = EEquipment.Additional;
-            transforms.Add(m_AdditionalLeftEquipmentParent);
-            transforms.Add(m_AdditionalRightEquipmentParent);
-        }
-
-        return transforms;
+        return m_EquipmentTransforms[equipment];
     }
 }
+
+[Serializable]
+public struct TransformHolder
+{
+    public List<Transform> transforms;
+}
+
+[System.Serializable]
+public class EquipmentAndItsTransformsDict : SerializableDictionaryBase<EEquipment, TransformHolder> { }

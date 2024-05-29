@@ -1589,10 +1589,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ProjectileVisualizer: {fileID: 7650483262289167305}
-  m_ShieldEquipmentParent: {fileID: 1814974696475830172}
-  m_WeaponEquipmentParent: {fileID: 3185772089960653254}
-  m_AdditionalLeftEquipmentParent: {fileID: 0}
-  m_AdditionalRightEquipmentParent: {fileID: 0}
+  m_EquipmentTransforms:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues: 010000000000000002000000
+    _keys: 010000000000000002000000
+    _values:
+    - transforms:
+      - {fileID: 1814974696475830172}
+    - transforms:
+      - {fileID: 3185772089960653254}
+    - transforms: []
 --- !u!114 &191498337766231172
 MonoBehaviour:
   m_ObjectHideFlags: 0

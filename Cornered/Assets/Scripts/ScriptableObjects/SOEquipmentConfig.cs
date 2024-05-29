@@ -24,50 +24,23 @@ public class SOEquipmentConfig : ScriptableObject
     [SerializeField] private AdditionalSettingsDict m_AdditionalSettingsDict;
     [SerializeField] private EquippedPrefabDict m_EquippedPrefabDict;
 
-    public ItemDatas GetRandomWeapon()
-    {
-        return m_Weapons.GetRandom();
-    }
+    public ItemDatas GetRandomWeapon() => m_Weapons.GetRandom();
 
-    public ItemDatas GetRandomShield()
-    {
-        return m_Shields.GetRandom();
-    }
+    public ItemDatas GetRandomShield() => m_Shields.GetRandom();
 
-    public ItemDatas GetRandomAdditional()
-    {
-        return m_Additionals.GetRandom();
-    }
+    public ItemDatas GetRandomAdditional() => m_Additionals.GetRandom();
 
-    public bool IsWeapon(EItemType eItemType)
-    {
-        return m_Weapons.Any(x => x.item == eItemType);
-    }
+    public bool IsWeapon(EItemType eItemType) => m_Weapons.Any(x => x.item == eItemType);
 
-    public bool IsShield(EItemType eItemType)
-    {
-        return m_Shields.Any(x => x.item == eItemType);
-    }
+    public bool IsShield(EItemType eItemType) => m_Shields.Any(x => x.item == eItemType);
 
-    public bool IsAdditional(EItemType eItemType)
-    {
-        return m_Additionals.Any(x => x.item == eItemType);
-    }
+    public bool IsAdditional(EItemType eItemType) => m_Additionals.Any(x => x.item == eItemType);
 
-    public WeaponSettings GetWeaponSettings(EItemType itemType)
-    {
-        return m_WeaponSettingsDict[itemType];
-    }
+    public WeaponSettings GetWeaponSettings(EItemType itemType) => m_WeaponSettingsDict[itemType];
 
-    public ShieldSettings GetShieldSettings(EItemType itemType)
-    {
-        return m_ShieldSettingsDict[itemType];
-    }
+    public ShieldSettings GetShieldSettings(EItemType itemType) => m_ShieldSettingsDict[itemType];
 
-    public AdditionalSettings GetAdditionalSettings(EItemType itemType)
-    {
-        return m_AdditionalSettingsDict[itemType];
-    }
+    public AdditionalSettings GetAdditionalSettings(EItemType itemType)  => m_AdditionalSettingsDict[itemType];
 
     public GameObject GetEquippedPrefab(EItemType itemType)
     {
@@ -77,6 +50,24 @@ public class SOEquipmentConfig : ScriptableObject
         }
 
         return null;
+    }
+
+    public EEquipment GetEquipmentTypeBasedOnItemType(EItemType itemType)
+    {
+        if (AllConfig.Instance.EquipmentConfig.IsWeapon(itemType))
+        {
+            return EEquipment.Weapon;
+        }
+        else if (AllConfig.Instance.EquipmentConfig.IsShield(itemType))
+        {
+            return EEquipment.Shield;
+        }
+        else if (AllConfig.Instance.EquipmentConfig.IsAdditional(itemType))
+        {
+            return EEquipment.Additional;
+        }
+
+        return EEquipment.Count;
     }
 }
 
