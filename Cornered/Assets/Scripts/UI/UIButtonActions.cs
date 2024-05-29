@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIGameWin : MonoBehaviour
+public class UIButtonActions : MonoBehaviour
 {
     public void OnResetAndRestartButtonPressed()
     {

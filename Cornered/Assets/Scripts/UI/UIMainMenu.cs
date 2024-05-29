@@ -42,11 +42,6 @@ public class UIMainMenu : MonoBehaviour
         m_ControlsPanel.SetActive(false);
     }
 
-    public void OnQuitButton()
-    {
-        Application.Quit();
-    }
-
     private void Start()
     {
         m_MainPanel.SetActive(true);
