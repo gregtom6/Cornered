@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class InventoryManager : MonoBehaviour
 {
-    public ItemDatas currentPlayerWeapon => m_CharacterInventories[ECharacterType.Player].weapon;
-
-    public ItemDatas currentPlayerAdditional => m_CharacterInventories[ECharacterType.Player].additional;
-
-    public ItemDatas currentEnemyWeapon => m_CharacterInventories[ECharacterType.Enemy].weapon;
-
-    public ItemDatas currentEnemyShield => m_CharacterInventories[ECharacterType.Enemy].shield;
+    public CurrentInventory GetCopyOfCurrentInventory(ECharacterType characterType)
+    {
+        return characterType == ECharacterType.Player ? m_CharacterInventories[ECharacterType.Player].Copy() : m_CharacterInventories[ECharacterType.Enemy].Copy();
+    }
 
     private Dictionary<ECharacterType, CurrentInventory> m_CharacterInventories = new();
 
@@ -47,5 +45,10 @@ public class CurrentInventory
         this.weapon = weapon;
         this.shield = shield;
         this.additional = additional;
+    }
+
+    public CurrentInventory Copy()
+    {
+        return new CurrentInventory(weapon, shield, additional);
     }
 }

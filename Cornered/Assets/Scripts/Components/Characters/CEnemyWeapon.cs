@@ -11,7 +11,9 @@ public class CEnemyWeapon : CWeapon
 
     protected override EItemType GetEquippedWeapon()
     {
-        return InventoryManager.instance.currentEnemyWeapon.item;
+        CurrentInventory currentInventory = InventoryManager.instance.GetCopyOfCurrentInventory(ECharacterType.Enemy);
+
+        return currentInventory.weapon.item;
     }
 
     private void Update()

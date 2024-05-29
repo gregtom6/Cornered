@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CCharacterAnimator : MonoBehaviour
+public class CCharacterAnimator : MonoBehaviour
 {
-    protected readonly int ANIM_PARAM_LEGSTATE = Animator.StringToHash("legState");
-    protected readonly int ANIM_PARAM_ARMWEAPON = Animator.StringToHash("useWeapon");
+    private readonly int ANIM_PARAM_LEGSTATE = Animator.StringToHash("legState");
+    private readonly int ANIM_PARAM_ARMWEAPON = Animator.StringToHash("useWeapon");
 
-    [SerializeField] protected Animator m_Animator;
-    protected CCharacterController m_CharacterController;
+    [SerializeField] private Animator m_Animator;
+    private CCharacterController m_CharacterController;
+    private CWeapon m_Weapon;
 
-    protected void Start()
+    private void Start()
     {
         m_CharacterController = GetComponent<CCharacterController>();
+        m_Weapon = GetComponent<CWeapon>();
     }
 
-    protected virtual void Update()
+    private void Update()
     {
         m_Animator.SetInteger(ANIM_PARAM_LEGSTATE, (int)m_CharacterController.characterMovementState);
+        m_Animator.SetBool(ANIM_PARAM_ARMWEAPON, m_Weapon.IsThereEquippedWeapon());
     }
 }

@@ -41,7 +41,9 @@ public class CPlayerController : CCharacterController
 
     private float GetAdditionalMultiplier()
     {
-        return InventoryManager.instance.currentPlayerAdditional.item == EItemType.FastBoots ? AllConfig.Instance.CharacterConfig.fastBootsSpeedMultiplier : 1f;
+        CurrentInventory currentInventory = InventoryManager.instance.GetCopyOfCurrentInventory(ECharacterType.Player);
+
+        return currentInventory.additional.item == EItemType.FastBoots ? AllConfig.Instance.CharacterConfig.fastBootsSpeedMultiplier : 1f;
     }
     private void OnEnable()
     {
