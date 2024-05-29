@@ -1,6 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+/// <summary>
+/// Filename: IHoldable.cs
+/// Author: Tamas Gregus
+/// Creation Date: 18.05.2024.
+/// </summary>
 
 public interface IHoldable
 {

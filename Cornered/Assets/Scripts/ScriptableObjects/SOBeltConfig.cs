@@ -1,10 +1,16 @@
+/// <summary>
+/// Filename: SOBeltConfig.cs
+/// Author: Tamas Gregus
+/// Creation Date: 18.05.2024.
+/// </summary>
+
 using RotaryHeart.Lib.SerializableDictionary;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Belt Config")]
-public class BeltConfig : ScriptableObject
+public class SOBeltConfig : ScriptableObject
 {
     [SerializeField] private CBeltElement m_BeltElementPrefab;
     [SerializeField] private float m_NormalMultiplier;

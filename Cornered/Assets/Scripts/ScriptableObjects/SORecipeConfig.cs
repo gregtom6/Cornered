@@ -1,3 +1,9 @@
+/// <summary>
+/// Filename: SORecipeConfig.cs
+/// Author: Tamas Gregus
+/// Creation Date: 18.05.2024.
+/// </summary>
+
 using JetBrains.Annotations;
 using RotaryHeart.Lib.SerializableDictionary;
 using System;
@@ -8,7 +14,7 @@ using Unity.VisualScripting.FullSerializer.Internal.Converters;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Recipe Config")]
-public class RecipeConfig : ScriptableObject
+public class SORecipeConfig : ScriptableObject
 {
     [SerializeField] private Material m_RecipeShowPlusMaterial;
     [SerializeField] private Material m_RecipeShowEqualMaterial;

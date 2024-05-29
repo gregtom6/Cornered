@@ -1,5 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+/// <summary>
+/// Filename: IPickable.cs
+/// Author: Tamas Gregus
+/// Creation Date: 18.05.2024.
+/// </summary>
+
 using UnityEngine;
 
 public interface IPickable

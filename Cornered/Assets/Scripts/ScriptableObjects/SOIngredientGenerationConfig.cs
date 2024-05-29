@@ -1,3 +1,9 @@
+/// <summary>
+/// Filename: SOIngredientGenerationConfig.cs
+/// Author: Tamas Gregus
+/// Creation Date: 18.05.2024.
+/// </summary>
+
 using JetBrains.Annotations;
 using RotaryHeart.Lib.SerializableDictionary;
 using System;
@@ -6,7 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Ingredient Generation Config")]
-public class IngredientGenerationConfig : ScriptableObject
+public class SOIngredientGenerationConfig : ScriptableObject
 {
     [SerializeField] private IngredientGenerationDict m_IngredientGenerationDict;
 

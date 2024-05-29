@@ -1,48 +1,54 @@
+/// <summary>
+/// Filename: AllConfig.cs
+/// Author: Tamas Gregus
+/// Creation Date: 18.05.2024.
+/// </summary>
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AllConfig : MonoBehaviour
 {
-    [SerializeField] private CharacterConfig m_CharacterConfig;
-    [SerializeField] private BeltConfig m_BeltConfig;
-    [SerializeField] private IngredientGenerationConfig m_IngredientGenerationConfig;
-    [SerializeField] private RecipeConfig m_RecipeConfig;
-    [SerializeField] private TimeConfig m_TimeConfig;
-    [SerializeField] private HintConfig m_HintConfig;
-    [SerializeField] private EquipmentConfig m_EquipmentConfig;
-    [SerializeField] private AIConfig m_AIConfig;
-    [SerializeField] private MixingMachineConfig m_MixingMachineConfig;
-    [SerializeField] private ProgressConfig m_ProgressConfig;
-    [SerializeField] private ExitDoorConfig m_ExitDoorConfig;
-    [SerializeField] private TutorialConfig m_TutorialConfig;
-    [SerializeField] private ControlsConfig m_ControlsConfig;
+    [SerializeField] private SOCharacterConfig m_CharacterConfig;
+    [SerializeField] private SOBeltConfig m_BeltConfig;
+    [SerializeField] private SOIngredientGenerationConfig m_IngredientGenerationConfig;
+    [SerializeField] private SORecipeConfig m_RecipeConfig;
+    [SerializeField] private SOTimeConfig m_TimeConfig;
+    [SerializeField] private SOHintConfig m_HintConfig;
+    [SerializeField] private SOEquipmentConfig m_EquipmentConfig;
+    [SerializeField] private SOAIConfig m_AIConfig;
+    [SerializeField] private SOMixingMachineConfig m_MixingMachineConfig;
+    [SerializeField] private SOProgressConfig m_ProgressConfig;
+    [SerializeField] private SOExitDoorConfig m_ExitDoorConfig;
+    [SerializeField] private SOTutorialConfig m_TutorialConfig;
+    [SerializeField] private SOControlsConfig m_ControlsConfig;
 
-    public CharacterConfig CharacterConfig => m_CharacterConfig;
+    public SOCharacterConfig CharacterConfig => m_CharacterConfig;
 
-    public BeltConfig beltConfig => m_BeltConfig;
+    public SOBeltConfig beltConfig => m_BeltConfig;
 
-    public IngredientGenerationConfig IngredientGenerationConfig => m_IngredientGenerationConfig;
+    public SOIngredientGenerationConfig IngredientGenerationConfig => m_IngredientGenerationConfig;
 
-    public RecipeConfig RecipeConfig => m_RecipeConfig;
+    public SORecipeConfig RecipeConfig => m_RecipeConfig;
 
-    public TimeConfig TimeConfig => m_TimeConfig;
+    public SOTimeConfig TimeConfig => m_TimeConfig;
 
-    public HintConfig HintConfig => m_HintConfig;
+    public SOHintConfig HintConfig => m_HintConfig;
 
-    public EquipmentConfig EquipmentConfig => m_EquipmentConfig;
+    public SOEquipmentConfig EquipmentConfig => m_EquipmentConfig;
 
-    public AIConfig AIConfig => m_AIConfig;
+    public SOAIConfig AIConfig => m_AIConfig;
 
-    public ProgressConfig ProgressConfig => m_ProgressConfig;
+    public SOProgressConfig ProgressConfig => m_ProgressConfig;
 
-    public MixingMachineConfig MixingMachineConfig => m_MixingMachineConfig;
+    public SOMixingMachineConfig MixingMachineConfig => m_MixingMachineConfig;
 
-    public ExitDoorConfig ExitDoorConfig => m_ExitDoorConfig;
+    public SOExitDoorConfig ExitDoorConfig => m_ExitDoorConfig;
 
-    public TutorialConfig TutorialConfig => m_TutorialConfig;
+    public SOTutorialConfig TutorialConfig => m_TutorialConfig;
 
-    public ControlsConfig ControlsConfig => m_ControlsConfig;
+    public SOControlsConfig ControlsConfig => m_ControlsConfig;
 
     public static AllConfig Instance;
 

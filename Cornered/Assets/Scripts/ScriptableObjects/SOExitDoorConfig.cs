@@ -1,9 +1,15 @@
+/// <summary>
+/// Filename: SOExitDoorConfig.cs
+/// Author: Tamas Gregus
+/// Creation Date: 18.05.2024.
+/// </summary>
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Exit Door Config")]
-public class ExitDoorConfig : ScriptableObject
+public class SOExitDoorConfig : ScriptableObject
 {
     [SerializeField] private float m_ButtonHoldingOpenMultiplier;
     [SerializeField] private float m_MinPercentage;

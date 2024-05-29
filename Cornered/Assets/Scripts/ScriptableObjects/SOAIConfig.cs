@@ -1,9 +1,15 @@
+/// <summary>
+/// Filename: SOAIConfig.cs
+/// Author: Tamas Gregus
+/// Creation Date: 18.05.2024.
+/// </summary>
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AI Config")]
-public class AIConfig : ScriptableObject
+public class SOAIConfig : ScriptableObject
 {
     [SerializeField] private float m_HideWhenLifeLessThanPercentage;
     [SerializeField] private float m_AttackWhenLifeMoreThanPercentage;

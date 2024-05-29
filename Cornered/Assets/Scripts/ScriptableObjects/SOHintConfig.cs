@@ -1,10 +1,16 @@
+/// <summary>
+/// Filename: SOHintConfig.cs
+/// Author: Tamas Gregus
+/// Creation Date: 18.05.2024.
+/// </summary>
+
 using RotaryHeart.Lib.SerializableDictionary;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Hint Config")]
-public class HintConfig : ScriptableObject
+public class SOHintConfig : ScriptableObject
 {
     [SerializeField] private ItemHintMaterialDict m_ItemHintMaterialDict;
 

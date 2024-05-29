@@ -1,9 +1,15 @@
+/// <summary>
+/// Filename: SOCharacterConfig.cs
+/// Author: Tamas Gregus
+/// Creation Date: 18.05.2024.
+/// </summary>
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CharacterConfig")]
-public class CharacterConfig : ScriptableObject
+public class SOCharacterConfig : ScriptableObject
 {
     [SerializeField] private float m_RunSpeed;
     [SerializeField] private float m_EnemyRunSpeed;

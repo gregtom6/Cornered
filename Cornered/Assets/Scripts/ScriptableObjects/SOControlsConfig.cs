@@ -1,10 +1,16 @@
+/// <summary>
+/// Filename: SOControlsConfig.cs
+/// Author: Tamas Gregus
+/// Creation Date: 18.05.2024.
+/// </summary>
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Controls Config")]
-public class ControlsConfig : ScriptableObject
+public class SOControlsConfig : ScriptableObject
 {
     [SerializeField] private List<ControlsPageDatas> m_ControlsPageDatas = new();
 
@@ -17,7 +23,7 @@ public class ControlsConfig : ScriptableObject
             return m_ControlsPageDatas[index];
         }
 
-        return default(ControlsPageDatas);
+        return default;
     }
 }
 

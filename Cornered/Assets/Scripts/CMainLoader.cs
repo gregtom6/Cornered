@@ -1,3 +1,15 @@
+/// <summary>
+/// Filename: CMainLoader.cs
+/// Author: Tamas Gregus
+/// Creation Date: 18.05.2024.
+/// </summary>
+
+/// <summary>
+/// Input: New Input System
+/// Render Pipeline: Universal RP
+/// Unity: 2022.2.17f1
+/// </summary>
+
 using System;
 using System.Collections;
 using System.Collections.Generic;

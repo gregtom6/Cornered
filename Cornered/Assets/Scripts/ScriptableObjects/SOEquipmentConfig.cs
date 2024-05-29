@@ -1,3 +1,9 @@
+/// <summary>
+/// Filename: SOEquipmentConfig.cs
+/// Author: Tamas Gregus
+/// Creation Date: 18.05.2024.
+/// </summary>
+
 using JetBrains.Annotations;
 using RotaryHeart.Lib.SerializableDictionary;
 using System;
@@ -7,7 +13,7 @@ using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Equipment Config")]
-public class EquipmentConfig : ScriptableObject
+public class SOEquipmentConfig : ScriptableObject
 {
     [SerializeField] private List<WeaponItemDatas> m_Weapons = new();
     [SerializeField] private List<ShieldItemDatas> m_Shields = new();

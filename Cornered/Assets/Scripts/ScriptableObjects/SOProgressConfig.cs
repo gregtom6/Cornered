@@ -1,3 +1,9 @@
+/// <summary>
+/// Filename: SOProgressConfig.cs
+/// Author: Tamas Gregus
+/// Creation Date: 18.05.2024.
+/// </summary>
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +12,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Progress Config")]
-public class ProgressConfig : ScriptableObject
+public class SOProgressConfig : ScriptableObject
 {
     [SerializeField] private List<UnlockableAbilities> m_AbilitiesToUnlockPerLevel = new();
     public int maxUnlockLevel => m_AbilitiesToUnlockPerLevel.Count;
