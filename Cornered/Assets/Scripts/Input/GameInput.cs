@@ -50,33 +50,6 @@ public class GameInput : ScriptableObject, GameInputActions.IGameplayActions
             LeftRight?.Invoke(0f);
         }
     }
-
-    private void EnableGameplayInput()
-    {
-        m_InputActions.Gameplay.Enable();
-    }
-
-    private void DisableGameplayInput()
-    {
-        m_InputActions.Gameplay.Disable();
-    }
-
-    private void OnEnable()
-    {
-        if (m_InputActions == null)
-        {
-            m_InputActions = new GameInputActions();
-            m_InputActions.Gameplay.SetCallbacks(this);
-        }
-
-        EnableGameplayInput();
-    }
-
-    private void OnDisable()
-    {
-        DisableGameplayInput();
-    }
-
     public void OnPointerPosition(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -128,4 +101,31 @@ public class GameInput : ScriptableObject, GameInputActions.IGameplayActions
                 break;
         }
     }
+
+    private void EnableGameplayInput()
+    {
+        m_InputActions.Gameplay.Enable();
+    }
+
+    private void DisableGameplayInput()
+    {
+        m_InputActions.Gameplay.Disable();
+    }
+
+    private void OnEnable()
+    {
+        if (m_InputActions == null)
+        {
+            m_InputActions = new GameInputActions();
+            m_InputActions.Gameplay.SetCallbacks(this);
+        }
+
+        EnableGameplayInput();
+    }
+
+    private void OnDisable()
+    {
+        DisableGameplayInput();
+    }
+
 }

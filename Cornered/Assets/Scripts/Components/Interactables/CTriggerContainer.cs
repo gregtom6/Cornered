@@ -11,11 +11,10 @@ using UnityEngine;
 
 public class CTriggerContainer : MonoBehaviour
 {
-    private HashSet<Collider> m_Colliders = new();
-
     public Action<Transform> objectEntered;
-
     public Action allObjectLeft;
+
+    private HashSet<Collider> m_Colliders = new();
 
     private void OnTriggerEnter(Collider other)
     {

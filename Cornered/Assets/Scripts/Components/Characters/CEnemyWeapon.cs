@@ -10,11 +10,6 @@ using UnityEngine;
 
 public class CEnemyWeapon : CWeapon
 {
-    public override bool IsThereEquippedWeapon()
-    {
-        return GetEquippedWeapon() != EItemType.Count;
-    }
-
     protected override EItemType GetEquippedWeapon()
     {
         CurrentInventory currentInventory = InventoryManager.instance.GetCopyOfCurrentInventory(ECharacterType.Enemy);

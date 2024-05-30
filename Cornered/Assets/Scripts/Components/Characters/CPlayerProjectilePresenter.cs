@@ -8,6 +8,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
+[RequireComponent(typeof(Animator))]
 public class CPlayerProjectilePresenter : CProjectileVisualizer
 {
     [SerializeField] protected Transform m_HeadTransform;

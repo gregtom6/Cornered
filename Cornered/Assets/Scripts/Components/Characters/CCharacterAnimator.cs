@@ -8,6 +8,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CCharacterController))]
+[RequireComponent(typeof(CWeapon))]
 public class CCharacterAnimator : MonoBehaviour
 {
     private readonly int ANIM_PARAM_LEGSTATE = Animator.StringToHash("legState");

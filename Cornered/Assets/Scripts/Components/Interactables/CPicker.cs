@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[RequireComponent(typeof(CInteractableDetector))]
 public class CPicker : MonoBehaviour
 {
     [SerializeField] private GameInput m_GameInput;

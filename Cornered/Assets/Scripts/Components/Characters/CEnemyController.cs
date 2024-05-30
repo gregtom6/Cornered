@@ -13,6 +13,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(CWeapon))]
 public partial class CEnemyController : CCharacterController
 {
     [SerializeField] private CHealth m_EnemyHealth;
@@ -22,9 +23,7 @@ public partial class CEnemyController : CCharacterController
     [SerializeField] private LayerMask m_PillarLayerMask;
 
     private CWeapon m_AIWeapon;
-
     private NavMeshAgent m_NavMeshAgent;
-
     private EEnemyState state = EEnemyState.Waiting;
 
     private void OnEnable()
@@ -58,6 +57,14 @@ public partial class CEnemyController : CCharacterController
 
         m_HeadTransform.LookAt(CCharacterManager.instance.playerPosition);
 
+        ProcessCurrentState();
+        SwitchStateIfNeeded();
+
+        movementState = m_NavMeshAgent.velocity.magnitude <= 1f ? EMovementState.Standing : EMovementState.Walking;
+    }
+
+    private void ProcessCurrentState()
+    {
         if (state == EEnemyState.DefendPosition)
         {
             HideSpotFinder hideSpotFinder = new HideSpotFinder(m_MovementTargetPoint, transform, m_PlayerPillarLayerMask, m_PillarLayerMask);
@@ -68,8 +75,10 @@ public partial class CEnemyController : CCharacterController
         {
             m_NavMeshAgent.destination = CCharacterManager.instance.playerPosition;
         }
+    }
 
-
+    private void SwitchStateIfNeeded()
+    {
         if (state == EEnemyState.DefendPosition)
         {
             if ((m_EnemyHealth.currentHealth / AllConfig.Instance.CharacterConfig.enemyMaxHealth) * 100f >= AllConfig.Instance.AIConfig.attackWhenLifeMoreThanPercentage && m_AIWeapon.isReadyToShoot)
@@ -84,8 +93,6 @@ public partial class CEnemyController : CCharacterController
                 state = EEnemyState.DefendPosition;
             }
         }
-
-        movementState = m_NavMeshAgent.velocity.magnitude <= 1f ? EMovementState.Standing : EMovementState.Walking;
     }
 
     private void OnDrawGizmos()

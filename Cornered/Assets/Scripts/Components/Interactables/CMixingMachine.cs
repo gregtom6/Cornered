@@ -58,21 +58,24 @@ public class CMixingMachine : MonoBehaviour
     {
         m_FreezeParticleSystem.Play();
         m_State = EMixingMachineState.Freezing;
-        m_ProcessStartTime = Time.time;
-        m_TopLidAnimator.SetBool(ANIM_PARAM_CLOSE, true);
+        StartingProcess();
     }
 
     private void BurnButtonPressed()
     {
         m_BurnParticleSystem.Play();
         m_State = EMixingMachineState.Heating;
-        m_ProcessStartTime = Time.time;
-        m_TopLidAnimator.SetBool(ANIM_PARAM_CLOSE, true);
+        StartingProcess();
     }
 
     private void ConvertButtonPressed()
     {
         m_State = EMixingMachineState.Mixing;
+        StartingProcess();
+    }
+
+    private void StartingProcess()
+    {
         m_ProcessStartTime = Time.time;
         m_TopLidAnimator.SetBool(ANIM_PARAM_CLOSE, true);
     }

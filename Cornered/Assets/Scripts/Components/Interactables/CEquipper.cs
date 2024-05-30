@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CPicker))]
 public class CEquipper : MonoBehaviour
 {
     [SerializeField] private GameInput m_GameInput;

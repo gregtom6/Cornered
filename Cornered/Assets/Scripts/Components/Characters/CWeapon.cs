@@ -29,7 +29,10 @@ public abstract class CWeapon : MonoBehaviour
         return Mathf.Clamp01(currentTime / weaponSettings.cooldownTimeInSec);
     }
 
-    public abstract bool IsThereEquippedWeapon();
+    public bool IsThereEquippedWeapon()
+    {
+        return GetEquippedWeapon() != EItemType.Count;
+    }
 
     protected void SetReadyToShootAfterCooldownHappened(EItemType usedWeapon)
     {

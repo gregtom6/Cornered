@@ -12,7 +12,7 @@ using UnityEngine.SceneManagement;
 
 public class SettingsManager : MonoBehaviour
 {
-    [SerializeField] private List<string> m_MenuScenes = new List<string>();
+    [SerializeField] private List<string> m_MenuScenes = new();
 
     public static SettingsManager Instance;
 
@@ -34,16 +34,13 @@ public class SettingsManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        if (m_MenuScenes.Any(x => x == arg0.name))
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = false;
-        }
+        Cursor.lockState = IsItMenuScene(arg0) ? CursorLockMode.None : CursorLockMode.Confined;
+        Cursor.visible = IsItMenuScene(arg0);
+    }
+
+    private bool IsItMenuScene(Scene arg0)
+    {
+        return m_MenuScenes.Any(x => x == arg0.name);
     }
 
     private void Awake()

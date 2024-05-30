@@ -13,11 +13,6 @@ public class CPlayerWeapon : CWeapon
 {
     [SerializeField] private GameInput m_GameInput;
 
-    public override bool IsThereEquippedWeapon()
-    {
-        return GetEquippedWeapon() != EItemType.Count;
-    }
-
     protected override EItemType GetEquippedWeapon()
     {
         CurrentInventory currentInventory = InventoryManager.instance.GetCopyOfCurrentInventory(ECharacterType.Player);

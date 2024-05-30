@@ -26,10 +26,9 @@ public abstract class CHealth : MonoBehaviour
             EventManager.Raise(new CharacterDefeatedEvent { characterType = GetCharacterType() });
         }
     }
+    public abstract float GetMaxHealth();
 
     protected abstract ECharacterType GetCharacterType();
-
-    public abstract float GetMaxHealth();
 
     protected abstract float GetReloadWaitingMaxTime();
 

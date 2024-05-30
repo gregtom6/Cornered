@@ -11,14 +11,13 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class InventoryManager : MonoBehaviour
 {
+    public static InventoryManager instance;
+
+    private Dictionary<ECharacterType, CurrentInventory> m_CharacterInventories = new();
     public CurrentInventory GetCopyOfCurrentInventory(ECharacterType characterType)
     {
         return characterType == ECharacterType.Player ? m_CharacterInventories[ECharacterType.Player].Copy() : m_CharacterInventories[ECharacterType.Enemy].Copy();
     }
-
-    private Dictionary<ECharacterType, CurrentInventory> m_CharacterInventories = new();
-
-    public static InventoryManager instance;
 
     public void EquipItem(ECharacterType type, ItemDatas itemTypes)
     {

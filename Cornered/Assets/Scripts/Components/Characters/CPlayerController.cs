@@ -31,14 +31,14 @@ public class CPlayerController : CCharacterController
         m_Rot.y = m_Rot.y < AllConfig.Instance.CharacterConfig.headMinRotX ? AllConfig.Instance.CharacterConfig.headMinRotX : m_Rot.y;
     }
 
-    private void OnLeftRightMovement(float obj)
+    private void OnLeftRight(float obj)
     {
         m_Movement.x = obj * (AllConfig.Instance.CharacterConfig.runSpeed / 100f) * GetAdditionalMultiplier();
 
         movementState = EMovementState.Strafing;
     }
 
-    private void OnForwardBackwardMovement(float obj)
+    private void OnForwardBackward(float obj)
     {
         m_Movement.z = obj * (AllConfig.Instance.CharacterConfig.runSpeed / 100f) * GetAdditionalMultiplier();
 
@@ -55,8 +55,8 @@ public class CPlayerController : CCharacterController
     {
         if (m_GameInput != null)
         {
-            m_GameInput.ForwardBackward += OnForwardBackwardMovement;
-            m_GameInput.LeftRight += OnLeftRightMovement;
+            m_GameInput.ForwardBackward += OnForwardBackward;
+            m_GameInput.LeftRight += OnLeftRight;
             m_GameInput.PointerDelta += OnPointerPosition;
         }
     }
@@ -65,8 +65,8 @@ public class CPlayerController : CCharacterController
     {
         if (m_GameInput != null)
         {
-            m_GameInput.ForwardBackward -= OnForwardBackwardMovement;
-            m_GameInput.LeftRight -= OnLeftRightMovement;
+            m_GameInput.ForwardBackward -= OnForwardBackward;
+            m_GameInput.LeftRight -= OnLeftRight;
             m_GameInput.PointerDelta -= OnPointerPosition;
         }
     }

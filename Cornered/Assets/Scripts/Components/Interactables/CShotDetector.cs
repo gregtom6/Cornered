@@ -29,6 +29,8 @@ public class CShotDetector : MonoBehaviour
 
         m_IsValidHit = Physics.Raycast(origin, worldDirection, out m_RaycastHit, rayLength);
 
+#if UNITY_EDITOR
         Debug.DrawRay(origin, worldDirection * rayLength, Color.green);
+#endif
     }
 }

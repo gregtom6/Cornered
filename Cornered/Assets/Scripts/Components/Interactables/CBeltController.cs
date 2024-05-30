@@ -19,12 +19,12 @@ public class CBeltController : MonoBehaviour
     [SerializeField] private CButton m_Button;
 
     public EBeltSpeed currentBeltSpeed => m_CurrentBeltSpeed;
+    public static CBeltController instance;
 
     private IObjectPool<CBeltElement> m_BeltElementPool;
 
     private EBeltSpeed m_CurrentBeltSpeed = EBeltSpeed.Normal;
 
-    public static CBeltController instance;
 
     public float GetCurrentMultiplier()
     {

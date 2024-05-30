@@ -14,7 +14,6 @@ public class CCooldownIndicator : MonoBehaviour
     [SerializeField] private Transform m_IndicatorTransform;
     [SerializeField] private SpriteRenderer m_SpriteRenderer;
     private CWeapon m_Weapon;
-    private Vector3 m_TemporaryScaleVector;
 
     private void Start()
     {

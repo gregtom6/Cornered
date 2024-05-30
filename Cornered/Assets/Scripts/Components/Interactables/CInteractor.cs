@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CInteractableDetector))]
 public class CInteractor : MonoBehaviour
 {
     [SerializeField] private GameInput m_GameInput;

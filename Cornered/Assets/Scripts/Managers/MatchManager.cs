@@ -11,12 +11,10 @@ using UnityEngine.SceneManagement;
 
 public class MatchManager : MonoBehaviour
 {
-    [SerializeField] private List<SceneSetting> m_GameOverScenesToLoad = new List<SceneSetting>();
+    [SerializeField] private List<SceneSetting> m_GameOverScenesToLoad = new();
 
     private int m_MatchIndex;
-
     private float m_MatchEndedStartTime;
-
     private bool m_ShouldWaitUntilNewMatch;
 
     private void OnEnable()

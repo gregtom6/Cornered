@@ -25,7 +25,7 @@ public class CBeltElement : MonoBehaviour
     private void Update()
     {
         float currentBeltSpeed = CBeltController.instance.GetCurrentMultiplier();
-        transform.Translate(-transform.right * Time.deltaTime * currentBeltSpeed);
+        transform.Translate(currentBeltSpeed * Time.deltaTime * -transform.right);
     }
 
     private void OnEnable()

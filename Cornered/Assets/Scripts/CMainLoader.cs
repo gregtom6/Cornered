@@ -25,7 +25,7 @@ public class SceneSetting
 }
 public class CMainLoader : MonoBehaviour
 {
-    [SerializeField] private List<SceneSetting> m_ScenesToLoad = new List<SceneSetting>();
+    [SerializeField] private List<SceneSetting> m_ScenesToLoad = new();
 
     private void Start()
     {
