@@ -30,14 +30,18 @@ E: Enum
 
 Folder structure:
 
-Assets/Scenes folder has two subfolders: Private and Public. The reason for this, is because if I would use a testing scene (invisible for players, or would not be included in builds), those would be placed in here. 
+Assets/Scenes folder has two subfolders: 
+
+Private: invisible for players, or would not be included in builds (empty folder currently)
+
+Public: visible for players, included in builds
 
 ///////////////////////////////////////////////////
 
 Architecture:
 
 Init scene sets up some managers used in other scenes with DontDestroyOnLoad. It also contains CMainLoader, which loads the first real game scene. 
-Camera is in this first Init scene only to surely render something, instead of leaving glyphs on the screen. 
+This scene includes a Camera set up to allow this scene to render properly, while next scenes are getting loaded. 
 Manager classes all follow the Singleton pattern. EventManager is a class with generic methods to be able to broadcast events to subscribed objects. Basically it also works as the Observer pattern. 
 CBeltController manages an object pool object, which is following the pattern and its used from Unity's API. 
 GameDefinitions contain all of the enums. All of them have a Count value as the last element. It's used for avoiding unnecessary allocations created by Enum.GetValues(), because I can process all enum elements by managing them as integers in a loop. 
