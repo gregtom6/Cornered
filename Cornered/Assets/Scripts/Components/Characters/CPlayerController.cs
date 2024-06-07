@@ -35,14 +35,14 @@ public class CPlayerController : CCharacterController
     {
         m_Movement.x = obj * (AllConfig.Instance.CharacterConfig.runSpeed / 100f) * GetAdditionalMultiplier();
 
-        movementState = EMovementState.Strafing;
+        m_MovementState = EMovementState.Strafing;
     }
 
     private void OnForwardBackward(float obj)
     {
         m_Movement.z = obj * (AllConfig.Instance.CharacterConfig.runSpeed / 100f) * GetAdditionalMultiplier();
 
-        movementState = EMovementState.Walking;
+        m_MovementState = EMovementState.Walking;
     }
 
     private float GetAdditionalMultiplier()
@@ -83,9 +83,9 @@ public class CPlayerController : CCharacterController
 
     private void LateUpdate()
     {
-        if (movementState != EMovementState.Standing && Mathf.Approximately(m_Movement.x, 0f) && Mathf.Approximately(m_Movement.z, 0f))
+        if (m_MovementState != EMovementState.Standing && Mathf.Approximately(m_Movement.x, 0f) && Mathf.Approximately(m_Movement.z, 0f))
         {
-            movementState = EMovementState.Standing;
+            m_MovementState = EMovementState.Standing;
         }
     }
 

@@ -48,32 +48,28 @@ public class CRecipeShower : MonoBehaviour
         {
             for (int j = 0; j < materials[i].Count; j++)
             {
-                GameObject recipeElement = Instantiate(AllConfig.Instance.RecipeConfig.recipeShowElementPrefab, positionForGeneration, Quaternion.Euler(90, 0, 0), transform);
-                m_RecipeVisualElements.Add(recipeElement);
-                CRecipeElementVisual meshRenderer = recipeElement.GetComponentInParent<CRecipeElementVisual>();
-                meshRenderer.SetElement(materials[i][j], stateMaterials[i][j]);
-                positionForGeneration = new Vector3(positionForGeneration.x + m_HorizontalGapSize, positionForGeneration.y, positionForGeneration.z);
+                RecipeElementCreation(AllConfig.Instance.RecipeConfig.recipeShowElementPrefab, ref positionForGeneration, materials[i][j], m_HorizontalGapSize, stateMaterials[i][j]);
 
                 if (j + 2 < materials[i].Count)
                 {
-                    recipeElement = Instantiate(AllConfig.Instance.RecipeConfig.recipeShowOperatorPrefab, positionForGeneration, Quaternion.Euler(90, 0, 0), transform);
-                    m_RecipeVisualElements.Add(recipeElement);
-                    meshRenderer = recipeElement.GetComponentInParent<CRecipeElementVisual>();
-                    meshRenderer.SetElement(AllConfig.Instance.RecipeConfig.plusSignMaterial, null);
-                    positionForGeneration = new Vector3(positionForGeneration.x + m_HorizontalGapSize, positionForGeneration.y, positionForGeneration.z);
+                    RecipeElementCreation(AllConfig.Instance.RecipeConfig.recipeShowOperatorPrefab, ref positionForGeneration, AllConfig.Instance.RecipeConfig.plusSignMaterial, m_HorizontalGapSize);
                 }
                 else if (j + 2 == materials[i].Count)
                 {
-                    recipeElement = Instantiate(AllConfig.Instance.RecipeConfig.recipeShowOperatorPrefab, positionForGeneration, Quaternion.Euler(90, 0, 0), transform);
-                    m_RecipeVisualElements.Add(recipeElement);
-                    meshRenderer = recipeElement.GetComponentInParent<CRecipeElementVisual>();
-                    meshRenderer.SetElement(AllConfig.Instance.RecipeConfig.equalSignMaterial, null);
-                    positionForGeneration = new Vector3(positionForGeneration.x + m_HorizontalGapSize, positionForGeneration.y, positionForGeneration.z);
+                    RecipeElementCreation(AllConfig.Instance.RecipeConfig.recipeShowOperatorPrefab, ref positionForGeneration, AllConfig.Instance.RecipeConfig.equalSignMaterial, m_HorizontalGapSize);
                 }
-
             }
 
             positionForGeneration = new Vector3(m_StartingTransform.position.x, positionForGeneration.y + m_VerticalGapSize, positionForGeneration.z);
         }
+    }
+
+    private void RecipeElementCreation(GameObject prefabGameObject, ref Vector3 positionForGeneration, Material elementMaterial, float xDelta, Material effectMaterial = null)
+    {
+        GameObject recipeElement = Instantiate(prefabGameObject, positionForGeneration, Quaternion.Euler(90, 0, 0), transform);
+        m_RecipeVisualElements.Add(recipeElement);
+        CRecipeElementVisual meshRenderer = recipeElement.GetComponentInParent<CRecipeElementVisual>();
+        meshRenderer.SetElement(elementMaterial, effectMaterial);
+        positionForGeneration = new Vector3(positionForGeneration.x + xDelta, positionForGeneration.y, positionForGeneration.z);
     }
 }

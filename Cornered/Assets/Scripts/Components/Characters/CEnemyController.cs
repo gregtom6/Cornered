@@ -24,7 +24,7 @@ public partial class CEnemyController : CCharacterController
 
     private CWeapon m_AIWeapon;
     private NavMeshAgent m_NavMeshAgent;
-    private EEnemyState state = EEnemyState.Waiting;
+    private EEnemyState m_State = EEnemyState.Waiting;
 
     private void OnEnable()
     {
@@ -45,12 +45,12 @@ public partial class CEnemyController : CCharacterController
 
     private void OnTimeOverHappened(TimeOverHappenedEvent ev)
     {
-        state = EEnemyState.ShootPosition;
+        m_State = EEnemyState.ShootPosition;
     }
 
     private void Update()
     {
-        if (state == EEnemyState.Waiting)
+        if (m_State == EEnemyState.Waiting)
         {
             return;
         }
@@ -60,18 +60,18 @@ public partial class CEnemyController : CCharacterController
         ProcessCurrentState();
         SwitchStateIfNeeded();
 
-        movementState = m_NavMeshAgent.velocity.magnitude <= 1f ? EMovementState.Standing : EMovementState.Walking;
+        m_MovementState = m_NavMeshAgent.velocity.magnitude <= 1f ? EMovementState.Standing : EMovementState.Walking;
     }
 
     private void ProcessCurrentState()
     {
-        if (state == EEnemyState.DefendPosition)
+        if (m_State == EEnemyState.DefendPosition)
         {
             HideSpotFinder hideSpotFinder = new HideSpotFinder(m_MovementTargetPoint, transform, m_PlayerPillarLayerMask, m_PillarLayerMask);
             Vector3? position = hideSpotFinder.GetClosestHidingSpot();
             m_NavMeshAgent.destination = position.HasValue ? position.Value : transform.position;
         }
-        else if (state == EEnemyState.ShootPosition)
+        else if (m_State == EEnemyState.ShootPosition)
         {
             m_NavMeshAgent.destination = CCharacterManager.instance.playerPosition;
         }
@@ -79,18 +79,18 @@ public partial class CEnemyController : CCharacterController
 
     private void SwitchStateIfNeeded()
     {
-        if (state == EEnemyState.DefendPosition)
+        if (m_State == EEnemyState.DefendPosition)
         {
             if ((m_EnemyHealth.currentHealth / AllConfig.Instance.CharacterConfig.enemyMaxHealth) * 100f >= AllConfig.Instance.AIConfig.attackWhenLifeMoreThanPercentage && m_AIWeapon.isReadyToShoot)
             {
-                state = EEnemyState.ShootPosition;
+                m_State = EEnemyState.ShootPosition;
             }
         }
-        else if (state == EEnemyState.ShootPosition)
+        else if (m_State == EEnemyState.ShootPosition)
         {
             if (!m_AIWeapon.isReadyToShoot || (m_EnemyHealth.currentHealth / AllConfig.Instance.CharacterConfig.enemyMaxHealth) * 100f <= AllConfig.Instance.AIConfig.hideWhenLifeLessThanPercentage)
             {
-                state = EEnemyState.DefendPosition;
+                m_State = EEnemyState.DefendPosition;
             }
         }
     }
