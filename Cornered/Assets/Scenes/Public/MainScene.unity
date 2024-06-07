@@ -5541,12 +5541,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ResultTargetTransform: {fileID: 590841017}
   m_MixingItemDetector: {fileID: 1060604228}
-  m_FreezeButton: {fileID: 935779646}
-  m_BurnButton: {fileID: 613800822}
-  m_ConvertButton: {fileID: 315208531}
-  m_BurnParticleSystem: {fileID: 1476611344}
-  m_FreezeParticleSystem: {fileID: 1197436499}
   m_TopLidAnimator: {fileID: 1195647254}
+  m_StateComponents:
+  - m_StateButton: {fileID: 315208531}
+    m_StateParticleSystem: {fileID: 0}
+    m_Ability: 0
+    m_ItemModifyingAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 990656287}
+          m_TargetAssemblyTypeName: CMixingMachine, Assembly-CSharp
+          m_MethodName: OnMixingCallback
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - m_StateButton: {fileID: 613800822}
+    m_StateParticleSystem: {fileID: 1476611344}
+    m_Ability: 1
+    m_ItemModifyingAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1060604228}
+          m_TargetAssemblyTypeName: CMixingItemDetector, Assembly-CSharp
+          m_MethodName: BurnAllItems
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - m_StateButton: {fileID: 935779646}
+    m_StateParticleSystem: {fileID: 1197436499}
+    m_Ability: 2
+    m_ItemModifyingAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1060604228}
+          m_TargetAssemblyTypeName: CMixingItemDetector, Assembly-CSharp
+          m_MethodName: FreezeAllItems
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &990997629
 GameObject:
   m_ObjectHideFlags: 0

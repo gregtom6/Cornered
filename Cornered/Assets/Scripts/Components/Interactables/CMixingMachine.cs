@@ -4,10 +4,12 @@
 /// Creation Date: 18.05.2024.
 /// </summary>
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CMixingMachine : MonoBehaviour
 {
@@ -15,72 +17,19 @@ public class CMixingMachine : MonoBehaviour
 
     [SerializeField] private Transform m_ResultTargetTransform;
     [SerializeField] private CMixingItemDetector m_MixingItemDetector;
-    [SerializeField] private CButton m_FreezeButton;
-    [SerializeField] private CButton m_BurnButton;
-    [SerializeField] private CButton m_ConvertButton;
-    [SerializeField] private ParticleSystem m_BurnParticleSystem;
-    [SerializeField] private ParticleSystem m_FreezeParticleSystem;
     [SerializeField] private Animator m_TopLidAnimator;
+    [SerializeField] private List<StateComponent> m_StateComponents = new();
 
     private EMixingMachineState m_State = EMixingMachineState.Waiting;
+    private StateComponent m_CurrentStateComponent;
     private float m_ProcessStartTime;
 
-    private void OnEnable()
+    public void SetCurrentStateComponent(StateComponent state)
     {
-        m_FreezeButton.pressHappened += FreezeButtonPressed;
-        m_BurnButton.pressHappened += BurnButtonPressed;
-        m_ConvertButton.pressHappened += ConvertButtonPressed;
-
-        EventManager.AddListener<NewMatchStartedEvent>(OnNewMatchStarted);
+        m_CurrentStateComponent = state;
     }
 
-    private void OnDisable()
-    {
-        m_FreezeButton.pressHappened -= FreezeButtonPressed;
-        m_BurnButton.pressHappened -= BurnButtonPressed;
-        m_ConvertButton.pressHappened -= ConvertButtonPressed;
-
-        EventManager.RemoveListener<NewMatchStartedEvent>(OnNewMatchStarted);
-    }
-
-    private void OnNewMatchStarted(NewMatchStartedEvent ev)
-    {
-        ActivateUnlockedButtons();
-    }
-
-    private void ActivateUnlockedButtons()
-    {
-        m_FreezeButton.gameObject.SetActive(AllConfig.Instance.ProgressConfig.IsAbilityAlreadyUnlocked(EAbility.Freeze));
-        m_BurnButton.gameObject.SetActive(AllConfig.Instance.ProgressConfig.IsAbilityAlreadyUnlocked(EAbility.Burn));
-    }
-
-    private void FreezeButtonPressed()
-    {
-        m_FreezeParticleSystem.Play();
-        m_State = EMixingMachineState.Freezing;
-        StartingProcess();
-    }
-
-    private void BurnButtonPressed()
-    {
-        m_BurnParticleSystem.Play();
-        m_State = EMixingMachineState.Heating;
-        StartingProcess();
-    }
-
-    private void ConvertButtonPressed()
-    {
-        m_State = EMixingMachineState.Mixing;
-        StartingProcess();
-    }
-
-    private void StartingProcess()
-    {
-        m_ProcessStartTime = Time.time;
-        m_TopLidAnimator.SetBool(ANIM_PARAM_CLOSE, true);
-    }
-
-    private void Mixing()
+    public void OnMixingCallback()
     {
         IReadOnlyList<ItemDatas> detectedItems = m_MixingItemDetector.GetDetectedItems();
 
@@ -98,6 +47,32 @@ public class CMixingMachine : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        m_StateComponents.ForEach(x => x.Initialize(MachineButtonPressHappened, this));
+
+        EventManager.AddListener<NewMatchStartedEvent>(OnNewMatchStarted);
+    }
+
+    private void OnDisable()
+    {
+        m_StateComponents.ForEach(x => x.ShutDown(MachineButtonPressHappened));
+
+        EventManager.RemoveListener<NewMatchStartedEvent>(OnNewMatchStarted);
+    }
+
+    private void OnNewMatchStarted(NewMatchStartedEvent ev)
+    {
+        m_StateComponents.ForEach(x => x.ManageButtons());
+    }
+
+    private void MachineButtonPressHappened()
+    {
+        m_ProcessStartTime = Time.time;
+        m_TopLidAnimator.SetBool(ANIM_PARAM_CLOSE, true);
+        m_State = EMixingMachineState.DoingProcess;
+    }
+
     private void Update()
     {
         if (m_State == EMixingMachineState.Waiting)
@@ -108,48 +83,76 @@ public class CMixingMachine : MonoBehaviour
         float currentTime = Time.time - m_ProcessStartTime;
         if (currentTime >= GetCurrentProcessTime())
         {
-            DoProcessSteps();
+            m_CurrentStateComponent.ProcessState();
             SettingDefaultState();
         }
-
     }
 
     private void SettingDefaultState()
     {
         m_State = EMixingMachineState.Waiting;
-        m_BurnParticleSystem.Stop();
-        m_FreezeParticleSystem.Stop();
+        m_CurrentStateComponent.ExitState();
         m_TopLidAnimator.SetBool(ANIM_PARAM_CLOSE, false);
     }
 
     private float GetCurrentProcessTime()
     {
-        switch (m_State)
-        {
-            case EMixingMachineState.Freezing:
-                return AllConfig.Instance.MixingMachineConfig.freezingTime;
-            case EMixingMachineState.Heating:
-                return AllConfig.Instance.MixingMachineConfig.burningTime;
-            case EMixingMachineState.Mixing:
-                return AllConfig.Instance.MixingMachineConfig.mixingTime;
-        }
-
-        return 0f;
+        return AllConfig.Instance.MixingMachineConfig.GetProcessTime(m_CurrentStateComponent.ability);
     }
+}
 
-    private void DoProcessSteps()
+[Serializable]
+public class StateComponent
+{
+    [SerializeField] private CButton m_StateButton;
+    [SerializeField] private ParticleSystem m_StateParticleSystem;
+    [SerializeField] private EAbility m_Ability;
+    [SerializeField] private UnityEvent m_ItemModifyingAction;
+
+    public EAbility ability => m_Ability;
+
+    private CMixingMachine m_MixingMachine;
+
+    public void ManageButtons()
     {
-        switch (m_State)
+        m_StateButton.gameObject.SetActive(AllConfig.Instance.ProgressConfig.IsAbilityAlreadyUnlocked(ability));
+    }
+
+    public void Initialize(Action actionToCall, CMixingMachine mixingMachine)
+    {
+        m_StateButton.pressHappened += actionToCall;
+        m_StateButton.pressHappened += EnterState;
+
+        m_MixingMachine = mixingMachine;
+    }
+
+    public void ShutDown(Action actionToCall)
+    {
+        m_StateButton.pressHappened -= actionToCall;
+        m_StateButton.pressHappened -= EnterState;
+    }
+
+    private void EnterState()
+    {
+        if (m_StateParticleSystem != null)
         {
-            case EMixingMachineState.Freezing:
-                m_MixingItemDetector.FreezeAllItems();
-                break;
-            case EMixingMachineState.Heating:
-                m_MixingItemDetector.BurnAllItems();
-                break;
-            case EMixingMachineState.Mixing:
-                Mixing();
-                break;
+            m_StateParticleSystem.Play();
+        }
+
+        m_MixingMachine.SetCurrentStateComponent(this);
+    }
+
+    public void ProcessState()
+    {
+        m_ItemModifyingAction?.Invoke();
+    }
+    public void ExitState()
+    {
+        if (m_StateParticleSystem != null)
+        {
+            m_StateParticleSystem.Stop();
         }
     }
+
+
 }

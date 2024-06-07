@@ -18,6 +18,11 @@ public class SOProgressConfig : ScriptableObject
     public int maxUnlockLevel => m_AbilitiesToUnlockPerLevel.Count;
     public bool IsAbilityAlreadyUnlocked(EAbility ability)
     {
+        if (ability == EAbility.Default)
+        {
+            return true;
+        }
+
         int currentUnlockLevel = ProgressManager.Instance.currentUnlockLevel;
 
         IReadOnlyList<EAbility> unlockedAbilities = GetAlreadyUnlockedAbilities(currentUnlockLevel);

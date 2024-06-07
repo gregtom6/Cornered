@@ -4,6 +4,7 @@
 /// Creation Date: 18.05.2024.
 /// </summary>
 
+using RotaryHeart.Lib.SerializableDictionary;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,11 +12,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Mixing Machine Config")]
 public class SOMixingMachineConfig : ScriptableObject
 {
-    [SerializeField] private float m_FreezingTime;
-    [SerializeField] private float m_BurningTime;
-    [SerializeField] private float m_MixingTime;
+    [SerializeField] private AbilityProcessTimeDict m_AbilityProcessTimeDict;
 
-    public float freezingTime => m_FreezingTime;
-    public float burningTime => m_BurningTime;
-    public float mixingTime => m_MixingTime;
+    public float GetProcessTime(EAbility ability)
+    {
+        return m_AbilityProcessTimeDict[ability];
+    }
 }
+
+[System.Serializable]
+public class AbilityProcessTimeDict : SerializableDictionaryBase<EAbility, float> { }

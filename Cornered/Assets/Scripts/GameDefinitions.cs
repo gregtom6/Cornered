@@ -94,9 +94,7 @@ public enum EBeltSpeed
 
 public enum EMixingMachineState
 {
-    Heating,
-    Freezing,
-    Mixing,
+    DoingProcess,
     Waiting,
 
     Count,
