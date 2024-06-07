@@ -44,23 +44,53 @@ public class CRecipeShower : MonoBehaviour
 
         IReadOnlyList<IReadOnlyList<Material>> materials = AllConfig.Instance.RecipeConfig.GetRadiatingMaterialsOfAllRecipes(out IReadOnlyList<IReadOnlyList<Material>> stateMaterials);
 
-        for (int i = 0; i < materials.Count; i++)
+        for (int currentRow = 0; currentRow < materials.Count; currentRow++)
         {
-            for (int j = 0; j < materials[i].Count; j++)
-            {
-                RecipeElementCreation(AllConfig.Instance.RecipeConfig.recipeShowElementPrefab, ref positionForGeneration, materials[i][j], m_HorizontalGapSize, stateMaterials[i][j]);
+            GenerateRecipeRow(materials[currentRow], stateMaterials[currentRow], ref positionForGeneration);
+            MoveToNextRow(ref positionForGeneration);
+        }
+    }
 
-                if (j + 2 < materials[i].Count)
-                {
-                    RecipeElementCreation(AllConfig.Instance.RecipeConfig.recipeShowOperatorPrefab, ref positionForGeneration, AllConfig.Instance.RecipeConfig.plusSignMaterial, m_HorizontalGapSize);
-                }
-                else if (j + 2 == materials[i].Count)
-                {
-                    RecipeElementCreation(AllConfig.Instance.RecipeConfig.recipeShowOperatorPrefab, ref positionForGeneration, AllConfig.Instance.RecipeConfig.equalSignMaterial, m_HorizontalGapSize);
-                }
-            }
+    private void CreateRecipeElement(Material material, Material stateMaterial, ref Vector3 positionForGeneration)
+    {
+        RecipeElementCreation(AllConfig.Instance.RecipeConfig.recipeShowElementPrefab, ref positionForGeneration, material, m_HorizontalGapSize, stateMaterial);
+    }
 
-            positionForGeneration = new Vector3(m_StartingTransform.position.x, positionForGeneration.y + m_VerticalGapSize, positionForGeneration.z);
+    private void AddOperatorIfNeeded(int index, int materialCount, ref Vector3 positionForGeneration)
+    {
+        if (IsIndexBeforeLastElement(index, materialCount))
+        {
+            CreateOperator(AllConfig.Instance.RecipeConfig.plusSignMaterial, ref positionForGeneration);
+        }
+        else
+        {
+            CreateOperator(AllConfig.Instance.RecipeConfig.equalSignMaterial, ref positionForGeneration);
+        }
+    }
+
+    //TODO: replace into an util class
+
+    private bool IsIndexBeforeLastElement(int index, int count)
+    {
+        return index + 2 < count;
+    }
+
+    private void CreateOperator(Material operatorMaterial, ref Vector3 positionForGeneration)
+    {
+        RecipeElementCreation(AllConfig.Instance.RecipeConfig.recipeShowOperatorPrefab, ref positionForGeneration, operatorMaterial, m_HorizontalGapSize);
+    }
+
+    private void MoveToNextRow(ref Vector3 positionForGeneration)
+    {
+        positionForGeneration = new Vector3(m_StartingTransform.position.x, positionForGeneration.y + m_VerticalGapSize, positionForGeneration.z);
+    }
+
+    private void GenerateRecipeRow(IReadOnlyList<Material> materials, IReadOnlyList<Material> stateMaterials, ref Vector3 positionForGeneration)
+    {
+        for (int currentColumn = 0; currentColumn < materials.Count; currentColumn++)
+        {
+            CreateRecipeElement(materials[currentColumn], stateMaterials[currentColumn], ref positionForGeneration);
+            AddOperatorIfNeeded(currentColumn, materials.Count, ref positionForGeneration);
         }
     }
 
