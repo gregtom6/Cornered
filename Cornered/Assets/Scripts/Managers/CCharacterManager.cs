@@ -14,11 +14,25 @@ public class CCharacterManager : MonoBehaviour
     [SerializeField] private List<Transform> m_EnemyPossibleStartingTransforms = new();
 
     public static CCharacterManager instance;
-    public Vector3 playerPosition => instance.m_Player.position;
 
     public Transform playerTransform => instance.m_Player;
 
     private GameObject m_EnemyInstanceGameObject;
+
+    public Vector3 GetCharacterPosition(ECharacterType characterType)
+    {
+        if (characterType == ECharacterType.Player && m_Player != null)
+        {
+            return m_Player.position;
+        }
+        else if (characterType == ECharacterType.Enemy && m_EnemyInstanceGameObject != null)
+        {
+            return m_EnemyInstanceGameObject.transform.position;
+        }
+
+        return Vector3.zero;
+    }
+
     public CEquipmentVisualizer GetEquipmentVisualizer(ECharacterType characterType)
     {
         if (characterType == ECharacterType.Player && m_Player != null)
@@ -64,6 +78,4 @@ public class CCharacterManager : MonoBehaviour
             Destroy(m_EnemyInstanceGameObject);
         }
     }
-
-
 }

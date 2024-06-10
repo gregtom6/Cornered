@@ -15,15 +15,6 @@ public enum ECharacterType
     Count,
 }
 
-public enum EEnemyState
-{
-    Waiting,
-    ShootPosition,
-    DefendPosition,
-
-    Count,
-}
-
 public enum EEquipment
 {
     Weapon,

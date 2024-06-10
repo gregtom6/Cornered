@@ -22,6 +22,6 @@ public class CEnemyProjectilePresenter : CProjectileVisualizer
     protected override void Update()
     {
         base.Update();
-        m_LineRenderer.SetPosition(1, CCharacterManager.instance.playerPosition);
+        m_LineRenderer.SetPosition(1, CCharacterManager.instance.GetCharacterPosition(ECharacterType.Player));
     }
 }

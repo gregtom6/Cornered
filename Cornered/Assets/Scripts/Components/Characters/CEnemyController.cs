@@ -22,77 +22,39 @@ public partial class CEnemyController : CCharacterController
     [SerializeField] private LayerMask m_PlayerPillarLayerMask;
     [SerializeField] private LayerMask m_PillarLayerMask;
 
-    private CWeapon m_AIWeapon;
     private NavMeshAgent m_NavMeshAgent;
-    private EEnemyState m_State = EEnemyState.Waiting;
-
-    private void OnEnable()
-    {
-        EventManager.AddListener<TimeOverHappenedEvent>(OnTimeOverHappened);
-    }
-
-    private void OnDisable()
-    {
-        EventManager.RemoveListener<TimeOverHappenedEvent>(OnTimeOverHappened);
-    }
+    private CharacterStateMachine m_StateMachine = new();
+    private HideSpotFinder m_HideSpotFinder;
 
     private void Start()
     {
         m_NavMeshAgent = GetComponent<NavMeshAgent>();
-        m_AIWeapon = GetComponent<CWeapon>();
+        CWeapon m_AIWeapon = GetComponent<CWeapon>();
         m_NavMeshAgent.speed = AllConfig.Instance.CharacterConfig.enemyRunSpeed;
+        m_StateMachine.Initialize(new WaitingState());
+        m_HideSpotFinder = new HideSpotFinder(m_MovementTargetPoint,transform, m_PlayerPillarLayerMask, m_PillarLayerMask);
+
+        m_StateMachine.stateMachineReferences =
+            new CharacterStateMachineReferenceData(m_NavMeshAgent, m_EnemyHealth, m_AIWeapon, transform, m_HideSpotFinder, AllConfig.Instance.CharacterConfig.enemyMaxHealth);
     }
 
-    private void OnTimeOverHappened(TimeOverHappenedEvent ev)
+    private void OnDisable()
     {
-        m_State = EEnemyState.ShootPosition;
+        m_StateMachine.Unsubscribe();
     }
 
     private void Update()
     {
-        if (m_State == EEnemyState.Waiting)
+        if (m_StateMachine.state is WaitingState)
         {
             return;
         }
 
-        m_HeadTransform.LookAt(CCharacterManager.instance.playerPosition);
+        m_HeadTransform.LookAt(CCharacterManager.instance.GetCharacterPosition(ECharacterType.Player));
 
-        ProcessCurrentState();
-        SwitchStateIfNeeded();
+        m_StateMachine.Update();
 
         m_MovementState = m_NavMeshAgent.velocity.magnitude <= 1f ? EMovementState.Standing : EMovementState.Walking;
-    }
-
-    private void ProcessCurrentState()
-    {
-        if (m_State == EEnemyState.DefendPosition)
-        {
-            HideSpotFinder hideSpotFinder = new HideSpotFinder(m_MovementTargetPoint, transform, m_PlayerPillarLayerMask, m_PillarLayerMask);
-            Vector3? position = hideSpotFinder.GetClosestHidingSpot();
-            m_NavMeshAgent.destination = position.HasValue ? position.Value : transform.position;
-        }
-        else if (m_State == EEnemyState.ShootPosition)
-        {
-            m_NavMeshAgent.destination = CCharacterManager.instance.playerPosition;
-        }
-    }
-
-    private void SwitchStateIfNeeded()
-    {
-        if (m_State == EEnemyState.DefendPosition)
-        {
-            if ((m_EnemyHealth.currentHealth / AllConfig.Instance.CharacterConfig.enemyMaxHealth) * 100f >= AllConfig.Instance.AIConfig.attackWhenLifeMoreThanPercentage && m_AIWeapon.isReadyToShoot)
-            {
-                m_State = EEnemyState.ShootPosition;
-            }
-        }
-        else if (m_State == EEnemyState.ShootPosition)
-        {
-            if (!m_AIWeapon.isReadyToShoot || (m_EnemyHealth.currentHealth / AllConfig.Instance.CharacterConfig.enemyMaxHealth) * 100f <= AllConfig.Instance.AIConfig.hideWhenLifeLessThanPercentage)
-            {
-                m_State = EEnemyState.DefendPosition;
-            }
-        }
     }
 
     private void OnDrawGizmos()
