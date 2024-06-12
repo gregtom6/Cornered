@@ -16,11 +16,11 @@ public class SOAudioConfig : ScriptableObject
     public int maxSize => m_MaxSize;
     public bool collectionCheck => m_CollectionCheck;
 
-    public GameObject GetAudioSourcePrefab(EAudioSourceType audioSourceType)
+    public CPooledAudioSource GetAudioSourcePrefab(EAudioSourceType audioSourceType)
     {
         return m_AudioSourcePrefabDict[audioSourceType];
     }
 }
 
 [System.Serializable]
-public class AudioSourcePrefabDict : SerializableDictionaryBase<EAudioSourceType, GameObject> { }
+public class AudioSourcePrefabDict : SerializableDictionaryBase<EAudioSourceType, CPooledAudioSource> { }

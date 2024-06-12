@@ -12,29 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3889bc7d55c2cef40be3fb3aed41abde, type: 3}
   m_Name: Config_Audio
   m_EditorClassIdentifier: 
-  m_AudioClips:
-  - {fileID: 11400000, guid: a80bf40b171d5a843a707737cb516324, type: 2}
-  - {fileID: 11400000, guid: 64f908a649c1b4742840a4b12827c086, type: 2}
-  - {fileID: 11400000, guid: ec540d0854753354a9613a863679defe, type: 2}
-  - {fileID: 11400000, guid: 1679093d04c8e7645b4b7e0275f34dcd, type: 2}
-  - {fileID: 11400000, guid: cf3e03355e42b794d8cbc662e4032f82, type: 2}
-  - {fileID: 11400000, guid: ad3a9c9846d4e1743aaaa68651d05594, type: 2}
-  - {fileID: 11400000, guid: 086d7fd47cdf7ed45929693ffd75e749, type: 2}
-  - {fileID: 11400000, guid: 73406c71410ec8c4f8dd6252f394f577, type: 2}
-  - {fileID: 11400000, guid: e7775eeef9201ca478e10e1ab7a9c54e, type: 2}
-  - {fileID: 11400000, guid: 219b47b249fa59e4884b5eeacf6b3c17, type: 2}
-  - {fileID: 11400000, guid: 362f993877eaba444bf8c7284de8a0ed, type: 2}
-  - {fileID: 11400000, guid: 06ab2e1abbd47c9439334a28008254a6, type: 2}
-  - {fileID: 11400000, guid: b6508a8abb4786b4588f17e9a78d6368, type: 2}
-  - {fileID: 11400000, guid: ca87e884fb7c3074c901accb163c3ecd, type: 2}
-  - {fileID: 11400000, guid: 622a07481fdb718418e064cbec0c2bb8, type: 2}
-  - {fileID: 11400000, guid: ec635b2d52f7c2841b8586f1dc85e3ae, type: 2}
-  - {fileID: 11400000, guid: f5651b6a0df01734da91e465832c7faa, type: 2}
-  - {fileID: 11400000, guid: da706a117b585f64da5a361053763640, type: 2}
-  - {fileID: 11400000, guid: 0bba55dfe0fc1874c95232445d52c8d7, type: 2}
-  - {fileID: 11400000, guid: 65a1bdc958e276b4e8ca91d81252ab2a, type: 2}
-  - {fileID: 11400000, guid: 3146fda44e0168c4d900b8f6879d5482, type: 2}
-  - {fileID: 11400000, guid: fc743186a0761b846b9694575e780e6d, type: 2}
-  - {fileID: 11400000, guid: 8f68380863125214eb4ab6e78c6bf86a, type: 2}
-  - {fileID: 11400000, guid: f881f024ab9617b4789c4279d6803999, type: 2}
-  - {fileID: 11400000, guid: e8673b06b1ad2e14f8efc432a61557e4, type: 2}
+  m_AudioSourcePrefabDict:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues: 0100000000000000
+    _keys: 0100000000000000
+    _values:
+    - {fileID: 1342065466033816133, guid: 1151f529638b6844e8fdb348809a0c39, type: 3}
+    - {fileID: 7105163489615756121, guid: f293fdd975ebb7346b0a74d7a01f0d81, type: 3}
+  m_DefaultCapacity: 11
+  m_MaxSize: 20
+  m_CollectionCheck: 1
+  m_AudioClips: []

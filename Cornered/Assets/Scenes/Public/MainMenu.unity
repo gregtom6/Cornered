@@ -3478,8 +3478,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1013547617}
   - component: {fileID: 1013547618}
+  - component: {fileID: 1013547619}
   m_Layer: 5
-  m_Name: Hint
+  m_Name: Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3522,6 +3523,19 @@ MonoBehaviour:
   m_Text: {fileID: 118835617}
   m_LeftPageButton: {fileID: 1467003026}
   m_RightPageButton: {fileID: 495691602}
+--- !u!114 &1013547619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013547616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f154c9a2ec3e2f45b174c052b7e2ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AudioClipConfigToPlay: {fileID: 11400000, guid: ec540d0854753354a9613a863679defe, type: 2}
 --- !u!1 &1103615962
 GameObject:
   m_ObjectHideFlags: 0

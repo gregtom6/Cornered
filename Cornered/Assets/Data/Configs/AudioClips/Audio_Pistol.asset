@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AudioCategory: 3
   m_IsLooped: 0
-  m_ClipVariations: []
+  m_ClipVariations:
+  - {fileID: 8300000, guid: 5a035b910e406664aa7e06afe59909a8, type: 3}
+  - {fileID: 8300000, guid: 4df18cd1b7a827a4cb49a84c21c528be, type: 3}
+  - {fileID: 8300000, guid: 3e967836842a0d6409424a2b920a4df3, type: 3}
+  - {fileID: 8300000, guid: 9b276aca8f316604dac07435fcb4dbbb, type: 3}

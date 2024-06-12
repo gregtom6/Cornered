@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AudioCategory: 0
   m_IsLooped: 0
-  m_ClipVariations: []
+  m_PlayOnAwake: 1
+  m_ClipVariations:
+  - {fileID: 8300000, guid: e9c7d1c70d78cb840a550d5bf35c2db2, type: 3}

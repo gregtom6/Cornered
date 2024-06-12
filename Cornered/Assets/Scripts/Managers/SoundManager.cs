@@ -4,6 +4,7 @@
 /// Creation Date: 18.05.2024.
 /// </summary>
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,36 +13,44 @@ using UnityEngine.Pool;
 
 public class SoundManager : MonoBehaviour
 {
-    private List<CAudio> m_ActiveAudios = new();
-    private Dictionary<EAudioCategory, IObjectPool<CAudio>> m_AudioSources = new();
+    private List<CPooledAudioSource> m_AllAudios = new();
+    private List<CPooledAudioSource> m_ActiveAudios = new();
+    private Dictionary<EAudioCategory, IObjectPool<CPooledAudioSource>> m_AudioSources = new();
 
     public static SoundManager instance;
 
     public void Play(SOAudioClipConfig audioClipConfig)
     {
-        CAudio audioSource = m_AudioSources[audioClipConfig.audioCategory].Get();
+        CPooledAudioSource audioSource = m_AudioSources[audioClipConfig.audioCategory].Get();
         audioSource.Play(audioClipConfig);
+        m_ActiveAudios.Add(audioSource);
+
     }
 
-    public void Play(SOAudioClipConfig audioClipConfig, Vector3 position)
+    public void Play(SOAudioClipConfig audioClipConfig, Transform spatialParent)
     {
-
+        CPooledAudioSource audioSource = m_AudioSources[audioClipConfig.audioCategory].Get();
+        audioSource.Play(audioClipConfig);
+        m_ActiveAudios.Add(audioSource);
+        audioSource.SetParent(spatialParent);
     }
 
     public void Stop(SOAudioClipConfig audioClipConfig)
     {
-        CAudio audio = m_ActiveAudios.Where(x => x.GetClip() == audioClipConfig.GetClip()).FirstOrDefault();
+        CPooledAudioSource audio = m_ActiveAudios.Where(x => x.GetClip() == audioClipConfig.GetClip()).FirstOrDefault();
         audio.Stop();
+        m_ActiveAudios.Remove(audio);
+        m_AudioSources[audioClipConfig.audioCategory].Release(audio);
     }
 
     public void StopAll()
     {
-        for (EAudioCategory category = 0; category < EAudioCategory.Count; category++)
+        m_ActiveAudios.ForEach(x =>
         {
-            m_AudioSources[category].Clear();
-        }
+            x.Stop();
+            m_AudioSources[x.audioCategory].Release(x);
+        });
 
-        m_ActiveAudios.ForEach(x => x.Stop());
         m_ActiveAudios.Clear();
     }
 
@@ -50,10 +59,9 @@ public class SoundManager : MonoBehaviour
         for (EAudioCategory category = 0; category < EAudioCategory.Count; category++)
         {
             EAudioSourceType audioSourceType = GetAudioSourceTypeBasedOnCategory(category);
-            GameObject audioSourcePrefab = AllConfig.Instance.AudioConfig.GetAudioSourcePrefab(audioSourceType);
 
-            m_AudioSources[category] = new ObjectPool<CAudio>(CreateGlobalAudioSource, OnGetFromPool, OnReleaseToPool, OnDestroyPooledObject,
-            AllConfig.Instance.AudioConfig.collectionCheck, AllConfig.Instance.AudioConfig.defaultCapacity, AllConfig.Instance.AudioConfig.maxSize);
+            m_AudioSources.Add(category, new ObjectPool<CPooledAudioSource>(GetFuncBasedOnAudioSourceType(audioSourceType), OnGetFromPool, OnReleaseToPool, OnDestroyPooledObject,
+            AllConfig.Instance.AudioConfig.collectionCheck, AllConfig.Instance.AudioConfig.defaultCapacity, AllConfig.Instance.AudioConfig.maxSize));
         }
     }
 
@@ -67,25 +75,51 @@ public class SoundManager : MonoBehaviour
         return EAudioSourceType.Global;
     }
 
-    private void OnReleaseToPool(CAudio element)
+    private void OnAudioFinished(CPooledAudioSource audioSource)
+    {
+        m_AudioSources[audioSource.audioCategory].Release(audioSource);
+    }
+
+    private void OnReleaseToPool(CPooledAudioSource element)
     {
         element.gameObject.SetActive(false);
     }
 
-    private void OnGetFromPool(CAudio element)
+    private void OnGetFromPool(CPooledAudioSource element)
     {
-        //element.transform.position = m_SpawnPoint.position;
         element.gameObject.SetActive(true);
     }
 
-    private void OnDestroyPooledObject(CAudio element)
+    private void OnDestroyPooledObject(CPooledAudioSource element)
     {
         Destroy(element.gameObject);
     }
 
-    private CAudio CreateGlobalAudioSource()
+    Func<CPooledAudioSource> GetFuncBasedOnAudioSourceType(EAudioSourceType audioSourceType)
     {
-        CAudio audioSource = Instantiate<CAudio>(null, transform.position, Quaternion.identity, transform);
+        if (audioSourceType == EAudioSourceType.Global)
+        {
+            return CreateGlobalAudioSource;
+        }
+
+        return CreateSpatialAudioSource;
+    }
+
+    private CPooledAudioSource CreateGlobalAudioSource()
+    {
+        return CreateAudioSource(EAudioSourceType.Global);
+    }
+
+    private CPooledAudioSource CreateSpatialAudioSource()
+    {
+        return CreateAudioSource(EAudioSourceType.Spatial);
+    }
+
+    private CPooledAudioSource CreateAudioSource(EAudioSourceType audioSourceType)
+    {
+        CPooledAudioSource audioSource = Instantiate<CPooledAudioSource>(AllConfig.Instance.AudioConfig.GetAudioSourcePrefab(audioSourceType), Vector3.zero, Quaternion.identity, transform);
+        audioSource.onAudioFinished += OnAudioFinished;
+        m_AllAudios.Add(audioSource);
 
         return audioSource;
     }
@@ -101,5 +135,10 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnDisable()
+    {
+        m_AllAudios.ForEach(x => x.onAudioFinished -= OnAudioFinished);
     }
 }
