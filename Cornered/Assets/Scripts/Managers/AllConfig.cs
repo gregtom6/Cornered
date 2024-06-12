@@ -23,6 +23,7 @@ public class AllConfig : MonoBehaviour
     [SerializeField] private SOExitDoorConfig m_ExitDoorConfig;
     [SerializeField] private SOTutorialConfig m_TutorialConfig;
     [SerializeField] private SOControlsConfig m_ControlsConfig;
+    [SerializeField] private SOAudioConfig m_AudioConfig;
 
     public SOCharacterConfig CharacterConfig => m_CharacterConfig;
 
@@ -49,6 +50,8 @@ public class AllConfig : MonoBehaviour
     public SOTutorialConfig TutorialConfig => m_TutorialConfig;
 
     public SOControlsConfig ControlsConfig => m_ControlsConfig;
+
+    public SOAudioConfig AudioConfig => m_AudioConfig;
 
     public static AllConfig Instance;
 
