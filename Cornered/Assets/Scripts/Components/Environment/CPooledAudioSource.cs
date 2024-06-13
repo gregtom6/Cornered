@@ -20,7 +20,7 @@ public class CPooledAudioSource : MonoBehaviour
 
     public void SetParent(Transform parent)
     {
-        transform.SetParent(parent,false);
+        transform.SetParent(parent, false);
     }
 
     public void Play(SOAudioClipConfig audioClipConfig)

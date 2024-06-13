@@ -22583,6 +22583,7 @@ GameObject:
   - component: {fileID: 2128670840}
   - component: {fileID: 2128670841}
   - component: {fileID: 2128670842}
+  - component: {fileID: 2128670843}
   m_Layer: 0
   m_Name: RedLights
   m_TagString: Untagged
@@ -22642,6 +22643,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46151490a3327c47ad559bf2986b7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2128670843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128670839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f154c9a2ec3e2f45b174c052b7e2ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AudioClipConfigToPlay: {fileID: 11400000, guid: a80bf40b171d5a843a707737cb516324, type: 2}
 --- !u!1 &2143568793
 GameObject:
   m_ObjectHideFlags: 0

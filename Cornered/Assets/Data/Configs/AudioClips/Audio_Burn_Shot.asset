@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31eca45f89090c3488b4d085038201cb, type: 3}
-  m_Name: Audio_ButtonClick
+  m_Name: Audio_Burn_Shot
   m_EditorClassIdentifier: 
-  m_AudioCategory: 2
+  m_AudioCategory: 3
   m_IsLooped: 0
+  m_PlayOnAwake: 0
   m_ClipVariations:
-  - {fileID: 8300000, guid: 09b40959d55ee714a898f72d09f23d97, type: 3}
+  - {fileID: 8300000, guid: 1f905fc1263aad145b94f85245722b75, type: 3}

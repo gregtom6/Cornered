@@ -22,7 +22,7 @@ public class UIMainMenu : MonoBehaviour
 
     public void OnNewGameButton()
     {
-        m_AudioPlayer.Play();
+        SoundManager.instance.StopAll();
 
         m_NewGameScenesToLoad.ForEach(x =>
         {

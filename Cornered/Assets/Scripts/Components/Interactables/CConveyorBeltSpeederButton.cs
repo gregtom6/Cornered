@@ -19,8 +19,10 @@ public class CConveyorBeltSpeederButton : CButton
         m_MeshRenderer.material = AllConfig.Instance.beltConfig.GetMaterialBasedOnSpeed(m_BeltController.currentBeltSpeed);
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         m_MeshRenderer.material = AllConfig.Instance.beltConfig.GetMaterialBasedOnSpeed(m_BeltController.currentBeltSpeed);
     }
 

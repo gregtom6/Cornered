@@ -16,11 +16,25 @@ public class CAudioPlayer : MonoBehaviour
         SoundManager.instance.Play(m_AudioClipConfigToPlay, spatialParent);
     }
 
+    public void Stop()
+    {
+        SoundManager.instance.Stop(m_AudioClipConfigToPlay);
+    }
+
     private void Start()
     {
         if (m_AudioClipConfigToPlay.IsPlayOnAwake)
         {
-            Play(transform);
+            EAudioSourceType audioSourceType = SoundManager.instance.GetAudioSourceTypeBasedOnCategory(m_AudioClipConfigToPlay.audioCategory);
+
+            if (audioSourceType == EAudioSourceType.Spatial)
+            {
+                Play(transform);
+            }
+            else
+            {
+                Play();
+            }
         }
     }
 }

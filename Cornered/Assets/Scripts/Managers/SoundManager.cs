@@ -30,17 +30,25 @@ public class SoundManager : MonoBehaviour
     public void Play(SOAudioClipConfig audioClipConfig, Transform spatialParent)
     {
         CPooledAudioSource audioSource = m_AudioSources[audioClipConfig.audioCategory].Get();
-        audioSource.Play(audioClipConfig);
-        m_ActiveAudios.Add(audioSource);
-        audioSource.SetParent(spatialParent);
+
+        if (audioSource != null)
+        {
+            audioSource.Play(audioClipConfig);
+            m_ActiveAudios.Add(audioSource);
+            audioSource.SetParent(spatialParent);
+        }
     }
 
     public void Stop(SOAudioClipConfig audioClipConfig)
     {
         CPooledAudioSource audio = m_ActiveAudios.Where(x => x.GetClip() == audioClipConfig.GetClip()).FirstOrDefault();
-        audio.Stop();
-        m_ActiveAudios.Remove(audio);
-        m_AudioSources[audioClipConfig.audioCategory].Release(audio);
+
+        if (audio != null)
+        {
+            audio.Stop();
+            m_ActiveAudios.Remove(audio);
+            m_AudioSources[audioClipConfig.audioCategory].Release(audio);
+        }
     }
 
     public void StopAll()
@@ -48,10 +56,24 @@ public class SoundManager : MonoBehaviour
         m_ActiveAudios.ForEach(x =>
         {
             x.Stop();
-            m_AudioSources[x.audioCategory].Release(x);
+
+            if (x.gameObject.activeInHierarchy)
+            {
+                m_AudioSources[x.audioCategory].Release(x);
+            }
         });
 
         m_ActiveAudios.Clear();
+    }
+
+    public EAudioSourceType GetAudioSourceTypeBasedOnCategory(EAudioCategory category)
+    {
+        if (category == EAudioCategory.GameplaySFX)
+        {
+            return EAudioSourceType.Spatial;
+        }
+
+        return EAudioSourceType.Global;
     }
 
     private void Start()
@@ -65,16 +87,6 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    private EAudioSourceType GetAudioSourceTypeBasedOnCategory(EAudioCategory category)
-    {
-        if (category == EAudioCategory.GameplaySFX)
-        {
-            return EAudioSourceType.Spatial;
-        }
-
-        return EAudioSourceType.Global;
-    }
-
     private void OnAudioFinished(CPooledAudioSource audioSource)
     {
         m_AudioSources[audioSource.audioCategory].Release(audioSource);
@@ -82,12 +94,18 @@ public class SoundManager : MonoBehaviour
 
     private void OnReleaseToPool(CPooledAudioSource element)
     {
-        element.gameObject.SetActive(false);
+        if (element != null)
+        {
+            element.gameObject.SetActive(false);
+        }
     }
 
     private void OnGetFromPool(CPooledAudioSource element)
     {
-        element.gameObject.SetActive(true);
+        if (element != null)
+        {
+            element.gameObject.SetActive(true);
+        }
     }
 
     private void OnDestroyPooledObject(CPooledAudioSource element)

@@ -63,6 +63,8 @@ public class MatchManager : MonoBehaviour
 
     private void InitiateGameOver()
     {
+        SoundManager.instance.StopAll();
+
         m_GameOverScenesToLoad.ForEach(x =>
         {
             SceneManager.LoadScene(x.sceneReference, x.loadSceneMode);
