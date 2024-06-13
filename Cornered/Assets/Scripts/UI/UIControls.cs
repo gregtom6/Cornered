@@ -10,6 +10,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(CAudioPlayer))]
 public class UIControls : MonoBehaviour
 {
     [SerializeField] private Image m_GameImage;
@@ -19,12 +20,7 @@ public class UIControls : MonoBehaviour
     [SerializeField] private Button m_RightPageButton;
 
     private int m_CurrentPageIndex;
-
-    private void OnEnable()
-    {
-        m_CurrentPageIndex = 0;
-        ShowCurrentPage();
-    }
+    private CAudioPlayer m_AudioPlayer;
 
     public void OnLeftPageButton()
     {
@@ -32,6 +28,8 @@ public class UIControls : MonoBehaviour
         {
             m_CurrentPageIndex -= 1;
             ShowCurrentPage();
+
+            m_AudioPlayer.Play();
         }
     }
 
@@ -41,7 +39,20 @@ public class UIControls : MonoBehaviour
         {
             m_CurrentPageIndex += 1;
             ShowCurrentPage();
+
+            m_AudioPlayer.Play();
         }
+    }
+
+    private void Start()
+    {
+        m_AudioPlayer = GetComponent<CAudioPlayer>();
+    }
+
+    private void OnEnable()
+    {
+        m_CurrentPageIndex = 0;
+        ShowCurrentPage();
     }
 
     private void ManagePageSteppingButtons()
