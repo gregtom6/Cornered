@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Audio_Burn
   m_EditorClassIdentifier: 
   m_AudioCategory: 3
-  m_IsLooped: 0
+  m_IsLooped: 1
+  m_PlayOnAwake: 0
   m_ClipVariations:
   - {fileID: 8300000, guid: 310111e47ade0a44cbe23f76b65c2542, type: 3}

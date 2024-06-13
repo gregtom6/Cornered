@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Audio_Mix
   m_EditorClassIdentifier: 
   m_AudioCategory: 3
-  m_IsLooped: 0
+  m_IsLooped: 1
+  m_PlayOnAwake: 0
   m_ClipVariations:
   - {fileID: 8300000, guid: ee5d02f639ea3bd4aac99cacbed624b7, type: 3}

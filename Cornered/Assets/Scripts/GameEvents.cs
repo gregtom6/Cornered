@@ -38,3 +38,8 @@ public struct EquipmentDecidedEvent
     public ItemDatas shieldItem;
     public ItemDatas additionalItem;
 }
+
+public struct StepHappenedEvent
+{
+    public Transform animEventCatcherTransform;
+}

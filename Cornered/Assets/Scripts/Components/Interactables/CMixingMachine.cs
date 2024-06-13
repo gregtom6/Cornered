@@ -16,10 +16,12 @@ public class CMixingMachine : MonoBehaviour
     private static readonly int ANIM_PARAM_CLOSE = Animator.StringToHash("close");
 
     [SerializeField] private Transform m_ResultTargetTransform;
+    [SerializeField] private Transform m_AudioTarget;
     [SerializeField] private CMixingItemDetector m_MixingItemDetector;
     [SerializeField] private Animator m_TopLidAnimator;
     [SerializeField] private List<StateComponent> m_StateComponents = new();
 
+    public Transform audioTarget => m_AudioTarget;
     private EMixingMachineState m_State = EMixingMachineState.Waiting;
     private StateComponent m_CurrentStateComponent;
     private float m_ProcessStartTime;
@@ -106,6 +108,7 @@ public class StateComponent
 {
     [SerializeField] private CButton m_StateButton;
     [SerializeField] private ParticleSystem m_StateParticleSystem;
+    [SerializeField] private CAudioPlayer m_StateAudioPlayer;
     [SerializeField] private EAbility m_Ability;
     [SerializeField] private UnityEvent m_ItemModifyingAction;
 
@@ -139,6 +142,8 @@ public class StateComponent
             m_StateParticleSystem.Play();
         }
 
+        m_StateAudioPlayer.Play(m_MixingMachine.audioTarget);
+
         m_MixingMachine.SetCurrentStateComponent(this);
     }
 
@@ -152,6 +157,8 @@ public class StateComponent
         {
             m_StateParticleSystem.Stop();
         }
+
+        m_StateAudioPlayer.Stop();
     }
 
 

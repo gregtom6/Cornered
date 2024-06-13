@@ -10,11 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31eca45f89090c3488b4d085038201cb, type: 3}
-  m_Name: Audio_Step
+  m_Name: Audio_Freeze_Shot
   m_EditorClassIdentifier: 
   m_AudioCategory: 3
   m_IsLooped: 0
-  m_PlayOnAwake: 0
   m_ClipVariations:
-  - {fileID: 8300000, guid: 57ec40b409197dc4bad0e2816548b63d, type: 3}
-  - {fileID: 8300000, guid: ef8490cc73da3fe4398b717728680506, type: 3}
+  - {fileID: 8300000, guid: bb4d765412e19ed4f9b908a2fc53e09e, type: 3}
