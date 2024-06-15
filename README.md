@@ -46,6 +46,8 @@ Manager classes all follow the Singleton pattern. EventManager is a class with g
 CBeltController manages an object pool object, which is following the pattern and its used from Unity's API. 
 GameDefinitions contain all of the enums. All of them have a Count value as the last element. It's used for avoiding unnecessary allocations created by Enum.GetValues(), because I can process all enum elements by managing them as integers in a loop. 
 GameInput implements the New Input System related methods, which are automatically generated, when the editor user modifies the Input Action Asset (named as GameInputActions in the project). When the implemented methods get called by the Input System, the GameInput calls the relevant actions, which can be subscribed in various places in the project. 
+SoundManager manages prefab instances with CPooledAudioSource components, which manages different AudioSource settings for 2D and 3D audios. 
+New audio files can be added by the Game Designer alone. When new audio files needs to be added, a new SOAudioClipConfig need to be created with settings, audio file variations, etc. into the Assets/Data/Configs/AudioClips folder. Then the CAudioPlayer component needs to be added onto a relevant GameObject, and the previously created SOAudioClipConfig needs to be selected on that. When the SOAudioClipConfig's Audio Category is BGM (Background Music), Ambient or UISFX, the Designer can add that to any GameObject related to that sound, it will be a 2D sound. If the category is Gameplay SFX, the component should be added to a GameObject with a Transform position, from where the Designer wants to hear that sound. 
 
 ///////////////////////////////////////////////////
 
