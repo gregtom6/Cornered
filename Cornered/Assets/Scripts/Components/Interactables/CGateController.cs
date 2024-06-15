@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CAudioPlayer))]
 public class CGateController : MonoBehaviour
 {
     private static readonly int ANIM_PARAM_OPEN = Animator.StringToHash("open");
@@ -15,6 +16,23 @@ public class CGateController : MonoBehaviour
     [SerializeField] private Animator m_GateAnimator;
     [SerializeField] private CGateEnterDetector m_GateEnterDetector;
     [SerializeField] private CGateEnterDetector m_GateExitDetector;
+
+    private CAudioPlayer m_AudioPlayer;
+
+    public void OnGateMovementStarted()
+    {
+        m_AudioPlayer.Play(transform);
+    }
+
+    public void OnGateMovementFinished()
+    {
+        m_AudioPlayer.Stop();
+    }
+
+    private void Start()
+    {
+        m_AudioPlayer = GetComponent<CAudioPlayer>();
+    }
 
     private void OnEnable()
     {
