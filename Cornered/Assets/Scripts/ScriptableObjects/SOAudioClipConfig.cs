@@ -19,6 +19,7 @@ public class SOAudioClipConfig : ScriptableObject
     public EAudioCategory audioCategory => m_AudioCategory;
     public bool IsLooped => m_IsLooped;
     public bool IsPlayOnAwake => m_PlayOnAwake;
+    
     public AudioClip GetClip()
     {
         return m_ClipVariations.GetRandom();

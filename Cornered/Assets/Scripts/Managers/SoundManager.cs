@@ -13,11 +13,11 @@ using UnityEngine.Pool;
 
 public class SoundManager : MonoBehaviour
 {
+    public static SoundManager instance;
+
     private List<CPooledAudioSource> m_AllAudios = new();
     private List<CPooledAudioSource> m_ActiveAudios = new();
     private Dictionary<EAudioCategory, IObjectPool<CPooledAudioSource>> m_AudioSources = new();
-
-    public static SoundManager instance;
 
     public void Play(SOAudioClipConfig audioClipConfig)
     {
@@ -113,7 +113,7 @@ public class SoundManager : MonoBehaviour
         Destroy(element.gameObject);
     }
 
-    Func<CPooledAudioSource> GetFuncBasedOnAudioSourceType(EAudioSourceType audioSourceType)
+    private Func<CPooledAudioSource> GetFuncBasedOnAudioSourceType(EAudioSourceType audioSourceType)
     {
         if (audioSourceType == EAudioSourceType.Global)
         {
