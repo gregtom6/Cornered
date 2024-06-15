@@ -12,12 +12,14 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using static UnityEditor.Rendering.FilterWindow;
 
+[RequireComponent(typeof(CWeapon))]
 public class CEquipmentVisualizer : MonoBehaviour
 {
     [SerializeField] private CProjectileVisualizer m_ProjectileVisualizer;
     [SerializeField] private EquipmentAndItsTransformsDict m_EquipmentTransforms;
 
     private Dictionary<EEquipment, List<GameObject>> m_VisualizedEquipmentElements = new();
+    private CWeapon m_Weapon;
 
     public void VisualizeEquipment(ItemDatas itemTypes)
     {
@@ -48,12 +50,15 @@ public class CEquipmentVisualizer : MonoBehaviour
 
         if (equippedWeapon != null)
         {
+            m_Weapon.SetAudioPlayers(equippedWeapon.audioPlayers);
             m_ProjectileVisualizer.SetOriginTransform(equippedWeapon.muzzleTransform);
         }
     }
 
-    private void Start()
+    private void Awake()
     {
+        m_Weapon = GetComponent<CWeapon>();
+
         if (m_VisualizedEquipmentElements.Count == 0)
         {
             InitializeDictionary();

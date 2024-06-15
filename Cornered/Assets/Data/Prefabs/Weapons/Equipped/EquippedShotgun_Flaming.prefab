@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1057126231022323573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1766432012326467013}
+  - component: {fileID: 3870014473577896580}
+  m_Layer: 6
+  m_Name: BurnAudioPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1766432012326467013
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057126231022323573}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.42, y: 10.05, z: -7.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 751369305218670555}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3870014473577896580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057126231022323573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f154c9a2ec3e2f45b174c052b7e2ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AudioClipConfigToPlay: {fileID: 11400000, guid: be5c94e213cd3fb458dc6f6326173450, type: 2}
 --- !u!1 &6139401461636675401
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,6 +171,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 770731375408432229, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
+      propertyPath: m_AudioClipConfigToPlay
+      value: 
+      objectReference: {fileID: 11400000, guid: da706a117b585f64da5a361053763640, type: 2}
     - target: {fileID: 1484698010765353310, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -198,6 +247,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EquippedShotgun_Flaming
       objectReference: {fileID: 0}
+    - target: {fileID: 4388461746872210176, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
+      propertyPath: m_AudioPlayers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4388461746872210176, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
+      propertyPath: m_AudioPlayers.Array.data[1]
+      value: 
+      objectReference: {fileID: 3870014473577896580}
     - target: {fileID: 4528127666089671836, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.01
@@ -214,6 +271,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 80baf449300e62c40a05a5a5c4af2162, type: 2}
+    - target: {fileID: 7814162343061395010, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814162343061395010, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814162343061395010, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.6
+      objectReference: {fileID: 0}
     - target: {fileID: 9120058734530189158, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
       propertyPath: m_LocalScale.y
       value: 2.5136
@@ -224,6 +293,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1484698010765353310, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8548632753952516594}
+    - targetCorrespondingSourceObject: {fileID: 1484698010765353310, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1766432012326467013}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 236921ae393713c4383e1951f71f7a8b, type: 3}
 --- !u!4 &751369305218670555 stripped

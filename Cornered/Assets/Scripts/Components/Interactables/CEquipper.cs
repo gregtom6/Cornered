@@ -9,15 +9,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CPicker))]
+[RequireComponent(typeof(CAudioPlayer))]
 public class CEquipper : MonoBehaviour
 {
     [SerializeField] private GameInput m_GameInput;
 
     private CPicker m_Picker;
+    private CAudioPlayer m_AudioPlayer;
 
     private void Start()
     {
         m_Picker = GetComponent<CPicker>();
+        m_AudioPlayer = GetComponent<CAudioPlayer>();
     }
 
     private void OnEnable()
@@ -47,6 +50,8 @@ public class CEquipper : MonoBehaviour
                 {
                     m_Picker.RemovePickable();
                     equippable.Equip();
+
+                    m_AudioPlayer.Play();
                 }
             }
         }

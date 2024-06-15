@@ -57,3 +57,4 @@ MonoBehaviour:
   m_ExitDoorConfig: {fileID: 11400000, guid: c49b36f4eccd20f479a97f8c3635f92b, type: 2}
   m_TutorialConfig: {fileID: 11400000, guid: efe577218a1a0234995769e1ecccb542, type: 2}
   m_ControlsConfig: {fileID: 11400000, guid: 42a01f3791e8e1e4da3a2800e159e0ca, type: 2}
+  m_AudioConfig: {fileID: 11400000, guid: 25f4699131d43d74ab9d945fbc7fbee9, type: 2}

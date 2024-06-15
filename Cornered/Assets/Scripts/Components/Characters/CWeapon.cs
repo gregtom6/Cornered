@@ -15,8 +15,8 @@ public abstract class CWeapon : MonoBehaviour
     public bool isReadyToShoot => m_IsReadyToShoot;
 
     protected float m_CooldownStartTime;
-
     protected bool m_IsReadyToShoot;
+    protected IReadOnlyList<CAudioPlayer> m_EquippedAudioPlayers;
 
     public float GetCooldownTimeLeftPercentageBetween01()
     {
@@ -32,6 +32,11 @@ public abstract class CWeapon : MonoBehaviour
     public bool IsThereEquippedWeapon()
     {
         return GetEquippedWeapon() != EItemType.Count;
+    }
+
+    public void SetAudioPlayers(IReadOnlyList<CAudioPlayer> audioPlayers)
+    {
+        m_EquippedAudioPlayers = audioPlayers;
     }
 
     protected void SetReadyToShootAfterCooldownHappened(EItemType usedWeapon)
@@ -53,7 +58,7 @@ public abstract class CWeapon : MonoBehaviour
             return;
         }
 
-        m_ProjectileVisualizers.ForEach(x => x.Show());
+        ManageAudioVisual();
 
         m_IsReadyToShoot = false;
 
@@ -81,9 +86,19 @@ public abstract class CWeapon : MonoBehaviour
         {
             health = raycastHit.collider.GetComponentInChildren<CHealth>();
         }
-        
+
         return health != null;
     }
 
     protected abstract EItemType GetEquippedWeapon();
+
+    private void ManageAudioVisual()
+    {
+        m_ProjectileVisualizers.ForEach(x => x.Show());
+
+        for (int i = 0; i < m_EquippedAudioPlayers.Count; i++)
+        {
+            m_EquippedAudioPlayers[i].Play(m_EquippedAudioPlayers[i].transform);
+        }
+    }
 }

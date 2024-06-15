@@ -9,9 +9,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CAudioPlayer))]
 public class CExitButton : MonoBehaviour, IHoldable
 {
     [SerializeField] private CHoldActivable m_HoldActivable;
+
+    private CAudioPlayer m_AudioPlayer;
 
     public void HoldingFinished()
     {
@@ -20,6 +23,13 @@ public class CExitButton : MonoBehaviour, IHoldable
 
     public void HoldingStarted()
     {
+        m_AudioPlayer.Play();
+
         m_HoldActivable.HoldProcessStarted();
+    }
+
+    private void Start()
+    {
+        m_AudioPlayer = GetComponent<CAudioPlayer>();
     }
 }

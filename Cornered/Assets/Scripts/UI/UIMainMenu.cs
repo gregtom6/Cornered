@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(CAudioPlayer))]
 public class UIMainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject m_MainPanel;
@@ -17,9 +18,12 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private List<SceneSetting> m_NewGameScenesToLoad = new List<SceneSetting>();
 
     private EMainMenuState m_State = EMainMenuState.Main;
+    private CAudioPlayer m_AudioPlayer;
 
     public void OnNewGameButton()
     {
+        SoundManager.instance.StopAll();
+
         m_NewGameScenesToLoad.ForEach(x =>
         {
             SceneManager.LoadScene(x.sceneReference, x.loadSceneMode);
@@ -28,26 +32,38 @@ public class UIMainMenu : MonoBehaviour
 
     public void OnHintButton()
     {
+        m_AudioPlayer.Play();
+
         SetState(EMainMenuState.Hint);
     }
 
     public void OnHintBackButton()
     {
-        SetState(EMainMenuState.Main);
+        BackToMain();
     }
 
     public void OnControlsButton()
     {
+        m_AudioPlayer.Play();
+
         SetState(EMainMenuState.Controls);
     }
 
     public void OnControlsBackButton()
     {
+        BackToMain();
+    }
+
+    private void BackToMain()
+    {
+        m_AudioPlayer.Play();
+
         SetState(EMainMenuState.Main);
     }
 
     private void Start()
     {
+        m_AudioPlayer = GetComponent<CAudioPlayer>();
         ShowState();
     }
 

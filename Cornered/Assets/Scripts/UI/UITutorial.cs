@@ -10,6 +10,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(CAudioPlayer))]
 public class UITutorial : MonoBehaviour
 {
     [SerializeField] private Image m_Image;
@@ -18,6 +19,12 @@ public class UITutorial : MonoBehaviour
     [SerializeField] private Button m_RightPageButton;
 
     private int m_CurrentPageIndex;
+    private CAudioPlayer m_AudioPlayer;
+
+    private void Start()
+    {
+        m_AudioPlayer = GetComponent<CAudioPlayer>();
+    }
 
     private void OnEnable()
     {
@@ -30,6 +37,7 @@ public class UITutorial : MonoBehaviour
         if (m_CurrentPageIndex - 1 >= 0)
         {
             m_CurrentPageIndex -= 1;
+            m_AudioPlayer.Play();
             ShowCurrentPage();
         }
     }
@@ -39,6 +47,7 @@ public class UITutorial : MonoBehaviour
         if (m_CurrentPageIndex + 1 < AllConfig.Instance.TutorialConfig.tutorialPageCount)
         {
             m_CurrentPageIndex += 1;
+            m_AudioPlayer.Play();
             ShowCurrentPage();
         }
     }

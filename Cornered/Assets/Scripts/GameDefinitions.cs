@@ -108,3 +108,21 @@ public enum EMainMenuState
 
     Count,
 }
+
+public enum EAudioCategory
+{
+    BGM,
+    Ambient,
+    UISFX,
+    GameplaySFX,
+
+    Count,
+}
+
+public enum EAudioSourceType
+{
+    Global,
+    Spatial,
+
+    Count,
+}
