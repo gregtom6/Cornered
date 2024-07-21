@@ -24,11 +24,11 @@ public class CPlayerController : CCharacterController
 
     private void OnPointerPosition(Vector2 obj)
     {
-        m_Rot.x += obj.x * AllConfig.Instance.CharacterConfig.headRotSpeed;
-        m_Rot.y += -obj.y * AllConfig.Instance.CharacterConfig.headRotSpeed;
+        //m_Rot.x += obj.x * AllConfig.Instance.CharacterConfig.headRotSpeed;
+        //m_Rot.y += -obj.y * AllConfig.Instance.CharacterConfig.headRotSpeed;
 
-        m_Rot.y = m_Rot.y > AllConfig.Instance.CharacterConfig.headMaxRotX ? AllConfig.Instance.CharacterConfig.headMaxRotX : m_Rot.y;
-        m_Rot.y = m_Rot.y < AllConfig.Instance.CharacterConfig.headMinRotX ? AllConfig.Instance.CharacterConfig.headMinRotX : m_Rot.y;
+        //m_Rot.y = m_Rot.y > AllConfig.Instance.CharacterConfig.headMaxRotX ? AllConfig.Instance.CharacterConfig.headMaxRotX : m_Rot.y;
+        //m_Rot.y = m_Rot.y < AllConfig.Instance.CharacterConfig.headMinRotX ? AllConfig.Instance.CharacterConfig.headMinRotX : m_Rot.y;
     }
 
     private void OnLeftRight(float obj)
@@ -45,6 +45,20 @@ public class CPlayerController : CCharacterController
         m_MovementState = EMovementState.Walking;
     }
 
+    private void OnCameraUpDown(float obj)
+    {
+        m_Rot.y += -obj * AllConfig.Instance.CharacterConfig.headRotSpeed;
+
+        m_Rot.y = m_Rot.y > AllConfig.Instance.CharacterConfig.headMaxRotX ? AllConfig.Instance.CharacterConfig.headMaxRotX : m_Rot.y;
+        m_Rot.y = m_Rot.y < AllConfig.Instance.CharacterConfig.headMinRotX ? AllConfig.Instance.CharacterConfig.headMinRotX : m_Rot.y;
+    }
+
+    private void OnCameraLeftRight(float obj)
+    {
+        Debug.Log("");
+        m_Rot.x += obj * AllConfig.Instance.CharacterConfig.headRotSpeed;
+    }
+
     private float GetAdditionalMultiplier()
     {
         CurrentInventory currentInventory = InventoryManager.instance.GetCopyOfCurrentInventory(ECharacterType.Player);
@@ -57,6 +71,8 @@ public class CPlayerController : CCharacterController
         {
             m_GameInput.ForwardBackward += OnForwardBackward;
             m_GameInput.LeftRight += OnLeftRight;
+            m_GameInput.CameraUpDown += OnCameraUpDown;
+            m_GameInput.CameraLeftRight += OnCameraLeftRight;
             m_GameInput.PointerDelta += OnPointerPosition;
         }
     }
@@ -67,6 +83,8 @@ public class CPlayerController : CCharacterController
         {
             m_GameInput.ForwardBackward -= OnForwardBackward;
             m_GameInput.LeftRight -= OnLeftRight;
+            m_GameInput.CameraUpDown -= OnCameraUpDown;
+            m_GameInput.CameraLeftRight -= OnCameraLeftRight;
             m_GameInput.PointerDelta -= OnPointerPosition;
         }
     }
@@ -102,6 +120,17 @@ public class CPlayerController : CCharacterController
 
     private void ManageLooking()
     {
+        if (m_GameInput.upDownPressed)
+        {
+            OnCameraUpDown(m_GameInput.upDownFloat);
+        }
+
+        if (m_GameInput.leftRightPressed)
+        {
+            OnCameraLeftRight(m_GameInput.leftRightFloat);
+        }
+
+
         if (headParent != null && legParent != null && armParent != null && bodyParent != null)
         {
             headParent.localRotation = Quaternion.Euler(m_Rot.y, m_Rot.x, 0.0f);

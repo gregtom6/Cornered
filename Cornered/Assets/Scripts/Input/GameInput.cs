@@ -19,6 +19,8 @@ public class GameInput : ScriptableObject, GameInputActions.IGameplayActions
     public event Action<Vector2> PointerDelta = delegate { };
     public event Action<float> ForwardBackward = delegate { };
     public event Action<float> LeftRight = delegate { };
+    public event Action<float> CameraUpDown = delegate { };
+    public event Action<float> CameraLeftRight = delegate { };
     public event Action<Vector2> LeftPointerDown = delegate { };
     public event Action<Vector2> LeftPointerUp = delegate { };
     public event Action<Vector2> RightPointerDown = delegate { };
@@ -26,6 +28,11 @@ public class GameInput : ScriptableObject, GameInputActions.IGameplayActions
 
     private GameInputActions m_InputActions = null;
     private Vector2 m_MousePosScreen;
+
+    public bool leftRightPressed;
+    public float leftRightFloat;
+    public bool upDownPressed;
+    public float upDownFloat;
 
     public void OnForwardBackwardMovement(InputAction.CallbackContext context)
     {
@@ -128,4 +135,33 @@ public class GameInput : ScriptableObject, GameInputActions.IGameplayActions
         DisableGameplayInput();
     }
 
+    public void OnCameraUpDown(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            CameraUpDown?.Invoke(context.ReadValue<float>());
+            upDownPressed = true;
+            upDownFloat = context.ReadValue<float>();
+        }
+        else if (context.canceled)
+        {
+            CameraUpDown?.Invoke(0f);
+            upDownPressed= false;
+        }
+    }
+
+    public void OnCameraLeftRight(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            CameraLeftRight?.Invoke(context.ReadValue<float>());
+            leftRightPressed = true;
+            leftRightFloat= context.ReadValue<float>();
+        }
+        else if (context.canceled)
+        {
+            CameraLeftRight?.Invoke(0f);
+            leftRightPressed = false;
+        }
+    }
 }
