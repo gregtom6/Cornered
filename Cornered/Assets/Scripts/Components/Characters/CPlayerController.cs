@@ -24,11 +24,11 @@ public class CPlayerController : CCharacterController
 
     private void OnPointerPosition(Vector2 obj)
     {
-        //m_Rot.x += obj.x * AllConfig.Instance.CharacterConfig.headRotSpeed;
-        //m_Rot.y += -obj.y * AllConfig.Instance.CharacterConfig.headRotSpeed;
+        m_Rot.x += obj.x * AllConfig.Instance.CharacterConfig.headRotSpeed;
+        m_Rot.y += -obj.y * AllConfig.Instance.CharacterConfig.headRotSpeed;
 
-        //m_Rot.y = m_Rot.y > AllConfig.Instance.CharacterConfig.headMaxRotX ? AllConfig.Instance.CharacterConfig.headMaxRotX : m_Rot.y;
-        //m_Rot.y = m_Rot.y < AllConfig.Instance.CharacterConfig.headMinRotX ? AllConfig.Instance.CharacterConfig.headMinRotX : m_Rot.y;
+        m_Rot.y = m_Rot.y > AllConfig.Instance.CharacterConfig.headMaxRotX ? AllConfig.Instance.CharacterConfig.headMaxRotX : m_Rot.y;
+        m_Rot.y = m_Rot.y < AllConfig.Instance.CharacterConfig.headMinRotX ? AllConfig.Instance.CharacterConfig.headMinRotX : m_Rot.y;
     }
 
     private void OnLeftRight(float obj)
