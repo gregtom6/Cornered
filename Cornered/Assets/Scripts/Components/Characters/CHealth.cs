@@ -25,6 +25,10 @@ public abstract class CHealth : MonoBehaviour
         {
             EventManager.Raise(new CharacterDefeatedEvent { characterType = GetCharacterType() });
         }
+        else
+        {
+            EventManager.Raise(new CharacterReceivedShotEvent { charType = GetCharacterType() });
+        }
     }
     public abstract float GetMaxHealth();
 

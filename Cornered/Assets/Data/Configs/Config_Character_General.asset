@@ -24,4 +24,6 @@ MonoBehaviour:
   m_EnemyWaitUntilHealthReloadStarts: 1000
   m_HealHealthDelta: 5
   m_FastBootsSpeedMultiplier: 2
+  m_WhenReceivingShotHeadXRotationMin: -11
+  m_WhenReceivingShotHeadXRotationMax: 11
   m_EnemyPrefab: {fileID: 2535627791207296582, guid: dd3237f0ab67ba44589cf4f20f9626ab, type: 3}

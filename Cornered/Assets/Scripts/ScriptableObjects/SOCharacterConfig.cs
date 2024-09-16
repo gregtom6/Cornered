@@ -23,6 +23,8 @@ public class SOCharacterConfig : ScriptableObject
     [SerializeField] private float m_EnemyWaitUntilHealthReloadStarts;
     [SerializeField] private float m_HealHealthDelta;
     [SerializeField] private float m_FastBootsSpeedMultiplier;
+    [SerializeField] private float m_WhenReceivingShotHeadXRotationMin;
+    [SerializeField] private float m_WhenReceivingShotHeadXRotationMax;
     [SerializeField] private GameObject m_EnemyPrefab;
 
     public float enemyRunSpeed => m_EnemyRunSpeed;
@@ -40,5 +42,10 @@ public class SOCharacterConfig : ScriptableObject
     public float enemyWaitUntilHealthReloadStarts => m_EnemyWaitUntilHealthReloadStarts;
 
     public float fastBootsSpeedMultiplier => m_FastBootsSpeedMultiplier;
+
+    public float whenReceivingShotHeadXRotationMin => m_WhenReceivingShotHeadXRotationMin;
+
+    public float whenReceivingShotHeadXRotationMax => m_WhenReceivingShotHeadXRotationMax;
+
     public GameObject enemyPrefab => m_EnemyPrefab;
 }

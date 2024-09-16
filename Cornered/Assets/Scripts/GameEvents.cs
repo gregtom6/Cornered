@@ -20,6 +20,11 @@ public struct NewMatchStartedEvent
 
 public struct TimeOverHappenedEvent { }
 
+public struct CharacterReceivedShotEvent
+{
+    public ECharacterType charType;
+}
+
 public struct EnemyGeneratedEvent
 {
     public GameObject enemy;

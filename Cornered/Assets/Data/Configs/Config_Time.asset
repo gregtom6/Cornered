@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PrepareTimeEndInSec: 200
   m_WaitBetweenPreviousAndNewMatchInSec: 2
+  m_ReceivingHitPostProcessTime: 0.5
