@@ -16,6 +16,7 @@ public abstract class CWeapon : MonoBehaviour
 
     protected float m_CooldownStartTime;
     protected bool m_IsReadyToShoot;
+    protected bool m_IsShootDisabled;
     protected IReadOnlyList<CAudioPlayer> m_EquippedAudioPlayers;
 
     public float GetCooldownTimeLeftPercentageBetween01()
@@ -100,5 +101,20 @@ public abstract class CWeapon : MonoBehaviour
         {
             m_EquippedAudioPlayers[i].Play(m_EquippedAudioPlayers[i].transform);
         }
+    }
+
+    private void OnEnable()
+    {
+        EventManager.AddListener<CharacterDefeatedEvent>(OnCharacterDefeated);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.RemoveListener<CharacterDefeatedEvent>(OnCharacterDefeated);
+    }
+
+    private void OnCharacterDefeated(CharacterDefeatedEvent e)
+    {
+        m_IsShootDisabled = true;
     }
 }

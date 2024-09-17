@@ -36,7 +36,7 @@ public class MatchManager : MonoBehaviour
     {
         if (e.characterType == ECharacterType.Player)
         {
-            InitiateGameOver();
+            //InitiateGameOver();
         }
         else if (e.characterType == ECharacterType.Enemy)
         {

@@ -29,11 +29,18 @@ public partial class CEnemyController : CCharacterController
     private void OnEnable()
     {
         EventManager.AddListener<TimeOverHappenedEvent>(OnTimeOverHappened);
+        EventManager.AddListener<CharacterDefeatedEvent>(OnCharacterDefeated);
     }
 
     private void OnDisable()
     {
         EventManager.RemoveListener<TimeOverHappenedEvent>(OnTimeOverHappened);
+        EventManager.RemoveListener<CharacterDefeatedEvent>(OnCharacterDefeated);
+    }
+
+    private void OnCharacterDefeated(CharacterDefeatedEvent ev)
+    {
+        m_State = ev.characterType == ECharacterType.Enemy ? EEnemyState.OwnDeath : EEnemyState.PlayerDeath;
     }
 
     private void Start()
@@ -50,7 +57,9 @@ public partial class CEnemyController : CCharacterController
 
     private void Update()
     {
-        if (m_State == EEnemyState.Waiting)
+        if (m_State == EEnemyState.Waiting || 
+            m_State == EEnemyState.PlayerDeath || 
+            m_State == EEnemyState.OwnDeath)
         {
             return;
         }

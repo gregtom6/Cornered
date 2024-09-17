@@ -8,6 +8,7 @@ using UnityEngine.Rendering;
 public class CPostProcessController : MonoBehaviour
 {
     private bool m_PlayerReceivedShot;
+    private bool m_PlayerDied;
     private UniversalRenderPipelineAsset m_UrpAsset;
     private Volume m_Volume;
     private float m_TimeWhenPostProcessStarted;
@@ -23,11 +24,25 @@ public class CPostProcessController : MonoBehaviour
     private void OnEnable()
     {
         EventManager.AddListener<CharacterReceivedShotEvent>(OnCharacterReceivedShot);
+        EventManager.AddListener<CharacterDefeatedEvent>(OnCharacterDefeated);
     }
 
     private void OnDisable()
     {
         EventManager.RemoveListener<CharacterReceivedShotEvent>(OnCharacterReceivedShot);
+        EventManager.RemoveListener<CharacterDefeatedEvent>(OnCharacterDefeated);
+    }
+
+    private void OnCharacterDefeated(CharacterDefeatedEvent ev)
+    {
+        if (ev.characterType == ECharacterType.Enemy)
+        {
+            return;
+        }
+
+        m_PlayerDied = true;
+        m_TimeWhenPostProcessStarted = Time.time;
+        SetShotEffect(0f);
     }
 
     private void OnCharacterReceivedShot(CharacterReceivedShotEvent characterReceivedShot)
@@ -56,6 +71,13 @@ public class CPostProcessController : MonoBehaviour
 
     private void Update()
     {
+        ProcessShotReceived();
+
+        ProcessPlayerDied();
+    }
+
+    private void ProcessShotReceived()
+    {
         if (!m_PlayerReceivedShot)
         {
             return;
@@ -71,5 +93,19 @@ public class CPostProcessController : MonoBehaviour
         {
             m_PlayerReceivedShot = false;
         }
+    }
+
+    private void ProcessPlayerDied()
+    {
+        if (!m_PlayerDied)
+        {
+            return;
+        }
+
+        float currentTime = Time.time - m_TimeWhenPostProcessStarted;
+        float percentage = currentTime / AllConfig.Instance.TimeConfig.waitTimeUntilGameOver;
+        percentage = Mathf.Clamp01(percentage);
+
+        SetShotEffect(percentage);
     }
 }

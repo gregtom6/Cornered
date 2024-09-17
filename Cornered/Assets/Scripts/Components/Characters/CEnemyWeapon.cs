@@ -19,6 +19,11 @@ public class CEnemyWeapon : CWeapon
 
     private void Update()
     {
+        if (m_IsShootDisabled)
+        {
+            return;
+        }
+
         if (m_IsReadyToShoot)
         {
             if (m_ShotDetector.isValidHit && IsDetectingHealthComponentDirectly(out CHealth health))

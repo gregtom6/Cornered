@@ -38,6 +38,11 @@ public class CPlayerWeapon : CWeapon
 
     private void OnLeftPointerDown(Vector2 obj)
     {
+        if (m_IsShootDisabled)
+        {
+            return;
+        }
+
         ShootWithEquippedWeapon();
     }
 

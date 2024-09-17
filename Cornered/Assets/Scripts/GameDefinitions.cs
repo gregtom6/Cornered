@@ -20,6 +20,8 @@ public enum EEnemyState
     Waiting,
     ShootPosition,
     DefendPosition,
+    PlayerDeath,
+    OwnDeath,
 
     Count,
 }
