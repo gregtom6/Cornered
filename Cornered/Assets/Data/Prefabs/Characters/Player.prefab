@@ -1522,6 +1522,7 @@ GameObject:
   - component: {fileID: 4094154704245678516}
   - component: {fileID: 191498337766231172}
   - component: {fileID: 6963786029566028479}
+  - component: {fileID: 240242333074179502}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1720,6 +1721,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 8078359445537564418}
+--- !u!114 &240242333074179502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6170694111097863793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c65eecf9904fc42815fdab2a72c395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyAnimator: {fileID: 8078359445537564418}
+  controller: {fileID: 4898167865936725133}
+  head: {fileID: 6170694112272487522}
+  body: {fileID: 6170694111168635365}
+  leftUpperArm: {fileID: 6170694111981655422}
+  rightUpperArm: {fileID: 6170694111961499356}
+  leftLowerArm: {fileID: 6170694112041662120}
+  rightLowerArm: {fileID: 6170694110825433426}
+  leftUpperLeg: {fileID: 6170694111812558202}
+  rightUpperLeg: {fileID: 6170694110653430058}
+  leftLowerLeg: {fileID: 6170694110726870626}
+  rightLowerLeg: {fileID: 6170694110945782846}
+  bodyparts:
+  - {fileID: 6170694111168635365}
+  - {fileID: 6170694111812558202}
+  - {fileID: 6170694110726870626}
+  - {fileID: 6170694110653430058}
+  - {fileID: 6170694110945782846}
+  - {fileID: 6170694111981655422}
+  - {fileID: 6170694112041662120}
+  - {fileID: 6170694111961499356}
+  - {fileID: 6170694110825433426}
 --- !u!1 &6170694111168635365
 GameObject:
   m_ObjectHideFlags: 0
