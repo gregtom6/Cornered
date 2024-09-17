@@ -6,7 +6,6 @@ using UnityEngine.AI;
 
 public class CRagdollActivator : MonoBehaviour
 {
-    public bool isPlayer;
     public Animator bodyAnimator;
     public CCharacterController controller;
     public GameObject head;
@@ -28,8 +27,8 @@ public class CRagdollActivator : MonoBehaviour
         bodyAnimator.enabled = false;
         controller.enabled = false;
 
-        head.AddComponent<BoxCollider>();
-        body.AddComponent<BoxCollider>();
+        head.GetComponent<BoxCollider>().enabled = true;
+        body.GetComponent<BoxCollider>().enabled = true;
         Rigidbody headRigidBody = head.AddComponent<Rigidbody>();
         headRigidBody.isKinematic = false;
         headRigidBody.useGravity = true;
@@ -62,21 +61,21 @@ public class CRagdollActivator : MonoBehaviour
         anchor.y = anchor.y * -1;
         rightLowerArm.GetComponent<CharacterJoint>().anchor = anchor;
 
-        if (!isPlayer)
+        leftUpperLeg.GetComponent<BoxCollider>().enabled = true;
+        leftLowerLeg.GetComponent<BoxCollider>().enabled = true;
+
+        rightUpperLeg.GetComponent<BoxCollider>().enabled = true;
+        rightLowerLeg.GetComponent<BoxCollider>().enabled = true;
+
+        leftUpperArm.GetComponent<BoxCollider>().enabled = true;
+        leftLowerArm.GetComponent<BoxCollider>().enabled = true;
+
+        rightUpperArm.GetComponent<BoxCollider>().enabled = true;
+        rightLowerArm.GetComponent<BoxCollider>().enabled = true;
+
+        if (navmeshAgent != null)
         {
             navmeshAgent.enabled = false;
-
-            leftUpperLeg.AddComponent<BoxCollider>();
-            leftLowerLeg.AddComponent<BoxCollider>();
-
-            rightUpperLeg.AddComponent<BoxCollider>();
-            rightLowerLeg.AddComponent<BoxCollider>();
-
-            leftUpperArm.AddComponent<BoxCollider>();
-            leftLowerArm.AddComponent<BoxCollider>();
-
-            rightUpperArm.AddComponent<BoxCollider>();
-            rightLowerArm.AddComponent<BoxCollider>();
         }
     }
 }
