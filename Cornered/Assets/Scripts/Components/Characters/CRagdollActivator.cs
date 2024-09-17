@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CRagdollActivator : MonoBehaviour
 {
+    public bool isPlayer;
     public Animator bodyAnimator;
-    public CPlayerController controller;
+    public CCharacterController controller;
     public GameObject head;
     public GameObject body;
     public GameObject leftUpperArm;
@@ -16,6 +19,7 @@ public class CRagdollActivator : MonoBehaviour
     public GameObject rightUpperLeg;
     public GameObject leftLowerLeg;
     public GameObject rightLowerLeg;
+    public NavMeshAgent navmeshAgent;
     public List<GameObject> bodyparts = new();
 
     // Start is called before the first frame update
@@ -24,6 +28,8 @@ public class CRagdollActivator : MonoBehaviour
         bodyAnimator.enabled = false;
         controller.enabled = false;
 
+        head.AddComponent<BoxCollider>();
+        body.AddComponent<BoxCollider>();
         Rigidbody headRigidBody = head.AddComponent<Rigidbody>();
         headRigidBody.isKinematic = false;
         headRigidBody.useGravity = true;
@@ -43,25 +49,34 @@ public class CRagdollActivator : MonoBehaviour
         rightUpperLeg.GetComponent<CharacterJoint>().connectedBody = body.GetComponent<Rigidbody>();
 
         leftLowerArm.GetComponent<CharacterJoint>().connectedBody = leftUpperArm.GetComponent<Rigidbody>();
-        rightLowerArm.GetComponent<CharacterJoint>().connectedBody= rightUpperArm.GetComponent<Rigidbody>();
+        rightLowerArm.GetComponent<CharacterJoint>().connectedBody = rightUpperArm.GetComponent<Rigidbody>();
 
-        leftLowerLeg.GetComponent<CharacterJoint>().connectedBody=leftUpperArm.GetComponent<Rigidbody>();
-        rightLowerLeg.GetComponent<CharacterJoint>().connectedBody=rightUpperArm.GetComponent<Rigidbody>();
+        leftLowerLeg.GetComponent<CharacterJoint>().connectedBody = leftUpperLeg.GetComponent<Rigidbody>();
+        rightLowerLeg.GetComponent<CharacterJoint>().connectedBody = rightUpperLeg.GetComponent<Rigidbody>();
 
         Vector3 anchor = rightUpperArm.GetComponent<CharacterJoint>().anchor;
         anchor.y = anchor.y * -1;
         rightUpperArm.GetComponent<CharacterJoint>().anchor = anchor;
 
-        anchor=rightLowerArm.GetComponent<CharacterJoint>().anchor;
+        anchor = rightLowerArm.GetComponent<CharacterJoint>().anchor;
         anchor.y = anchor.y * -1;
         rightLowerArm.GetComponent<CharacterJoint>().anchor = anchor;
 
-        anchor=rightUpperLeg.GetComponent<CharacterJoint>().anchor;
-        anchor.y= anchor.y * -1;
-        rightUpperLeg.GetComponent <CharacterJoint>().anchor = anchor;
+        if (!isPlayer)
+        {
+            navmeshAgent.enabled = false;
 
-        anchor=rightLowerLeg.GetComponent<CharacterJoint>().anchor;
-        anchor.y=anchor.y * -1;
-        rightLowerLeg.GetComponent <CharacterJoint>().anchor = anchor;
+            leftUpperLeg.AddComponent<BoxCollider>();
+            leftLowerLeg.AddComponent<BoxCollider>();
+
+            rightUpperLeg.AddComponent<BoxCollider>();
+            rightLowerLeg.AddComponent<BoxCollider>();
+
+            leftUpperArm.AddComponent<BoxCollider>();
+            leftLowerArm.AddComponent<BoxCollider>();
+
+            rightUpperArm.AddComponent<BoxCollider>();
+            rightLowerArm.AddComponent<BoxCollider>();
+        }
     }
 }
