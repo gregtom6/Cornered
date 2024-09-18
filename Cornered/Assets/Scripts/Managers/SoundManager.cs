@@ -19,15 +19,16 @@ public class SoundManager : MonoBehaviour
     private List<CPooledAudioSource> m_ActiveAudios = new();
     private Dictionary<EAudioCategory, IObjectPool<CPooledAudioSource>> m_AudioSources = new();
 
-    public void Play(SOAudioClipConfig audioClipConfig)
+    public CPooledAudioSource Play(SOAudioClipConfig audioClipConfig)
     {
         CPooledAudioSource audioSource = m_AudioSources[audioClipConfig.audioCategory].Get();
         audioSource.Play(audioClipConfig);
         m_ActiveAudios.Add(audioSource);
 
+        return audioSource;
     }
 
-    public void Play(SOAudioClipConfig audioClipConfig, Transform spatialParent)
+    public CPooledAudioSource Play(SOAudioClipConfig audioClipConfig, Transform spatialParent)
     {
         CPooledAudioSource audioSource = m_AudioSources[audioClipConfig.audioCategory].Get();
 
@@ -37,6 +38,18 @@ public class SoundManager : MonoBehaviour
             m_ActiveAudios.Add(audioSource);
             audioSource.SetParent(spatialParent);
         }
+
+        return audioSource;
+    }
+
+    public void SetVolume(CPooledAudioSource pooledAudioSource, float volume)
+    {
+        if (pooledAudioSource == null)
+        {
+            return;
+        }
+
+        pooledAudioSource.SetVolume(volume);
     }
 
     public void Stop(SOAudioClipConfig audioClipConfig)

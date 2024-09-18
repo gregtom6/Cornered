@@ -29,11 +29,18 @@ public partial class CEnemyController : CCharacterController
     private void OnEnable()
     {
         EventManager.AddListener<TimeOverHappenedEvent>(OnTimeOverHappened);
+        EventManager.AddListener<CharacterDefeatedEvent>(OnCharacterDefeated);
     }
 
     private void OnDisable()
     {
         EventManager.RemoveListener<TimeOverHappenedEvent>(OnTimeOverHappened);
+        EventManager.RemoveListener<CharacterDefeatedEvent>(OnCharacterDefeated);
+    }
+
+    private void OnCharacterDefeated(CharacterDefeatedEvent ev)
+    {
+        m_State = ev.characterType == ECharacterType.Enemy ? EEnemyState.OwnDeath : EEnemyState.PlayerDeath;
     }
 
     private void Start()
@@ -50,7 +57,9 @@ public partial class CEnemyController : CCharacterController
 
     private void Update()
     {
-        if (m_State == EEnemyState.Waiting)
+        if (m_State == EEnemyState.Waiting || 
+            m_State == EEnemyState.PlayerDeath || 
+            m_State == EEnemyState.OwnDeath)
         {
             return;
         }
@@ -67,13 +76,14 @@ public partial class CEnemyController : CCharacterController
     {
         if (m_State == EEnemyState.DefendPosition)
         {
-            HideSpotFinder hideSpotFinder = new HideSpotFinder(m_MovementTargetPoint, transform, m_PlayerPillarLayerMask, m_PillarLayerMask);
+            HideSpotFinder hideSpotFinder = new HideSpotFinder(m_MovementTargetPoint, CCharacterManager.instance.playerTransform, transform, m_PlayerPillarLayerMask, m_PillarLayerMask);
             Vector3? position = hideSpotFinder.GetClosestHidingSpot();
             m_NavMeshAgent.destination = position.HasValue ? position.Value : transform.position;
         }
         else if (m_State == EEnemyState.ShootPosition)
         {
-            m_NavMeshAgent.destination = CCharacterManager.instance.playerPosition;
+            NavMesh.SamplePosition(CCharacterManager.instance.playerPosition, out NavMeshHit hit, AllConfig.Instance.AIConfig.navmeshSamplePositionDistance, NavMesh.AllAreas);
+            m_NavMeshAgent.destination = hit.position;
         }
     }
 

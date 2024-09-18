@@ -16,6 +16,12 @@ public class SOAIConfig : ScriptableObject
     [SerializeField] private float m_PreservedDistanceBetweenPlayerAndMe;
     [SerializeField] private float m_NavmeshSamplePositionDistance;
     [SerializeField] private float m_RayTraverseStepSizeToDiscoverHidingPlace;
+    [SerializeField] private float m_AngleRotationChecksToDetectHidingSpot;
+    [SerializeField] private float m_RayLengthToFindObstacle;
+    [SerializeField] private float m_ObstacleFindingRayStartingStepCount;
+    [SerializeField] private float m_ObstacleFindingRayMaxDistance;
+    [SerializeField] private float m_ObstacleFindingRayDeltaStepSize;
+    [SerializeField] private Vector3 m_HideSpotFinderOriginOffset;
 
     public float hideWhenLifeLessThanPercentage => m_HideWhenLifeLessThanPercentage;
 
@@ -26,4 +32,16 @@ public class SOAIConfig : ScriptableObject
     public float navmeshSamplePositionDistance => m_NavmeshSamplePositionDistance;
 
     public float rayTraverseStepSizeToDiscoverHidingPlace => m_RayTraverseStepSizeToDiscoverHidingPlace;
+
+    public float angleRotationChecksToDetectHidingSpot => m_AngleRotationChecksToDetectHidingSpot;
+
+    public float rayLengthToFindObstacle => m_RayLengthToFindObstacle;  
+
+    public float obstacleFindingRayStartingStepCount => m_ObstacleFindingRayStartingStepCount;
+
+    public float obstacleFindingRayMaxDistance => m_ObstacleFindingRayMaxDistance;
+
+    public float obstacleFindingRayDeltaStepSize => m_ObstacleFindingRayDeltaStepSize;
+
+    public Vector3 hideSpotFinderOriginOffset => m_HideSpotFinderOriginOffset;
 }

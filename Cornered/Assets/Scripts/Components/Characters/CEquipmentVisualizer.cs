@@ -10,7 +10,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
-using static UnityEditor.Rendering.FilterWindow;
 
 [RequireComponent(typeof(CWeapon))]
 public class CEquipmentVisualizer : MonoBehaviour

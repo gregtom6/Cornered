@@ -14,6 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HideWhenLifeLessThanPercentage: 70
   m_AttackWhenLifeMoreThanPercentage: 100
-  m_PreservedDistanceBetweenPlayerAndMe: 20
-  m_NavmeshSamplePositionDistance: 20
-  m_RayTraverseStepSizeToDiscoverHidingPlace: 4
+  m_PreservedDistanceBetweenPlayerAndMe: 10
+  m_NavmeshSamplePositionDistance: 1000
+  m_RayTraverseStepSizeToDiscoverHidingPlace: 2
+  m_AngleRotationChecksToDetectHidingSpot: 8
+  m_RayLengthToFindObstacle: 15
+  m_ObstacleFindingRayStartingStepCount: 1
+  m_ObstacleFindingRayMaxDistance: 30
+  m_ObstacleFindingRayDeltaStepSize: 1
+  m_HideSpotFinderOriginOffset: {x: 0, y: 1, z: 0}

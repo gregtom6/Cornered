@@ -32,7 +32,6 @@ public class CCharacterManager : MonoBehaviour
 
         return null;
     }
-
     private void Awake()
     {
         instance = this;
@@ -41,13 +40,11 @@ public class CCharacterManager : MonoBehaviour
     private void OnEnable()
     {
         EventManager.AddListener<NewMatchStartedEvent>(OnNewMatchStarted);
-        EventManager.AddListener<CharacterDefeatedEvent>(OnCharacterDefeatedEvent);
     }
 
     private void OnDisable()
     {
         EventManager.RemoveListener<NewMatchStartedEvent>(OnNewMatchStarted);
-        EventManager.RemoveListener<CharacterDefeatedEvent>(OnCharacterDefeatedEvent);
     }
 
     private void OnNewMatchStarted(NewMatchStartedEvent ev)
@@ -56,14 +53,4 @@ public class CCharacterManager : MonoBehaviour
         m_EnemyInstanceGameObject = Instantiate(AllConfig.Instance.CharacterConfig.enemyPrefab, selectedTransform.position, Quaternion.identity, null);
         EventManager.Raise(new EnemyGeneratedEvent { enemy = m_EnemyInstanceGameObject });
     }
-
-    private void OnCharacterDefeatedEvent(CharacterDefeatedEvent ev)
-    {
-        if (ev.characterType == ECharacterType.Enemy)
-        {
-            Destroy(m_EnemyInstanceGameObject);
-        }
-    }
-
-
 }

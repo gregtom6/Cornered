@@ -933,7 +933,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -1521,7 +1521,10 @@ GameObject:
   - component: {fileID: 8744795810692557121}
   - component: {fileID: 4094154704245678516}
   - component: {fileID: 191498337766231172}
-  - component: {fileID: 6963786029566028479}
+  - component: {fileID: 240242333074179502}
+  - component: {fileID: 2657696612278603829}
+  - component: {fileID: 1440590010043799602}
+  - component: {fileID: 570663499448876894}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1630,6 +1633,7 @@ MonoBehaviour:
   - {fileID: 324531080590195692}
   - {fileID: 7650483262289167305}
   m_GameInput: {fileID: 11400000, guid: a40925a3114a1c641b1de7c1e02c3ad6, type: 2}
+  m_InteractableDetector: {fileID: 4871763440169886117}
 --- !u!114 &8744795810692557121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1707,7 +1711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IndicatorTransform: {fileID: 1377813073936319389}
   m_SpriteRenderer: {fileID: 7351186793805202578}
---- !u!114 &6963786029566028479
+--- !u!114 &240242333074179502
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1716,10 +1720,69 @@ MonoBehaviour:
   m_GameObject: {fileID: 6170694111097863793}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e6de0879b483604286d31f563f58829, type: 3}
+  m_Script: {fileID: 11500000, guid: b9c65eecf9904fc42815fdab2a72c395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BodyAnimator: {fileID: 8078359445537564418}
+  m_Head: {fileID: 6170694112272487522}
+  m_Body: {fileID: 6170694111168635365}
+  m_LeftUpperArm: {fileID: 6170694111981655422}
+  m_RightUpperArm: {fileID: 6170694111961499356}
+  m_LeftLowerArm: {fileID: 6170694112041662120}
+  m_RightLowerArm: {fileID: 6170694110825433426}
+  m_LeftUpperLeg: {fileID: 6170694111812558202}
+  m_RightUpperLeg: {fileID: 6170694110653430058}
+  m_LeftLowerLeg: {fileID: 6170694110726870626}
+  m_RightLowerLeg: {fileID: 6170694110945782846}
+  m_BodyAndLimbs:
+  - {fileID: 6170694111168635365}
+  - {fileID: 6170694111812558202}
+  - {fileID: 6170694110726870626}
+  - {fileID: 6170694110653430058}
+  - {fileID: 6170694110945782846}
+  - {fileID: 6170694111981655422}
+  - {fileID: 6170694112041662120}
+  - {fileID: 6170694111961499356}
+  - {fileID: 6170694110825433426}
+--- !u!114 &2657696612278603829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6170694111097863793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1fb2ee71edca545a67f73bca9c014c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1440590010043799602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6170694111097863793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f154c9a2ec3e2f45b174c052b7e2ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AudioClipConfigToPlay: {fileID: 11400000, guid: 0d71596ea5e37744ab3258bf66ab68bb, type: 2}
+--- !u!114 &570663499448876894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6170694111097863793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f3bec1e6d9bb124ca326e4958ce8eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 8078359445537564418}
+  m_InteractableDetector: {fileID: 4871763440169886117}
 --- !u!1 &6170694111168635365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,6 +1794,7 @@ GameObject:
   - component: {fileID: 6170694111168635354}
   - component: {fileID: 6170694111168635353}
   - component: {fileID: 6170694111168635352}
+  - component: {fileID: 3087033119715063874}
   m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
@@ -1805,6 +1869,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3087033119715063874
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6170694111168635365}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: -0.0000038146973, z: -0.0000003054738}
 --- !u!1 &6170694111352708201
 GameObject:
   m_ObjectHideFlags: 0
@@ -2336,6 +2421,7 @@ GameObject:
   - component: {fileID: 6170694112272487523}
   - component: {fileID: 6170694112272487526}
   - component: {fileID: 6170694112272487521}
+  - component: {fileID: 5972605069528473670}
   m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
@@ -2409,6 +2495,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5972605069528473670
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6170694112272487522}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6812024739234199967
 GameObject:
   m_ObjectHideFlags: 0
@@ -2749,10 +2856,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10
-  m_Range: 10
-  m_SpotAngle: 93.766624
-  m_InnerSpotAngle: 85.568695
+  m_Intensity: 27.1
+  m_Range: 18.35
+  m_SpotAngle: 135.5915
+  m_InnerSpotAngle: 0
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2

@@ -39,6 +39,11 @@ public class CPooledAudioSource : MonoBehaviour
         m_AudioCategory = audioClipConfig.audioCategory;
     }
 
+    public void SetVolume(float volume)
+    {
+        m_AudioSource.volume = volume;
+    }
+
     public void Stop()
     {
         m_AudioSource.Stop();

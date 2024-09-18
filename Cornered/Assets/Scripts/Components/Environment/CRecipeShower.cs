@@ -58,11 +58,11 @@ public class CRecipeShower : MonoBehaviour
 
     private void AddOperatorIfNeeded(int index, int materialCount, ref Vector3 positionForGeneration)
     {
-        if (IsIndexBeforeLastElement(index, materialCount))
+        if (IsIndexBeforeAlmostLastElement(index, materialCount))
         {
             CreateOperator(AllConfig.Instance.RecipeConfig.plusSignMaterial, ref positionForGeneration);
         }
-        else
+        else if(IsIndexBeforeLastElement(index, materialCount))
         {
             CreateOperator(AllConfig.Instance.RecipeConfig.equalSignMaterial, ref positionForGeneration);
         }
@@ -70,9 +70,14 @@ public class CRecipeShower : MonoBehaviour
 
     //TODO: replace into an util class
 
-    private bool IsIndexBeforeLastElement(int index, int count)
+    private bool IsIndexBeforeAlmostLastElement(int index, int count)
     {
         return index + 2 < count;
+    }
+
+    private bool IsIndexBeforeLastElement(int index, int count)
+    {
+        return index + 1 < count;
     }
 
     private void CreateOperator(Material operatorMaterial, ref Vector3 positionForGeneration)
