@@ -12,19 +12,33 @@ public class CAudioPlayer : MonoBehaviour
 {
     [SerializeField] private SOAudioClipConfig m_AudioClipConfigToPlay;
 
+    private CPooledAudioSource m_ReceivedPooledAudioSource;
+
     public void Play()
     {
-        SoundManager.instance.Play(m_AudioClipConfigToPlay);
+        m_ReceivedPooledAudioSource = SoundManager.instance.Play(m_AudioClipConfigToPlay);
     }
 
     public void Play(Transform spatialParent)
     {
-        SoundManager.instance.Play(m_AudioClipConfigToPlay, spatialParent);
+        m_ReceivedPooledAudioSource = SoundManager.instance.Play(m_AudioClipConfigToPlay, spatialParent);
+    }
+
+    public void SetVolume(float volume)
+    {
+        if (m_ReceivedPooledAudioSource == null)
+        {
+            return;
+        }
+
+        SoundManager.instance.SetVolume(m_ReceivedPooledAudioSource, volume);
     }
 
     public void Stop()
     {
         SoundManager.instance.Stop(m_AudioClipConfigToPlay);
+
+        m_ReceivedPooledAudioSource = null;
     }
 
     private void Start()

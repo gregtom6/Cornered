@@ -14,8 +14,9 @@ public class MatchManager : MonoBehaviour
     [SerializeField] private List<SceneSetting> m_GameOverScenesToLoad = new();
 
     private int m_MatchIndex;
-    private float m_MatchEndedStartTime;
+    private float m_StartTime;
     private bool m_ShouldWaitUntilNewMatch;
+    private bool m_ShouldWaitUntilGameOver;
 
     private void OnEnable()
     {
@@ -34,26 +35,45 @@ public class MatchManager : MonoBehaviour
 
     private void OnCharacterDefeated(CharacterDefeatedEvent e)
     {
-        if (e.characterType == ECharacterType.Player)
-        {
-            //InitiateGameOver();
-        }
-        else if (e.characterType == ECharacterType.Enemy)
+        m_StartTime = Time.time;
+        m_ShouldWaitUntilGameOver = true;
+
+        if (e.characterType == ECharacterType.Enemy)
         {
             m_MatchIndex += 1;
-            m_MatchEndedStartTime = Time.time;
-            m_ShouldWaitUntilNewMatch = true;
         }
     }
 
     private void Update()
+    {
+        ProcessWaitUntilNewMatch();
+
+        ProcessWaitUntilGameOver();
+    }
+
+    private void ProcessWaitUntilGameOver()
+    {
+        if (!m_ShouldWaitUntilGameOver)
+        {
+            return;
+        }
+
+        float currentTime = Time.time - m_StartTime;
+        if (currentTime >= AllConfig.Instance.TimeConfig.waitTimeUntilGameOver)
+        {
+            m_ShouldWaitUntilGameOver = false;
+            InitiateGameOver();
+        }
+    }
+
+    private void ProcessWaitUntilNewMatch()
     {
         if (!m_ShouldWaitUntilNewMatch)
         {
             return;
         }
 
-        float currentTime = Time.time - m_MatchEndedStartTime;
+        float currentTime = Time.time - m_StartTime;
         if (currentTime >= AllConfig.Instance.TimeConfig.waitBetweenPreviousAndNewMatchInSec)
         {
             m_ShouldWaitUntilNewMatch = false;
