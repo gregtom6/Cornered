@@ -38,36 +38,6 @@ public partial class CEnemyController : CCharacterController
             m_PillarLayerMask = pillarLayerMask;
             m_PlayerLayerMask = playerLayerMask;
         }
-
-        private bool IsThisPointOutsideColliders(Vector3 currentPoint)
-        {
-            return !HidingRoomElementsCollector.Instance.IsAnyColliderContainsPosition(currentPoint);
-        }
-
-        private bool IsThisPointNotVisibleByPlayer(Vector3 currentPoint)
-        {
-            Vector3 direction = CCharacterManager.instance.playerTransform.position - currentPoint;
-
-            float distance = direction.magnitude;
-            direction.Normalize();
-
-#if UNITY_EDITOR
-            DebugArrow.ForDebug(currentPoint, direction * distance, Color.yellow);
-#endif
-
-            if (Physics.Raycast(currentPoint, direction, out RaycastHit hit, distance, m_PlayerLayerMask))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        private bool ThisRayIsNotHittingPlayer(RaycastHit raycastHits)
-        {
-            return raycastHits.transform != CCharacterManager.instance.playerTransform;
-        }
-
         public Vector3? GetClosestHidingSpot()
         {
             float currentAngle = 0f;
@@ -117,7 +87,37 @@ public partial class CEnemyController : CCharacterController
             return selectedHideSpot;
         }
 
-        List<Vector3> GetHighlightedHideSpots(List<ObstacleHideSpots> obstacles)
+        private bool IsThisPointOutsideColliders(Vector3 currentPoint)
+        {
+            return !HidingRoomElementsCollector.Instance.IsAnyColliderContainsPosition(currentPoint);
+        }
+
+        private bool IsThisPointNotVisibleByPlayer(Vector3 currentPoint)
+        {
+            Vector3 direction = CCharacterManager.instance.playerTransform.position - currentPoint;
+
+            float distance = direction.magnitude;
+            direction.Normalize();
+
+#if UNITY_EDITOR
+            DebugArrow.ForDebug(currentPoint, direction * distance, Color.yellow);
+#endif
+
+            if (Physics.Raycast(currentPoint, direction, out RaycastHit hit, distance, m_PlayerLayerMask))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool ThisRayIsNotHittingPlayer(RaycastHit raycastHits)
+        {
+            return raycastHits.transform != CCharacterManager.instance.playerTransform;
+        }
+
+
+        private List<Vector3> GetHighlightedHideSpots(List<ObstacleHideSpots> obstacles)
         {
             List<Vector3> highlightedHideSpots = new();
 
