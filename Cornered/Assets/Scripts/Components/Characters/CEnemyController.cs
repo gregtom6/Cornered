@@ -82,7 +82,8 @@ public partial class CEnemyController : CCharacterController
         }
         else if (m_State == EEnemyState.ShootPosition)
         {
-            m_NavMeshAgent.destination = CCharacterManager.instance.playerPosition;
+            NavMesh.SamplePosition(CCharacterManager.instance.playerPosition, out NavMeshHit hit, AllConfig.Instance.AIConfig.navmeshSamplePositionDistance, NavMesh.AllAreas);
+            m_NavMeshAgent.destination = hit.position;
         }
     }
 
