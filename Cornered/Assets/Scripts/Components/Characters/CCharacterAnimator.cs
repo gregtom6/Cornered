@@ -10,14 +10,17 @@ using UnityEngine;
 
 [RequireComponent(typeof(CCharacterController))]
 [RequireComponent(typeof(CWeapon))]
-public class CCharacterAnimator : MonoBehaviour
+public abstract class CCharacterAnimator : MonoBehaviour
 {
     private readonly int ANIM_PARAM_LEGSTATE = Animator.StringToHash("legState");
     private readonly int ANIM_PARAM_ARMWEAPON = Animator.StringToHash("useWeapon");
 
     [SerializeField] private Animator m_Animator;
+
     private CCharacterController m_CharacterController;
     private CWeapon m_Weapon;
+
+    protected abstract bool IsDetectingInteractable();
 
     private void Start()
     {
@@ -28,6 +31,6 @@ public class CCharacterAnimator : MonoBehaviour
     private void Update()
     {
         m_Animator.SetInteger(ANIM_PARAM_LEGSTATE, (int)m_CharacterController.characterMovementState);
-        m_Animator.SetBool(ANIM_PARAM_ARMWEAPON, m_Weapon.IsThereEquippedWeapon());
+        m_Animator.SetBool(ANIM_PARAM_ARMWEAPON, m_Weapon.IsThereEquippedWeapon() && !IsDetectingInteractable());
     }
 }

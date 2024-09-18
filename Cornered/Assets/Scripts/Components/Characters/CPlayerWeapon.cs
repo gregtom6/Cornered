@@ -12,6 +12,7 @@ using UnityEngine.InputSystem.HID;
 public class CPlayerWeapon : CWeapon
 {
     [SerializeField] private GameInput m_GameInput;
+    [SerializeField] private CInteractableDetector m_InteractableDetector;
 
     protected override EItemType GetEquippedWeapon()
     {
@@ -38,7 +39,7 @@ public class CPlayerWeapon : CWeapon
 
     private void OnLeftPointerDown(Vector2 obj)
     {
-        if (m_IsShootDisabled)
+        if (m_IsShootDisabled || m_InteractableDetector.isValidHit)
         {
             return;
         }
