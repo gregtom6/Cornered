@@ -76,7 +76,7 @@ public partial class CEnemyController : CCharacterController
     {
         if (m_State == EEnemyState.DefendPosition)
         {
-            HideSpotFinder hideSpotFinder = new HideSpotFinder(m_MovementTargetPoint, transform, m_PlayerPillarLayerMask, m_PillarLayerMask);
+            HideSpotFinder hideSpotFinder = new HideSpotFinder(m_MovementTargetPoint, CCharacterManager.instance.playerTransform, transform, m_PlayerPillarLayerMask, m_PillarLayerMask);
             Vector3? position = hideSpotFinder.GetClosestHidingSpot();
             m_NavMeshAgent.destination = position.HasValue ? position.Value : transform.position;
         }

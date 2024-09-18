@@ -21,6 +21,7 @@ public class CRagdollActivator : MonoBehaviour
     [SerializeField] protected List<GameObject> m_BodyAndLimbs = new();
 
     private CCharacterController m_Controller;
+    private bool m_RagdollActivated;
     private List<GameObject> m_LimbsConnectingBody = new();
 
     protected void OnEnable()
@@ -45,7 +46,8 @@ public class CRagdollActivator : MonoBehaviour
 
     protected virtual void OnCharacterDefeated(CharacterDefeatedEvent ev)
     {
-        if ((m_Controller is CPlayerController && ev.characterType != ECharacterType.Player) ||
+        if (m_RagdollActivated || 
+            (m_Controller is CPlayerController && ev.characterType != ECharacterType.Player) ||
             (m_Controller is CEnemyController && ev.characterType != ECharacterType.Enemy))
         {
             return;
@@ -60,6 +62,8 @@ public class CRagdollActivator : MonoBehaviour
         SetBody(headRigidbody);
 
         SetLimbs();
+
+        m_RagdollActivated = true;
     }
 
     private void SetWholeBodyComponents()

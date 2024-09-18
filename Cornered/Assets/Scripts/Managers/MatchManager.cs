@@ -36,11 +36,15 @@ public class MatchManager : MonoBehaviour
     private void OnCharacterDefeated(CharacterDefeatedEvent e)
     {
         m_StartTime = Time.time;
-        m_ShouldWaitUntilGameOver = true;
 
         if (e.characterType == ECharacterType.Enemy)
         {
+            m_ShouldWaitUntilNewMatch = true;
             m_MatchIndex += 1;
+        }
+        else if (e.characterType == ECharacterType.Player)
+        {
+            m_ShouldWaitUntilGameOver = true;
         }
     }
 

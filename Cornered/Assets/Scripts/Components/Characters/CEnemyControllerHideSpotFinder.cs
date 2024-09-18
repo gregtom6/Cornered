@@ -8,24 +8,35 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public partial class CEnemyController : CCharacterController
 {
+    public class ObstacleHideSpots
+    {
+        public Transform obstacle;
+        public List<float> angles = new();
+        public List<Vector3> possibleHideSpots = new();
+        public Vector3 highlightedHideSpot;
+    }
+
     private class HideSpotFinder
     {
         private Transform m_MovementTargetPoint;
+        private Transform m_PlayerTransform;
         private Transform m_EnemyTransform;
         private LayerMask m_PillarLayerMask;
-        private LayerMask m_PillarPlayerLayerMask;
+        private LayerMask m_PlayerLayerMask;
 
-        public HideSpotFinder(Transform movementTargetPoint, Transform enemyTransform, LayerMask pillarPlayerLayerMask, LayerMask pillarLayerMask)
+        public HideSpotFinder(Transform movementTargetPoint, Transform playerTransform, Transform enemyTransform, LayerMask playerLayerMask, LayerMask pillarLayerMask)
         {
             m_MovementTargetPoint = movementTargetPoint;
+            m_PlayerTransform = playerTransform;
             m_EnemyTransform = enemyTransform;
             m_PillarLayerMask = pillarLayerMask;
-            m_PillarPlayerLayerMask = pillarLayerMask;
+            m_PlayerLayerMask = playerLayerMask;
         }
 
         private bool IsThisPointOutsideColliders(Vector3 currentPoint)
@@ -41,13 +52,167 @@ public partial class CEnemyController : CCharacterController
             direction.Normalize();
 
 #if UNITY_EDITOR
-            DebugArrow.ForDebug(currentPoint, direction * distance, Color.red);
+            DebugArrow.ForDebug(currentPoint, direction * distance, Color.yellow);
 #endif
 
-            if (Physics.Raycast(currentPoint, direction, out RaycastHit hit, distance, m_PillarPlayerLayerMask))
+            if (Physics.Raycast(currentPoint, direction, out RaycastHit hit, distance, m_PlayerLayerMask))
             {
-                if (m_PillarLayerMask == (m_PillarLayerMask | (1 << hit.transform.gameObject.layer)))
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool ThisRayIsNotHittingPlayer(RaycastHit raycastHits)
+        {
+            return raycastHits.transform != CCharacterManager.instance.playerTransform;
+        }
+
+        public Vector3? GetClosestHidingSpot()
+        {
+            float currentAngle = 0f;
+            Vector3? selectedHideSpot = null;
+            List<ObstacleHideSpots> possibleHideSpots = new();
+
+            do
+            {
+                RaycastHit raycastHits = MakeRaycastInSelectedAngle(currentAngle, AllConfig.Instance.AIConfig.rayLengthToFindObstacle, out Ray rayToUse, out bool isHit);
+
+                if (isHit && ThisRayIsNotHittingPlayer(raycastHits))
                 {
+                    ObstacleHideSpots loadedObstacleDetails = new ObstacleHideSpots();
+                    int foundInIndex = -1;
+                    if (IsObstacleAlreadyFound(raycastHits.transform, possibleHideSpots, out loadedObstacleDetails, out foundInIndex))
+                    {
+                        FindingPossiblePositionsAlongCurrentRay(raycastHits.point, rayToUse.direction, loadedObstacleDetails.possibleHideSpots);
+                        loadedObstacleDetails.angles.Add(currentAngle);
+                        possibleHideSpots[foundInIndex] = loadedObstacleDetails;
+                    }
+                    else
+                    {
+                        FindingPossiblePositionsAlongCurrentRay(raycastHits.point, rayToUse.direction, loadedObstacleDetails.possibleHideSpots);
+                        loadedObstacleDetails.obstacle = raycastHits.transform;
+                        loadedObstacleDetails.angles.Add(currentAngle);
+                        possibleHideSpots.Add(loadedObstacleDetails);
+                    }
+
+                }
+
+                currentAngle += AllConfig.Instance.AIConfig.angleRotationChecksToDetectHidingSpot;
+            }
+            while (currentAngle < 360f);
+
+            if (possibleHideSpots.Count > 0)
+            {
+                FillHighlightedHideSpots(possibleHideSpots);
+
+                List<Vector3> highlightedHideSpots = GetHighlightedHideSpots(possibleHideSpots);
+
+                SortHitsBasedOnDistance(highlightedHideSpots);
+
+                selectedHideSpot= highlightedHideSpots[0];
+                m_MovementTargetPoint.position = highlightedHideSpots[0];
+            }
+
+            return selectedHideSpot;
+        }
+
+        List<Vector3> GetHighlightedHideSpots(List<ObstacleHideSpots> obstacles)
+        {
+            List<Vector3> highlightedHideSpots = new();
+
+            for (int i = 0; i < obstacles.Count; i++)
+            {
+                highlightedHideSpots.Add(obstacles[i].highlightedHideSpot);
+            }
+
+            return highlightedHideSpots;
+        }
+
+        private void FillHighlightedHideSpots(List<ObstacleHideSpots> obstacles)
+        {
+            for (int i = 0; i < obstacles.Count; i++)
+            {
+                if (obstacles[i].possibleHideSpots.Count > 0)
+                {
+                    List<float> NormalizedAngles = new();
+
+                    for (int j = 0; j < obstacles[i].angles.Count; j++)
+                    {
+                        NormalizedAngles.Add(NormalizeAngle(obstacles[i].angles[j]));
+                    }
+
+                    float MeanAngle = CalculateCircularMean(NormalizedAngles);
+
+                    int closestAngleIndex = GetClosestIndex(NormalizedAngles, MeanAngle);
+
+                    if (closestAngleIndex >= 0)
+                    {
+                        Vector3 middleElement = obstacles[i].possibleHideSpots[closestAngleIndex];
+                        obstacles[i].highlightedHideSpot = middleElement;
+                    }
+                }
+            }
+        }
+
+        private int GetClosestIndex(List<float> normalizedAngles, float targetValue)
+        {
+            if (normalizedAngles.Count == 0)
+            {
+                return -1;
+            }
+
+            int ClosestIndex = 0;
+            float ClosestDistance = Mathf.Abs(normalizedAngles[0] - targetValue);
+
+            for (int i = 1; i < normalizedAngles.Count; ++i)
+            {
+                float CurrentDistance = Mathf.Abs(normalizedAngles[i] - targetValue);
+                if (CurrentDistance < ClosestDistance)
+                {
+                    ClosestDistance = CurrentDistance;
+                    ClosestIndex = i;
+                }
+            }
+
+            return ClosestIndex;
+        }
+
+        private float CalculateCircularMean(List<float> angles)
+        {
+            float sumSin = 0.0f;
+            float sumCos = 0.0f;
+
+            foreach (float angle in angles)
+            {
+                float Radians = angle * Mathf.Deg2Rad;
+                sumSin += Mathf.Sin(Radians);
+                sumCos += Mathf.Cos(Radians);
+            }
+
+            float meanRadians = Mathf.Atan2(sumSin, sumCos);
+
+            float meanDegrees = meanRadians * Mathf.Rad2Deg;
+            return NormalizeAngle(meanDegrees);
+        }
+
+        private float NormalizeAngle(float angle)
+        {
+            while (angle >= 360.0f) angle -= 360.0f;
+            while (angle < 0.0f) angle += 360.0f;
+            return angle;
+        }
+
+        private bool IsObstacleAlreadyFound(Transform obstacle, List<ObstacleHideSpots> obstacles, out ObstacleHideSpots loadedObstacleDetails, out int foundInIndex)
+        {
+            foundInIndex = -1;
+            loadedObstacleDetails = new ObstacleHideSpots();
+            for (int i = 0; i < obstacles.Count; i++)
+            {
+                if (obstacles[i].obstacle == obstacle)
+                {
+                    loadedObstacleDetails = obstacles[i];
+                    foundInIndex = i;
                     return true;
                 }
             }
@@ -55,75 +220,38 @@ public partial class CEnemyController : CCharacterController
             return false;
         }
 
-        private bool ThisRayIsNotHittingPlayer(RaycastHit[] raycastHits)
+        private RaycastHit MakeRaycastInSelectedAngle(float currentAngle, float rayLength, out Ray rayToUse, out bool isHit)
         {
-            return !raycastHits.Any(x => x.transform == CCharacterManager.instance.playerTransform);
-        }
+            Vector3 origin = m_PlayerTransform.position + AllConfig.Instance.AIConfig.hideSpotFinderOriginOffset;
 
-        public Vector3? GetClosestHidingSpot()
-        {
-            float currentAngle = 0f;
-            float angleRotationChecks = 5f;
-            float rayLength = 30f;
+            Vector3 newForward = Quaternion.Euler(0, currentAngle, 0) * m_PlayerTransform.forward * rayLength;
 
-            List<Vector3> possibleHideSpots = new List<Vector3>();
+            rayToUse = new Ray(origin, newForward);
 
-            do
-            {
-                RaycastHit[] raycastHits = MakeRaycastInSelectedAngle(currentAngle, rayLength, out Ray rayToUse);
-
-                if (raycastHits.Length > 0 && ThisRayIsNotHittingPlayer(raycastHits))
-                {
-                    SortHitsBasedOnDistance(ref raycastHits);
-
-                    FindingPossiblePositionsAlongCurrentRay(rayToUse, possibleHideSpots, raycastHits, rayLength);
-                }
-
-                currentAngle += angleRotationChecks;
-            }
-            while (currentAngle < 360f);
-
-            if (possibleHideSpots.Count > 0)
-            {
-                possibleHideSpots.Sort((a, b) => Vector3.Distance(a, m_EnemyTransform.position).CompareTo(Vector3.Distance(b, m_EnemyTransform.position)));
-
-                m_MovementTargetPoint.position = possibleHideSpots[0];
-                return possibleHideSpots[0];
-            }
-
-            return null;
-        }
-
-        private RaycastHit[] MakeRaycastInSelectedAngle(float currentAngle, float rayLength, out Ray rayToUse)
-        {
-            Vector3 newForward = Quaternion.Euler(0, currentAngle, 0) * m_EnemyTransform.forward * rayLength;
-
-            rayToUse = new Ray(m_EnemyTransform.position, newForward);
-
-            RaycastHit[] raycastHits = Physics.RaycastAll(rayToUse);
+            isHit = Physics.Raycast(rayToUse, out RaycastHit raycastHit, rayLength,m_PillarLayerMask);
 
 #if UNITY_EDITOR
-            DebugArrow.ForDebug(m_EnemyTransform.position, newForward, Color.yellow);
+            DebugArrow.ForDebug(origin, newForward, Color.red);
 #endif
 
-            return raycastHits;
+            return raycastHit;
         }
 
-        private void FindingPossiblePositionsAlongCurrentRay(Ray ray, List<Vector3> possibleHideSpots, RaycastHit[] raycastHits, float rayLength)
+        private void FindingPossiblePositionsAlongCurrentRay(Vector3 impactPoint, Vector3 direction, List<Vector3> possibleHideSpots)
         {
             float currentDistanceToCheckOnRay = 0f;
-            float stepCount = 1f;
+            float stepCount = AllConfig.Instance.AIConfig.obstacleFindingRayStartingStepCount;
 
             do
             {
                 currentDistanceToCheckOnRay = AllConfig.Instance.AIConfig.rayTraverseStepSizeToDiscoverHidingPlace * stepCount;
 
-                if (currentDistanceToCheckOnRay > rayLength)
+                if (currentDistanceToCheckOnRay >= AllConfig.Instance.AIConfig.obstacleFindingRayMaxDistance)
                 {
                     continue;
                 }
 
-                Vector3 currentPoint = ray.GetPoint(currentDistanceToCheckOnRay);
+                Vector3 currentPoint = impactPoint + (direction * currentDistanceToCheckOnRay);
 
                 if (IsThisPointOutsideColliders(currentPoint) && IsThisPointNotVisibleByPlayer(currentPoint) && NavMesh.SamplePosition(currentPoint, out NavMeshHit hit, AllConfig.Instance.AIConfig.navmeshSamplePositionDistance, NavMesh.AllAreas))
                 {
@@ -132,15 +260,17 @@ public partial class CEnemyController : CCharacterController
                 }
                 else
                 {
-                    stepCount += 1f;
+                    stepCount += AllConfig.Instance.AIConfig.obstacleFindingRayDeltaStepSize;
                 }
             }
-            while (currentDistanceToCheckOnRay < rayLength);
+            while (currentDistanceToCheckOnRay < AllConfig.Instance.AIConfig.obstacleFindingRayMaxDistance);
         }
 
-        private void SortHitsBasedOnDistance(ref RaycastHit[] raycastHits)
+        private void SortHitsBasedOnDistance(List<Vector3> points)
         {
-            Array.Sort(raycastHits, (x, y) => x.distance.CompareTo(y.distance));
+            Vector3 enemyLocation = m_EnemyTransform.position;
+
+            points.Sort((p1, p2) => Vector3.Distance(p1, enemyLocation).CompareTo(Vector3.Distance(p2, enemyLocation)));
         }
     }
 }
