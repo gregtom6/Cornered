@@ -78,12 +78,12 @@ public partial class CEnemyController : CCharacterController
         {
             HideSpotFinder hideSpotFinder = new HideSpotFinder(m_MovementTargetPoint, CCharacterManager.instance.playerTransform, transform, m_PlayerPillarLayerMask, m_PillarLayerMask);
             Vector3? position = hideSpotFinder.GetClosestHidingSpot();
-            m_NavMeshAgent.destination = position.HasValue ? position.Value : transform.position;
+            m_NavMeshAgent.SetDestination(position.HasValue ? position.Value : transform.position);
         }
         else if (m_State == EEnemyState.ShootPosition)
         {
             NavMesh.SamplePosition(CCharacterManager.instance.playerPosition, out NavMeshHit hit, AllConfig.Instance.AIConfig.navmeshSamplePositionDistance, NavMesh.AllAreas);
-            m_NavMeshAgent.destination = hit.position;
+            m_NavMeshAgent.SetDestination(hit.position);
         }
     }
 
