@@ -2,7 +2,7 @@ CORNERED
 
 An open-source portfolio project by Tamas Gregus. 
 
-https://www.youtube.com/watch?v=tNNzySPVgSE
+https://www.youtube.com/watch?v=qlFecktj8JE
 
 ///////////////////////////////////////////////////
 
