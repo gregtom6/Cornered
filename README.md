@@ -1,6 +1,6 @@
-CORNERED
+CORNERED (Unity)
 
-An open-source portfolio project by Tamas Gregus. 
+Cornered © 2024 by Tamas Gregus is licensed under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International 
 
 ///////////////////////////////////////////////////
 
@@ -8,7 +8,7 @@ Input: New Input System
 
 Render Pipeline: Universal RP
 
-Unity: 2022.2.17f1
+Unity: 6 (6000.0.34f1)
 
 ///////////////////////////////////////////////////
 
