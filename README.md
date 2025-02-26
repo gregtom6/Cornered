@@ -2,6 +2,8 @@ CORNERED (Unity)
 
 Cornered © 2024 by Tamas Gregus is licensed under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International 
 
+Portfolio site: https://tamasgregus.com/
+
 ///////////////////////////////////////////////////
 
 Input: New Input System
